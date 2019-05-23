@@ -1,8 +1,13 @@
 package com.squorpikkor.app.magazassistant4;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -32,10 +37,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CUS_NAME = "name";
     private static final String COLUMN_CUS_SURNAME = "surname";
     //-----------------------------------------------------------------
-    public static final String TABLE_JUICES = "juices_table";
-    public static final String COLUMN_J_ID = "id";
-    public static final String COLUMN_J_NAME = "name";
-    public static final String COLUMN_J_PRICE = "price";
+    private static final String TABLE_JUICES = "juices_table";
+    private static final String COLUMN_J_ID = "id";
+    private static final String COLUMN_J_NAME = "name";
+    private static final String COLUMN_J_PRICE = "price";
 
     //По поводу ID: при создании нового RA_Source ID у него ещё нет, как только создается
     //экземпляр класса, он сразу же заносится в БД. ID объекта ещё нет, в базе ID уже есть
@@ -57,10 +62,117 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         + COLUMN_CUS_SURNAME + "TEXT"
         + ")"
         );
+
+        db.execSQL("CREATE TABLE " + TABLE_JUICES + "("
+                + COLUMN_J_ID + "INTEGER PRIMARY KEY, "
+                + COLUMN_J_NAME + "TEXT, "
+                + COLUMN_J_PRICE + "INTEGER"
+                + ")"
+        );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CUSTOMERS);
+        onCreate(db);
 
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_JUICES);
+        onCreate(db);
     }
+
+    public void addCustomer(String name, String surname) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CUS_NAME, name);
+        values.put(COLUMN_CUS_SURNAME, surname);
+        db.insert(TABLE_CUSTOMERS, null, values);
+        db.close();
+    }
+
+    /*Обертка для addCustomer -- добавление в БД кастомера с данными по-умолчанию*/
+    public void addCustomer() {
+        addCustomer("name", "surname");
+    }
+
+
+    public Customer getCustomer(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_CUSTOMERS, new String[]{COLUMN_CUS_ID,
+                        COLUMN_CUS_NAME,
+                        COLUMN_CUS_SURNAME
+                }, COLUMN_CUS_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+
+        Customer customer = new Customer();
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            customer.setID(Integer.parseInt(cursor.getString(0)));
+            customer.setName(cursor.getString(1));
+            customer.setSurname(cursor.getString(2));
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return customer;
+    }
+
+    public List<Customer> getAllCustomers() {
+        List<Customer> sourceList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_CUSTOMERS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Customer customer = new Customer();
+                customer.setID(Integer.parseInt(cursor.getString(0)));
+                customer.setName(cursor.getString(1));
+                customer.setSurname(cursor.getString(2));
+                sourceList.add(customer);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return sourceList;
+    }
+
+    //TODO сделать void?
+    public int updateRA_Source(Customer customer) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CUS_NAME, customer.getName());
+        values.put(COLUMN_CUS_SURNAME, customer.getSurname());
+
+        return db.update(TABLE_CUSTOMERS, values, COLUMN_CUS_ID + " = ?",
+                new String[]{String.valueOf(customer.getID())});
+    }
+
+    public void deleteCustomer(Customer customer) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CUSTOMERS, COLUMN_CUS_ID + " = ?", new String[]{String.valueOf(customer.getID())});
+        db.close();
+    }
+
+    public void deleteAll() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CUSTOMERS, null, null);
+        db.close();
+    }
+
+    public int getCustomerCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_CUSTOMERS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        cursor.close();
+
+        return cursor.getCount();
+    }
+
 }
