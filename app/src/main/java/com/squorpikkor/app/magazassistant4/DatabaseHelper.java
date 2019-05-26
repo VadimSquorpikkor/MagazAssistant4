@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Все объекты загружаются в лист, а адаптер обновляет ListView, таким образом только что
     //созданный объект класса появляется в активити как элемент списка. При этом в момент загрузки
     //из БД методом getAll объект получает свой ID. Voila
+    private static final String MY_TAG = "my_tag";
 
     DatabaseHelper (Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -56,17 +58,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+/*
+        String CREATE_CUSTOMERS_TABLE = "CREATE TABLE " + TABLE_CUSTOMERS + "("
+                + COLUMN_CUS_ID + "INTEGER PRIMARY KEY,"
+                + COLUMN_CUS_NAME + "TEXT, "
+                + COLUMN_CUS_SURNAME + "TEXT"
+                + ")";
+        db.execSQL(CREATE_CUSTOMERS_TABLE);
+*/
+
         db.execSQL("CREATE TABLE " + TABLE_CUSTOMERS + "("
-        + COLUMN_CUS_ID + "INTEGER PRIMARY KEY, "
-        + COLUMN_CUS_NAME + "TEXT, "
-        + COLUMN_CUS_SURNAME + "TEXT"
+        + COLUMN_CUS_ID + " INTEGER PRIMARY KEY,"
+        + COLUMN_CUS_NAME + " TEXT, "
+        + COLUMN_CUS_SURNAME + " TEXT"
         + ")"
         );
 
+        Log.e(MY_TAG, "onCreate: " + "table customers created");
+
         db.execSQL("CREATE TABLE " + TABLE_JUICES + "("
-                + COLUMN_J_ID + "INTEGER PRIMARY KEY, "
-                + COLUMN_J_NAME + "TEXT, "
-                + COLUMN_J_PRICE + "INTEGER"
+                + COLUMN_J_ID + " INTEGER PRIMARY KEY,"
+                + COLUMN_J_NAME + " TEXT,"
+                + COLUMN_J_PRICE + " INTEGER"
                 + ")"
         );
     }

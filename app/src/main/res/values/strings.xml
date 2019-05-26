@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MagazAssistant4</string>
     <string name="customers">Customers</string>
+    <string name="add_customer">Add Customer</string>
+    <string name="get_all">get all</string>
+    <string name="name">NAME</string>
+    <string name="surname">SURNAME</string>
 </resources>
