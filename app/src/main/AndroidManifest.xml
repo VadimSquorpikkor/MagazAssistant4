@@ -13,8 +13,11 @@
             android:name=".TabbedActivity"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>-->
+        <!--tools:replace="android:appComponentFactory"-->
+        <!--android:fullBackupContent="@xml/backup_descriptor">-->
         <activity android:name=".MainActivity">
             <intent-filter>
+                <!--<action android:name="android.intent.action.VIEW" />-->
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

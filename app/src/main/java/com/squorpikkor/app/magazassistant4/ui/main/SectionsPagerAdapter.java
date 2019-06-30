@@ -1,7 +1,6 @@
 package com.squorpikkor.app.magazassistant4.ui.main;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +11,7 @@ import com.squorpikkor.app.magazassistant4.R;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -46,7 +46,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return fragmentMap.get(position);
     }
 
-    @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         return mContext.getResources().getString(TAB_TITLES[position]);
