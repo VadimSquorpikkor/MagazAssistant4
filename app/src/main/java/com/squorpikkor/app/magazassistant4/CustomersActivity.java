@@ -10,7 +10,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 
-public class CustomersActivity extends AppCompatActivity {
+public class    CustomersActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
     public static final String MY_TAG = "my_tag";

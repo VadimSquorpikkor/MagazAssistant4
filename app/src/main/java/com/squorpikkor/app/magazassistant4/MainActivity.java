@@ -1,9 +1,11 @@
 package com.squorpikkor.app.magazassistant4;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -12,17 +14,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;
 import com.squorpikkor.app.magazassistant4.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, NavigationView.OnNavigationItemSelectedListener{
 
     DatabaseHelper databaseHelper;
+    MainViewModel mainViewModel;
+    FragmentManager manager;
+    public static final String TAG = "MY_TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        setContentView(R.layout.tabbed_main);
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
+        //        setContentView(R.layout.tabbed_main);
+
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -32,6 +41,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+/*        manager = getSupportFragmentManager();
+
+        if (mainViewModel.getJuiceFragment() == null) {
+            mainViewModel.setJuiceFragment(JuiceFragment.newInstance());
+            manager.beginTransaction().replace(R.id.fr, mainViewModel.getJuiceFragment()).commit();
+
+        } else mainViewModel.setJuiceFragment((JuiceFragment) manager.findFragmentById(R.id.juice_list));*/
 
 
 
