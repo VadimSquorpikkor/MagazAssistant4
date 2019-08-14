@@ -8,7 +8,7 @@
     <string name="title_activity_tabbed">TabbedActivity</string>
     <string name="tab_text_1">Цены</string>
     <string name="tab_text_2">Соки</string>
-    <string name="tab_text_3">Продукты</string>
+    <string name="tab_text_3">Заказы</string>
     <string name="tab_text_4">Остаток</string>
 
     <!-- TODO: Remove or change this placeholder text -->

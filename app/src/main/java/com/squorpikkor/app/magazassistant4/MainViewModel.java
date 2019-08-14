@@ -24,8 +24,8 @@ public class MainViewModel extends AndroidViewModel {
         return juicesList;
     }
 
-    public void addPack(Float price, int count) {
-        juicesList.add(new JuicePack(price, count));
+    public void addPack(String name, Float price, int count) {
+        juicesList.add(new JuicePack(name, price, count));
     }
 
 //----------FRAGMENTS-------------------------------------------------------------------------------
@@ -39,4 +39,175 @@ public class MainViewModel extends AndroidViewModel {
     public void setJuiceFragment(JuiceFragment juiceFragment) {
         this.juiceFragment = juiceFragment;
     }
+
+//----------ЦЕНЫ------------------------------------------------------------------------------------
+
+    private float juiceBigPrice;
+
+    private float juiceSmallPrice;
+
+    private float milkBigPrice;
+
+    private float milkSmallPrice;
+
+    public float getJuiceBigPrice() {
+        return juiceBigPrice;
+    }
+
+    public void setJuiceBigPrice(float juiceBigPrice) {
+        this.juiceBigPrice = juiceBigPrice;
+    }
+
+    public float getJuiceSmallPrice() {
+        return juiceSmallPrice;
+    }
+
+    public void setJuiceSmallPrice(float juiceSmallPrice) {
+        this.juiceSmallPrice = juiceSmallPrice;
+    }
+
+    public float getMilkBigPrice() {
+        return milkBigPrice;
+    }
+
+    public void setMilkBigPrice(float milkBigPrice) {
+        this.milkBigPrice = milkBigPrice;
+    }
+
+    public float getMilkSmallPrice() {
+        return milkSmallPrice;
+    }
+
+    public void setMilkSmallPrice(float milkSmallPrice) {
+        this.milkSmallPrice = milkSmallPrice;
+    }
+
+//----------НАКЛАДНАЯ-------------------------------------------------------------------------------
+
+    private int juiceInvoiceCount;
+
+    private int juiceBigCount;
+
+    private int juiceSmallCount;
+
+    private int milkBigCount;
+
+    private int milkSmallCount;
+
+    private float invoiceTotalPrice;
+
+    public int getJuiceInvoiceCount() {
+        return juiceInvoiceCount;
+    }
+
+    public void setJuiceInvoiceCount(int juiceInvoiceCount) {
+        this.juiceInvoiceCount = juiceInvoiceCount;
+    }
+
+    public int getJuiceBigCount() {
+        return juiceBigCount;
+    }
+
+    public void setJuiceBigCount(int juiceBigCount) {
+        this.juiceBigCount = juiceBigCount;
+    }
+
+    public int getJuiceSmallCount() {
+        return juiceSmallCount;
+    }
+
+    public void setJuiceSmallCount(int juiceSmallCount) {
+        this.juiceSmallCount = juiceSmallCount;
+    }
+
+    public int getMilkBigCount() {
+        return milkBigCount;
+    }
+
+    public void setMilkBigCount(int milkBigCount) {
+        this.milkBigCount = milkBigCount;
+    }
+
+    public int getMilkSmallCount() {
+        return milkSmallCount;
+    }
+
+    public void setMilkSmallCount(int milkSmallCount) {
+        this.milkSmallCount = milkSmallCount;
+    }
+
+    public float getInvoiceTotalPrice() {
+        return invoiceTotalPrice;
+    }
+
+    public void setInvoiceTotalPrice(float invoiceTotalPrice) {
+        this.invoiceTotalPrice = invoiceTotalPrice;
+    }
+
+//----------КОЛИЧЕСТВО ЛЮДЕЙ------------------------------------------------------------------------
+
+    private int korelinCount;
+    private int sborkaCount;
+    private int montazhCount;
+    private int krotCount;
+    private int pranevichCount;
+    private int podvalCount;
+    private int totalCustomersCount;
+
+    public int getKorelinCount() {
+        return korelinCount;
+    }
+
+    public void setKorelinCount(int korelinCount) {
+        this.korelinCount = korelinCount;
+    }
+
+    public int getSborkaCount() {
+        return sborkaCount;
+    }
+
+    public void setSborkaCount(int sborkaCount) {
+        this.sborkaCount = sborkaCount;
+    }
+
+    public int getMontazhCount() {
+        return montazhCount;
+    }
+
+    public void setMontazhCount(int montazhCount) {
+        this.montazhCount = montazhCount;
+    }
+
+    public int getKrotCount() {
+        return krotCount;
+    }
+
+    public void setKrotCount(int krotCount) {
+        this.krotCount = krotCount;
+    }
+
+    public int getPranevichCount() {
+        return pranevichCount;
+    }
+
+    public void setPranevichCount(int pranevichCount) {
+        this.pranevichCount = pranevichCount;
+    }
+
+    public int getPodvalCount() {
+        return podvalCount;
+    }
+
+    public void setPodvalCount(int podvalCount) {
+        this.podvalCount = podvalCount;
+    }
+
+    public int getTotalCustomersCount() {
+        return totalCustomersCount;
+    }
+
+    public void setTotalCustomersCount(int totalCustomersCount) {
+        this.totalCustomersCount = totalCustomersCount;
+    }
+
 }
