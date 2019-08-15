@@ -32,7 +32,7 @@ public class    CustomersActivity extends AppCompatActivity {
         // присваиваем адаптер списку
         //listView.setAdapter(adapterForCustomers);
 
-        findViewById(R.id.add_customer_btn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.add_customer_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseHelper.addCustomer();

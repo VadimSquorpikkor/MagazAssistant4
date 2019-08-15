@@ -38,4 +38,9 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
+    <style name="outer_block" parent="my_base_style">
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:background">@drawable/my_shape</item>
+    </style>
+
 </resources>

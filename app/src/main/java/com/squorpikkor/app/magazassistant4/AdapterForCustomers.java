@@ -26,8 +26,8 @@ public class AdapterForCustomers extends ArrayAdapter<Customer> {
 
         View view = inflater.inflate(this.layout, parent, false);
 
-        TextView nameView = view.findViewById(R.id.name_item);
-        TextView surnameView = view.findViewById(R.id.surname_item);
+        TextView nameView = view.findViewById(R.id.name);
+        TextView surnameView = view.findViewById(R.id.surname);
 
         Customer customer = customers.get(position);
 

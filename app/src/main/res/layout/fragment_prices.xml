@@ -1,70 +1,361 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PricesFragment">
 
     <LinearLayout style="@style/vertical">
 
-        <TextView style="@style/base_center"
-            android:text="Рассчитать цены и колличество" />
+        <TextView
+            style="@style/base_center"
+            android:textSize="18sp"
+            android:text="Рассчитать цены и количество соков"
+            android:textColor="@color/colorOrange"/>
 
-        <TextView style="@style/base_center"
-            android:text="Количество людей:" />
+        <LinearLayout style="@style/outer_block">
 
-        <LinearLayout style="@style/horizontal">
+            <LinearLayout style="@style/inner_block">
 
-            <LinearLayout style="@style/vertical"
-                android:layout_weight="1">
+                <RelativeLayout style="@style/horizontal">
 
-                <TextView style="@style/base_center"
-                    android:text="Корелин 1-й корпус"/>
-                <TextView style="@style/base_center"
-                    android:text="Монтажный участок"/>
-                <TextView style="@style/base_center"
-                    android:text="Сборочный участок"/>
-                <TextView style="@style/base_center"
-                    android:text="Праневич"/>
-                <TextView style="@style/base_center"
-                    android:text="Цокольный этаж"/>
-                <TextView style="@style/base_center"
-                    android:text="Монтаж 1-й этаж"/>
+                    <TextView
+                        style="@style/base_center"
+                        android:layout_marginBottom="5dp"
+                        android:text="Количество людей:"
+                        android:textSize="15sp" />
 
-            </LinearLayout>
+                    <ImageView
+                        style="@style/edit_button"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="0dp" />
 
-            <LinearLayout style="@style/vertical"
-                android:layout_weight="3">
+                </RelativeLayout>
 
-                <TextView style="@style/base_center"
-                    android:text="12" />
-                <TextView style="@style/base_center"
-                    android:text="5" />
-                <TextView style="@style/base_center"
-                    android:text="7" />
-                <TextView style="@style/base_center"
-                    android:text="2" />
-                <TextView style="@style/base_center"
-                    android:text="2" />
-                <TextView style="@style/base_center"
-                    android:text="3" />
+                <LinearLayout style="@style/horizontal">
 
-            </LinearLayout>
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="1">
 
-            <LinearLayout style="@style/vertical"
-                android:layout_weight="3"
-                android:layout_gravity="center_vertical|center_horizontal">
-                <TextView style="@style/base_center"
-                    android:text="Всего:" />
-                <TextView style="@style/base_center"
-                    android:text="33"
-                    android:padding="0dp"
-                    android:textSize="40sp"
-                    android:textColor="@color/colorOrange"/>
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Корелин 1-й корпус" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Монтажный участок" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Сборочный участок" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Праневич" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Цокольный этаж" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Монтаж 1-й этаж" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="2">
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="12" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="5" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="7" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="2" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="2" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="3" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="2">
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="24" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="15" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="21" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="6" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="6" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="9" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_weight="2">
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Всего:" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:padding="0dp"
+                            android:text="33"
+                            android:textColor="@color/colorOrange"
+                            android:textSize="40sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout style="@style/my_base_style"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        style="@style/base_center"
+                        android:textColor="@color/colorOrange"
+                        android:layout_marginBottom="5dp"
+                        android:text="Количество раболчих дней:" />
+
+
+                    <LinearLayout
+                        style="@style/horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="20dp">
+
+                        <ImageView style="@style/remove_button" />
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="0dp"
+                            android:text="5" />
+
+                        <ImageView style="@style/add_button" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
             </LinearLayout>
 
         </LinearLayout>
 
+        <LinearLayout style="@style/outer_block">
+
+            <LinearLayout style="@style/inner_block">
+
+                <TextView
+                    style="@style/base_center"
+                    android:layout_marginBottom="5dp"
+                    android:text="Цены на соки:"
+                    android:textSize="15sp" />
+
+
+                <LinearLayout style="@style/horizontal">
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Сок 1 литр" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Сок 0,25 л" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Молоко 1 л" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Молоко 0,25 л" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="2">
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="2" />
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="0,5" />
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="1" />
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="0,25" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout style="@style/outer_block">
+
+            <LinearLayout style="@style/inner_block">
+
+                <RelativeLayout style="@style/horizontal">
+
+                    <TextView
+                        style="@style/base_center"
+                        android:layout_marginBottom="5dp"
+                        android:text="Посчитать соки:"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        style="@style/edit_button"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="0dp" />
+
+                </RelativeLayout>
+
+                <LinearLayout style="@style/horizontal"
+                    android:layout_marginBottom="10dp">
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/base_center"
+                            android:textColor="@color/colorOrange"
+                            android:text="Соков в накладной:" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="2">
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="25" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout style="@style/horizontal">
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Сок 1 литр" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Сок 0,25 л" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Молоко 1 л" />
+
+                        <TextView
+                            style="@style/base_center"
+                            android:text="Молоко 0,25 л" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="2">
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="25" />
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="0" />
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="50" />
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="0" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout style="@style/horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/base_center"
+                            android:textColor="@color/colorOrange"
+                            android:text="Денег в накладной:" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/vertical"
+                        android:layout_weight="2">
+
+                        <EditText
+                            style="@style/small_edit"
+                            android:text="100" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

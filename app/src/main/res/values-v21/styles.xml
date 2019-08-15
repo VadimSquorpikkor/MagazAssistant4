@@ -1,0 +1,82 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="my_base_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="base_center" parent="my_base_style">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="base_right" parent="my_base_style">
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="vertical" parent="my_base_style">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="horizontal" parent="my_base_style">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="outer_block" parent="vertical">
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:background">@drawable/my_shape</item>
+        <item name="android:elevation">10dp</item>
+    </style>
+
+    <style name="inner_block" parent="vertical">
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:background">@drawable/my_shape_dark</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="small_button">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="delete_button" parent="small_button">
+        <item name="android:background">@drawable/baseline_delete_outline_white_48dp</item>
+    </style>
+
+    <style name="edit_button" parent="small_button">
+        <item name="android:background">@drawable/baseline_build_white_48dp</item>
+    </style>
+
+    <style name="add_button" parent="small_button">
+        <item name="android:background">@drawable/baseline_add_white_18dp</item>
+    </style>
+
+    <style name="remove_button" parent="small_button">
+        <item name="android:background">@drawable/baseline_remove_white_18dp</item>
+    </style>
+
+    <style name="small_edit" parent="base_center">
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:inputType">number</item>
+    </style>
+</resources>
