@@ -14,6 +14,12 @@ public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
+
+        customerList.add(new Customer("Максим", "Шустов"));
+        customerList.add(new Customer("Ваня", "Махнюков"));
+        customerList.add(new Customer("Олег", "Алисевич"));
+
+
     }
 
 //----------JUICE PACK------------------------------------------------------------------------------

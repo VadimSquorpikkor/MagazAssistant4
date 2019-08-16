@@ -18,7 +18,7 @@ public class CustomerActivity extends AppCompatActivity {
 
         manager = getSupportFragmentManager();
         fragment = CustomersFragment.newInstance();
-        manager.beginTransaction().replace(R.id.customers_list_view, fragment).commit();
+        manager.beginTransaction().replace(R.id.customer_fragment, fragment).commit();
 
     }
 }

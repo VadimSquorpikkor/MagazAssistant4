@@ -34,6 +34,7 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
         TextView name = view.findViewById(R.id.name);
         TextView surname = view.findViewById(R.id.surname);
 
+
         Customer state = sourceList.get(position);
 
         name.setText(state.getName());

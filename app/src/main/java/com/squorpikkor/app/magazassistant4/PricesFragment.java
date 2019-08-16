@@ -17,7 +17,6 @@ public class PricesFragment extends Fragment implements View.OnClickListener{
 
     View v;
     MainViewModel mViewModel;
-    DialogFragment dialogFragment;
 
     public PricesFragment() {
 
@@ -39,7 +38,6 @@ public class PricesFragment extends Fragment implements View.OnClickListener{
         v = inflater.inflate(R.layout.fragment_prices, null);
         mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);//todo in newInstance?
         v.findViewById(R.id.open_customers).setOnClickListener(this);
-        dialogFragment = new CustomersFragment();
         return v;
     }
 
@@ -47,8 +45,8 @@ public class PricesFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.open_customers:
-                //openCustomersActivity(); break;
-            dialogFragment.show(getFragmentManager(), "dlg");
+                openCustomersActivity(); break;
+//            dialogFragment.show(getFragmentManager(), "dlg");
         }
     }
 

@@ -5,15 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".CustomerActivity">
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="!!!!!"/>
-
-
-
     <FrameLayout
-        android:id="@+id/customer_fragment_list"
+        android:id="@+id/customer_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >

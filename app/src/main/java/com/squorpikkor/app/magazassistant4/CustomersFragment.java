@@ -2,10 +2,8 @@ package com.squorpikkor.app.magazassistant4;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
+public class CustomersFragment extends Fragment {
 
-//public class CustomersFragment extends Fragment {
-public class CustomersFragment extends DialogFragment {
-
-    DatabaseHelper databaseHelper;
+//    DatabaseHelper databaseHelper;
     View view;
     ListView lvMain;
     CustomerAdapter customerAdapter;
@@ -29,16 +26,15 @@ public class CustomersFragment extends DialogFragment {
         return new CustomersFragment();
     }
 
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         // начальная инициализация списка
         customers = mainViewModel.getCustomersList();
-        //todo временная затычка, пока не подключена БД
-        customers.add(new Customer("Максим", "Шустов"));
-        customers.add(new Customer("Ваня", "Махнюков"));
-        customers.add(new Customer("Олег", "Алисевич"));
+
 
         // находим список
         lvMain = view.findViewById(R.id.customers_list_view);
@@ -73,17 +69,19 @@ public class CustomersFragment extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_customers, container, false);
-        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);//todo in newInstance?
+        mainViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);//todo in newInstance?
+
         return view;
     }
-    private void refreshListView() {
-//        customers.clear();
-//        customers.addAll(databaseHelper.getAllCustomers());
-//        listView.setAdapter(adapterForCustomers);
-    }
+
+    /*private void refreshListView() {
+        customers.clear();
+        customers.addAll(databaseHelper.getAllCustomers());
+        listView.setAdapter(adapterForCustomers);
+    }*/
 
     @Override
     public void onResume() {
