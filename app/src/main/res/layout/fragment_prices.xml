@@ -10,9 +10,9 @@
 
         <TextView
             style="@style/base_center"
-            android:textSize="18sp"
             android:text="Рассчитать цены и количество соков"
-            android:textColor="@color/colorOrange"/>
+            android:textColor="@color/colorOrange"
+            android:textSize="18sp" />
 
         <LinearLayout style="@style/outer_block">
 
@@ -29,9 +29,17 @@
                     <ImageView
                         style="@style/edit_button"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="0dp" />
+                        android:layout_marginEnd="0dp"
+                        android:id="@+id/open_customers"/>
 
                 </RelativeLayout>
+
+<!--                <ListView
+                    android:id="@+id/department_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </ListView>-->
+
 
                 <LinearLayout style="@style/horizontal">
 
@@ -144,36 +152,30 @@
 
                 </LinearLayout>
 
-                <RelativeLayout style="@style/my_base_style"
+                <LinearLayout
+                    style="@style/horizontal"
+                    android:gravity="center"
                     android:layout_marginTop="5dp">
 
                     <TextView
                         style="@style/base_center"
-                        android:textColor="@color/colorOrange"
-                        android:layout_marginBottom="5dp"
-                        android:text="Количество раболчих дней:" />
-
-
-                    <LinearLayout
-                        style="@style/horizontal"
+                        android:paddingRight="10dp"
                         android:layout_width="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="20dp">
+                        android:text="Количество раболчих дней:"
+                        android:textColor="@color/colorOrange" />
 
-                        <ImageView style="@style/remove_button" />
+                    <ImageView style="@style/remove_button" />
 
-                        <EditText
-                            style="@style/small_edit"
-                            android:layout_width="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="0dp"
-                            android:text="5" />
+                    <TextView
+                        style="@style/small_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="5" />
 
-                        <ImageView style="@style/add_button" />
+                    <ImageView style="@style/add_button" />
 
-                    </LinearLayout>
-
-                </RelativeLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -257,7 +259,8 @@
 
                 </RelativeLayout>
 
-                <LinearLayout style="@style/horizontal"
+                <LinearLayout
+                    style="@style/horizontal"
                     android:layout_marginBottom="10dp">
 
                     <LinearLayout
@@ -266,8 +269,8 @@
 
                         <TextView
                             style="@style/base_center"
-                            android:textColor="@color/colorOrange"
-                            android:text="Соков в накладной:" />
+                            android:text="Соков в накладной:"
+                            android:textColor="@color/colorOrange" />
 
                     </LinearLayout>
 
@@ -328,7 +331,8 @@
                 </LinearLayout>
 
 
-                <LinearLayout style="@style/horizontal"
+                <LinearLayout
+                    style="@style/horizontal"
                     android:layout_marginTop="10dp">
 
                     <LinearLayout
@@ -337,8 +341,8 @@
 
                         <TextView
                             style="@style/base_center"
-                            android:textColor="@color/colorOrange"
-                            android:text="Денег в накладной:" />
+                            android:text="Денег в накладной:"
+                            android:textColor="@color/colorOrange" />
 
                     </LinearLayout>
 

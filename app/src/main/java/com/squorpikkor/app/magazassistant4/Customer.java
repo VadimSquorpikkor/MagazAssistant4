@@ -63,4 +63,15 @@ public class Customer {
     public void setComplete(boolean complete) {
         isComplete = complete;
     }
+
+    public Customer(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
+    //конструктор для DBHelper
+    public Customer() {
+
+    }
+
 }

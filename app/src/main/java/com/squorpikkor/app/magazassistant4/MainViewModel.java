@@ -210,4 +210,26 @@ public class MainViewModel extends AndroidViewModel {
         this.totalCustomersCount = totalCustomersCount;
     }
 
+//----------CUSTOMER--------------------------------------------------------------------------------
+
+    private ArrayList<Customer> customerList = new ArrayList<>();
+
+    ArrayList<Order> orderList = new ArrayList<>();
+
+    public ArrayList<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(ArrayList<Order> orderList) {
+        this.orderList = orderList;
+    }
+
+    public ArrayList<Customer> getCustomersList() {
+        return customerList;
+    }
+
+    public void setCustomersList(ArrayList<Customer> customersList) {
+        this.customerList = customersList;
+    }
+
 }

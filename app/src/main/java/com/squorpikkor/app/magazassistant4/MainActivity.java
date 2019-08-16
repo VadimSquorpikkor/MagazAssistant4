@@ -2,6 +2,7 @@ package com.squorpikkor.app.magazassistant4;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         setContentView(R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
+
         //        setContentView(R.layout.tabbed_main);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
@@ -41,34 +43,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-/*        manager = getSupportFragmentManager();
-
-        if (mainViewModel.getJuiceFragment() == null) {
-            mainViewModel.setJuiceFragment(JuiceFragment.newInstance());
-            manager.beginTransaction().replace(R.id.fr, mainViewModel.getJuiceFragment()).commit();
-
-        } else mainViewModel.setJuiceFragment((JuiceFragment) manager.findFragmentById(R.id.juice_list));*/
-
-
-
-
         final Context context = this;
-
-        /*findViewById(R.id.customers_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, CustomersActivity.class));
-
-            }
-        });
-        findViewById(R.id.tab_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, TabbedActivity.class));
-
-            }
-        });*/
 
         databaseHelper = new DatabaseHelper(this);
 
@@ -90,24 +65,17 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_open_ats) {
+        if (id == R.id.nav_customers) {
           //  openAts();
-        } else if (id == R.id.nav_generate) {
+        } else if (id == R.id.nav_customers) {
             //gen();
-        } else if (id == R.id.nav_set_time) {
-            //showDialog();
-        } else if (id == R.id.nav_toggle_mode) {
-            //toggleMode();
-        } else if (id == R.id.nav_toggle_button) {
-            //toggleButtonMode();
-        } else if (id == R.id.nav_send) {
-            //makeToast("Send");
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     @Override
     public void onClick(View v) {

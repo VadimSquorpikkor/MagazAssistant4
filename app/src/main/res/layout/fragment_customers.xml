@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/outer_block"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".CustomersFragment">
+
+    <LinearLayout
+        style="@style/inner_block"
+        android:layout_height="wrap_content">
+
+        <LinearLayout style="@style/horizontal">
+
+            <ListView
+                android:id="@+id/customers_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+
+            <LinearLayout style="@style/vertical"
+                android:layout_weight="4"
+                android:layout_gravity="bottom">
+
+                <TextView
+                    android:id="@+id/add_customer_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/my_add_button_shape"
+                    android:elevation="5dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="+"
+                    android:textSize="30sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
