@@ -21,13 +21,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="Spectrum Generator"
+        android:text="Magaz Assistant 4"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="www.atomtex.com" />
+        android:text="VadimSerikov11@gmail.com" />
 
 </LinearLayout>

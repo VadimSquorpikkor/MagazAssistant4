@@ -30,7 +30,6 @@ public class JuiceFragment extends Fragment  implements View.OnClickListener{
     ListView lvMain;
     AdapterForJuices sourceAdapter;
     MainViewModel mainViewModel;
-//    private List<JuicePack> sourceList = new ArrayList<>();
 
     public static JuiceFragment newInstance() {
         return new JuiceFragment();
@@ -40,8 +39,6 @@ public class JuiceFragment extends Fragment  implements View.OnClickListener{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
-
         // начальная инициализация списка
 //        sourceList = mainViewModel.getJuicesList();
 
@@ -50,7 +47,6 @@ public class JuiceFragment extends Fragment  implements View.OnClickListener{
 
         // создаем адаптер
         sourceAdapter = new AdapterForJuices(getActivity(), R.layout.juices_list_item,  mainViewModel.getJuicesList());
-        Log.e(TAG, "SOURCE LIST SIZE = " + mainViewModel.getJuicesList().size());
 
         // присваиваем адаптер списку
         lvMain.setAdapter(sourceAdapter);

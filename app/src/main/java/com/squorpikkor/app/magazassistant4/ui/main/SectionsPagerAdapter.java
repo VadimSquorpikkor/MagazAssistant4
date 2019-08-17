@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.squorpikkor.app.magazassistant4.OrderFragment;
 import com.squorpikkor.app.magazassistant4.PricesFragment;
 import com.squorpikkor.app.magazassistant4.R;
 import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;
@@ -32,7 +33,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             {
                 put(0, PricesFragment.newInstance());
                 put(1, JuiceFragment.newInstance());
-                put(2, PlaceholderFragment.newInstance(3));
+                put(2, OrderFragment.newInstance());
                 put(3, PlaceholderFragment.newInstance(4));
 
             }

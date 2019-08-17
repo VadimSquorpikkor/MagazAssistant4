@@ -14,6 +14,12 @@ public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
+
+        customerList.add(new Customer("Максим", "Шустов"));
+        customerList.add(new Customer("Ваня", "Махнюков"));
+        customerList.add(new Customer("Олег", "Алисевич"));
+
+
     }
 
 //----------JUICE PACK------------------------------------------------------------------------------
@@ -208,6 +214,28 @@ public class MainViewModel extends AndroidViewModel {
 
     public void setTotalCustomersCount(int totalCustomersCount) {
         this.totalCustomersCount = totalCustomersCount;
+    }
+
+//----------CUSTOMER--------------------------------------------------------------------------------
+
+    private ArrayList<Customer> customerList = new ArrayList<>();
+
+    ArrayList<Order> orderList = new ArrayList<>();
+
+    public ArrayList<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(ArrayList<Order> orderList) {
+        this.orderList = orderList;
+    }
+
+    public ArrayList<Customer> getCustomersList() {
+        return customerList;
+    }
+
+    public void setCustomersList(ArrayList<Customer> customersList) {
+        this.customerList = customersList;
     }
 
 }

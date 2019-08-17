@@ -3,8 +3,6 @@
     <string name="customers">Customers</string>
     <string name="add_customer">Add Customer</string>
     <string name="get_all">get all</string>
-    <string name="name">NAME</string>
-    <string name="surname">SURNAME</string>
     <string name="title_activity_tabbed">TabbedActivity</string>
     <string name="tab_text_1">Цены</string>
     <string name="tab_text_2">Соки</string>
