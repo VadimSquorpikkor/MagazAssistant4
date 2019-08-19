@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;
+import com.squorpikkor.app.magazassistant4.customer.CustomerActivity;
 import com.squorpikkor.app.magazassistant4.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, NavigationView.OnNavigationItemSelectedListener{
@@ -64,12 +64,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_customers) {
-          //  openAts();
-        } else if (id == R.id.nav_customers) {
-            //gen();
-        }
+        if (id == R.id.nav_customers) openCustomersActivity();
+        if (id == R.id.nav_settings) openSettingsActivity();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -80,6 +76,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     public void onClick(View v) {
 
+    }
+
+    private void openCustomersActivity() {
+        Intent i = new Intent(this, CustomerActivity.class);
+        startActivity(i);
+    }
+
+    private void openSettingsActivity() {
+        Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
     }
 }
 

@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CustomerActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     FragmentManager manager;
     Fragment fragment;
@@ -14,11 +14,11 @@ public class CustomerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer);
+        setContentView(R.layout.activity_settings);
 
         manager = getSupportFragmentManager();
-        fragment = CustomersFragment.newInstance();
-        manager.beginTransaction().replace(R.id.customer_fragment, fragment).commit();
+        fragment = SettingsFragment.newInstance();
+        manager.beginTransaction().replace(R.id.settings_fragment, fragment).commit();
 
     }
 }

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.squorpikkor.app.magazassistant4.customer.Customer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CUS_ID = "id";
     private static final String COLUMN_CUS_NAME = "name";
     private static final String COLUMN_CUS_SURNAME = "surname";
+    private static final String COLUMN_CUS_DEPARTMENT = "department";
     //-----------------------------------------------------------------
     private static final String TABLE_JUICES = "juices_table";
     private static final String COLUMN_J_ID = "id";
@@ -70,7 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_CUSTOMERS + "("
         + COLUMN_CUS_ID + " INTEGER PRIMARY KEY,"
         + COLUMN_CUS_NAME + " TEXT, "
-        + COLUMN_CUS_SURNAME + " TEXT"
+        + COLUMN_CUS_SURNAME + " TEXT,"
+        + COLUMN_CUS_DEPARTMENT + " INTEGER"
         + ")"
         );
 
@@ -156,7 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //TODO сделать void?
-    public int updateRA_Source(Customer customer) {
+    public int updateCustomer(Customer customer) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

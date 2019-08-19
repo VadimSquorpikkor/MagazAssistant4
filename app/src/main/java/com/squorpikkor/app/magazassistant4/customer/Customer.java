@@ -1,4 +1,7 @@
-package com.squorpikkor.app.magazassistant4;
+package com.squorpikkor.app.magazassistant4.customer;
+
+import com.squorpikkor.app.magazassistant4.Juice;
+import com.squorpikkor.app.magazassistant4.Product;
 
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ public class Customer {
 
     private String name;
     private String surname;
+    private int depName;
     private ArrayList<Juice> juiceList;
     private ArrayList<Product> prodList;
     private float moneyLeft;
@@ -64,10 +68,11 @@ public class Customer {
         isComplete = complete;
     }
 
-    public Customer(String name, String surname) {
+    public Customer(String name, String surname, int depName) {
         this.name = name;
         this.surname = surname;
         this.isWorking = true;
+        this.depName = depName;
     }
 
     //конструктор для DBHelper

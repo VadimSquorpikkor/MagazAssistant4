@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.squorpikkor.app.magazassistant4.customer.Customer;
+
 import java.util.List;
 
 public class AdapterForCustomers extends ArrayAdapter<Customer> {
@@ -26,8 +28,8 @@ public class AdapterForCustomers extends ArrayAdapter<Customer> {
 
         View view = inflater.inflate(this.layout, parent, false);
 
-        TextView nameView = view.findViewById(R.id.name);
-        TextView surnameView = view.findViewById(R.id.surname);
+        TextView nameView = view.findViewById(R.id.list_name);
+        TextView surnameView = view.findViewById(R.id.list_surname);
 
         Customer customer = customers.get(position);
 

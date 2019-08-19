@@ -1,5 +1,5 @@
 package com.squorpikkor.app.magazassistant4;
 
-class Juice {
+public class Juice {
 
 }

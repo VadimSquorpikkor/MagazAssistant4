@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 
-import com.squorpikkor.app.magazassistant4.juice.AdapterForJuices;
+import com.squorpikkor.app.magazassistant4.customer.Customer;
 import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;
 import com.squorpikkor.app.magazassistant4.juice.JuicePack;
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ public class MainViewModel extends AndroidViewModel {
     public MainViewModel(@NonNull Application application) {
         super(application);
 
-        customerList.add(new Customer("Максим", "Шустов"));
-        customerList.add(new Customer("Ваня", "Махнюков"));
-        customerList.add(new Customer("Олег", "Алисевич"));
+        customerList.add(new Customer("Максим", "Шустов", 0));
+        customerList.add(new Customer("Ваня", "Махнюков", 0));
+        customerList.add(new Customer("Олег", "Алисевич", 0));
 
 
     }

@@ -1,4 +1,4 @@
-package com.squorpikkor.app.magazassistant4;
+package com.squorpikkor.app.magazassistant4.customer;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.squorpikkor.app.magazassistant4.MainViewModel;
+import com.squorpikkor.app.magazassistant4.R;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -26,15 +29,12 @@ public class CustomersFragment extends Fragment {
         return new CustomersFragment();
     }
 
-
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         // начальная инициализация списка
         customers = mainViewModel.getCustomersList();
-
 
         // находим список
         lvMain = view.findViewById(R.id.customers_list_view);

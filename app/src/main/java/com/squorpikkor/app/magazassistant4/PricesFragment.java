@@ -1,17 +1,14 @@
 package com.squorpikkor.app.magazassistant4;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import com.squorpikkor.app.magazassistant4.customer.CustomerActivity;
 
 public class PricesFragment extends Fragment implements View.OnClickListener{
 
@@ -50,6 +47,7 @@ public class PricesFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    //todo удалить метод, вместо него ссылаться на такой же метод в MainActivity
     private void openCustomersActivity() {
         Intent i = new Intent(getActivity(), CustomerActivity.class);
         startActivity(i);
