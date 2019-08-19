@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.squorpikkor.app.magazassistant4.DatabaseHelper;
 import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.R;
 
@@ -24,6 +25,7 @@ public class CustomersFragment extends Fragment {
     CustomerAdapter customerAdapter;
     MainViewModel mainViewModel;
     ArrayList<Customer> customers;
+    DatabaseHelper databaseHelper;
 
     public static CustomersFragment newInstance() {
         return new CustomersFragment();
@@ -73,19 +75,24 @@ public class CustomersFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_customers, container, false);
         mainViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);//todo in newInstance?
-
+        databaseHelper = new DatabaseHelper(getActivity());
         return view;
     }
 
-    /*private void refreshListView() {
+    private void refreshListView() {
         customers.clear();
         customers.addAll(databaseHelper.getAllCustomers());
-        listView.setAdapter(adapterForCustomers);
-    }*/
+        lvMain.setAdapter(customerAdapter);
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-//        refreshListView();
+        refreshListView();
     }
+
+    public void addCustomer() {
+
+    }
+
 }

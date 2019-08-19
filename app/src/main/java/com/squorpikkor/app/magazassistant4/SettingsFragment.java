@@ -1,9 +1,11 @@
 package com.squorpikkor.app.magazassistant4;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +16,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SettingsFragment extends Fragment {
+import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
-    //todo what is this??? --
-    //private OnFragmentInteractionListener mListener;
-    Map<Integer, Department> depName = new HashMap<>();
-    ArrayList<Customer> customers = new ArrayList<>();
+public class SettingsFragment extends Fragment implements View.OnClickListener{
 
+    private static MainViewModel mViewModel;
+    //    Map<Integer, Department> dep = new HashMap<>();
+    //    ArrayList<Customer> customers = new ArrayList<>();
+    DatabaseHelper database;
+    View view;
 
 
     public SettingsFragment() {
@@ -41,21 +45,45 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        database = new DatabaseHelper(getActivity());
+        view = inflater.inflate(R.layout.fragment_settings, null);
+        mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);//todo in newInstance?
+        view.findViewById(R.id.set_default_button).setOnClickListener(this);
+        return view;
     }
 
     void setDefaultSettings() {
-        depName.put(0, new Department("Сборочный участок", 3));
-        depName.put(1, new Department("Корелин 1-й корпус", 2.5f));
-        depName.put(2, new Department("Монтажный участок", 3));
-        depName.put(3, new Department("Праневич", 3));
+        database.deleteAllDepartments();
+        database.deleteAllCustomers();
 
-        customers.add(new Customer("Максим", "Шустов", 0));
-        customers.add(new Customer("Ваня", "Махнюков", 0));
-        customers.add(new Customer("Олег", "Алисевич", 0));
+        database.addDepartment("Сборочный участок", 3);
+        database.addDepartment("Корелин 1-й корпус", 3);
+        database.addDepartment("Монтажный участок", 3);
+        database.addDepartment("Праневич", 3);
 
+        database.addCustomer("Максим", "Шустов", 0);
+        database.addCustomer("Ваня", "Махнюков", 0);
+        database.addCustomer("Олег", "Алисевич", 0);
 
+        sortCustomers();
+    }
+    
+    private void sortCustomers() {
+
+        /*for (Customer customer : customers) {
+            //т.е. беру человека, смотрю, какой номер отдела у него прописан, и добавляю его в
+            // этот отдел. И так для всех людей, так я рассортировываю людей по отделам
+            dep.get(customer.getDepName()).getCurrentDepCustomers().add(customer);
+        }*/
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+//            case R.id.set_default_button: setDefaultSettings(); break;
+            case R.id.set_default_button:
+                Log.e(TAG, "onClick: " + database.getCustomerCount()); break;
+        }
+    }
 }

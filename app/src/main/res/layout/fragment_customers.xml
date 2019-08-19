@@ -10,6 +10,12 @@
 
         <LinearLayout style="@style/inner_block">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Сборочный участок"
+                android:gravity="left"
+                />
 
             <ListView
                 android:id="@+id/customers_list_view"
@@ -19,5 +25,20 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/add_juice_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/my_add_button_shape"
+        android:paddingBottom="0dp"
+        android:text="+"
+        android:textSize="30sp"
+        android:gravity="center_horizontal|center_vertical"
+        android:elevation="5dp"
+        />
 
 </RelativeLayout>

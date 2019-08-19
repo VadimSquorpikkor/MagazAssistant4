@@ -19,6 +19,8 @@ public class Customer {
     private String name;
     private String surname;
     private int depName;
+
+
     private ArrayList<Juice> juiceList;
     private ArrayList<Product> prodList;
     private float moneyLeft;
@@ -66,6 +68,12 @@ public class Customer {
     }
     public void setComplete(boolean complete) {
         isComplete = complete;
+    }
+    public int getDepName() {
+        return depName;
+    }
+    public void setDepName(int depName) {
+        this.depName = depName;
     }
 
     public Customer(String name, String surname, int depName) {

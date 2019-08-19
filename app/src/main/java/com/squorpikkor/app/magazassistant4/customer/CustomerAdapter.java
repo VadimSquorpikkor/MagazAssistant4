@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.squorpikkor.app.magazassistant4.R;
@@ -35,12 +36,14 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
 
         TextView name = view.findViewById(R.id.list_name);
         TextView surname = view.findViewById(R.id.list_surname);
+        CheckBox isWorking = view.findViewById(R.id.isWorking);
 
 
         Customer state = sourceList.get(position);
 
         name.setText(state.getName());
         surname.setText(state.getSurname());
+        isWorking.setChecked(state.isWorking());
 
         return view;
     }

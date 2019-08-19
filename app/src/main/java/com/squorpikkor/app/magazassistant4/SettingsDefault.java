@@ -4,6 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SettingsDefault {
-    Map<Integer, String> devName = new HashMap<>();
+    Map<Integer, String> depName = new HashMap<>();
 
 }

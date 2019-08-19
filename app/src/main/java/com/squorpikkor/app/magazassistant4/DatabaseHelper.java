@@ -12,6 +12,8 @@ import com.squorpikkor.app.magazassistant4.customer.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 //      В проекте TrenkaAssistant_4 я пытался сделать класс работы с базой данных SQLite с
@@ -34,13 +36,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "magaz_db";
-    //-----------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
     private static final String TABLE_CUSTOMERS = "customers_table";
     private static final String COLUMN_CUS_ID = "id";
     private static final String COLUMN_CUS_NAME = "name";
     private static final String COLUMN_CUS_SURNAME = "surname";
     private static final String COLUMN_CUS_DEPARTMENT = "department";
-    //-----------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+    private static final String TABLE_DEPARTMENT = "department_table";
+    private static final String COLUMN_DEP_ID = "id";
+    private static final String COLUMN_DEP_NAME = "name";
+    private static final String COLUMN_DEP_KOEF = "koef";   //juice per week for each
+                                                            // customer in current dep
+//--------------------------------------------------------------------------------------------------
+
     private static final String TABLE_JUICES = "juices_table";
     private static final String COLUMN_J_ID = "id";
     private static final String COLUMN_J_NAME = "name";
@@ -55,7 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //из БД методом getAll объект получает свой ID. Voila
     private static final String MY_TAG = "my_tag";
 
-    DatabaseHelper (Context context) {
+    public DatabaseHelper (Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -80,6 +89,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.e(MY_TAG, "onCreate: " + "table customers created");
 
+        db.execSQL("CREATE TABLE " + TABLE_DEPARTMENT + "("
+                + COLUMN_DEP_ID + " INTEGER PRIMARY KEY,"
+                + COLUMN_DEP_NAME + " TEXT, "
+                + COLUMN_DEP_KOEF + " INTEGER"
+                + ")"
+        );
+
+        Log.e(MY_TAG, "onCreate: " + "table department created");
+
+
         db.execSQL("CREATE TABLE " + TABLE_JUICES + "("
                 + COLUMN_J_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_J_NAME + " TEXT,"
@@ -93,22 +112,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CUSTOMERS);
         onCreate(db);
 
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEPARTMENT);
+        onCreate(db);
+
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JUICES);
         onCreate(db);
     }
 
-    public void addCustomer(String name, String surname) {
+//---------------CUSTOMERS METHODS------------------------------------------------------------------
+
+    public void addCustomer(String name, String surname, int department) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_CUS_NAME, name);
         values.put(COLUMN_CUS_SURNAME, surname);
+        values.put(COLUMN_CUS_DEPARTMENT, department);
         db.insert(TABLE_CUSTOMERS, null, values);
         db.close();
     }
 
     /*Обертка для addCustomer -- добавление в БД кастомера с данными по-умолчанию*/
+    //todo а зачем?
     public void addCustomer() {
-        addCustomer("name", "surname");
+        addCustomer("name", "surname", 0);
     }
 
 
@@ -117,7 +143,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(TABLE_CUSTOMERS, new String[]{COLUMN_CUS_ID,
                         COLUMN_CUS_NAME,
-                        COLUMN_CUS_SURNAME
+                        COLUMN_CUS_SURNAME,
+                        COLUMN_CUS_DEPARTMENT
                 }, COLUMN_CUS_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
 
@@ -128,6 +155,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             customer.setID(Integer.parseInt(cursor.getString(0)));
             customer.setName(cursor.getString(1));
             customer.setSurname(cursor.getString(2));
+            customer.setDepName(Integer.parseInt(cursor.getString(3)));
         }
 
         if (cursor != null) {
@@ -150,6 +178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 customer.setID(Integer.parseInt(cursor.getString(0)));
                 customer.setName(cursor.getString(1));
                 customer.setSurname(cursor.getString(2));
+                customer.setDepName(Integer.parseInt(cursor.getString(3)));
                 sourceList.add(customer);
             } while (cursor.moveToNext());
         }
@@ -166,6 +195,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_CUS_NAME, customer.getName());
         values.put(COLUMN_CUS_SURNAME, customer.getSurname());
+        values.put(COLUMN_CUS_DEPARTMENT, customer.getDepName());
 
         return db.update(TABLE_CUSTOMERS, values, COLUMN_CUS_ID + " = ?",
                 new String[]{String.valueOf(customer.getID())});
@@ -177,7 +207,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteAll() {
+    public void deleteAllCustomers() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CUSTOMERS, null, null);
         db.close();
@@ -187,9 +217,107 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String countQuery = "SELECT  * FROM " + TABLE_CUSTOMERS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
         cursor.close();
 
-        return cursor.getCount();
+        return count;
     }
+
+//---------------DEPARTMENT METHODS-----------------------------------------------------------------
+
+    public void addDepartment(String name, int koef) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DEP_NAME, name);
+        values.put(COLUMN_DEP_KOEF, koef);
+        db.insert(TABLE_CUSTOMERS, null, values);
+        db.close();
+    }
+
+    public Department getDepartment(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_DEPARTMENT, new String[]{COLUMN_DEP_ID,
+                        COLUMN_DEP_NAME,
+                        COLUMN_DEP_KOEF
+                }, COLUMN_CUS_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+
+        Department department = new Department();
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            department.setID(Integer.parseInt(cursor.getString(0)));
+            department.setName(cursor.getString(1));
+            department.setJuicePerWeek(Integer.parseInt(cursor.getString(2)));
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return department;
+    }
+
+    public List<Department> getAllDepartments() {
+        List<Department> sourceList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_DEPARTMENT;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Department department = new Department();
+                department.setID(Integer.parseInt(cursor.getString(0)));
+                department.setName(cursor.getString(1));
+                department.setJuicePerWeek(Integer.parseInt(cursor.getString(2)));
+                sourceList.add(department);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return sourceList;
+    }
+
+    //TODO сделать void?
+    public int updateDepartment(Department department) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DEP_NAME, department.getName());
+        values.put(COLUMN_DEP_KOEF, department.getJuicePerWeek());
+
+        return db.update(TABLE_DEPARTMENT, values, COLUMN_DEP_ID + " = ?",
+                new String[]{String.valueOf(department.getID())});
+    }
+
+    public void deleteDepartment(Department department) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_DEPARTMENT, COLUMN_DEP_ID + " = ?", new String[]{String.valueOf(department.getID())});
+        db.close();
+    }
+
+    public void deleteAllDepartments() {
+
+        Log.e(TAG, "==========deleteAllDepartments: " + this);
+        if (this.getWritableDatabase() != null) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_DEPARTMENT, null, null);
+        db.close();
+        }
+    }
+
+    public int getDepartmentsCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_DEPARTMENT;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        return count;
+    }
+
 
 }
