@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.squorpikkor.app.magazassistant4.customer.Customer;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -259,8 +260,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return department;
     }
 
-    public List<Department> getAllDepartments() {
-        List<Department> sourceList = new ArrayList<>();
+    public ArrayList<Department> getAllDepartments() {
+        ArrayList<Department> sourceList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_DEPARTMENT;
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -279,6 +280,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return sourceList;
+    }
+
+    public ArrayList<Department> getAllDepartmentSorted() {
+        ArrayList<Department> departments;
+        departments = getAllDepartments();
+
+        return departments;
+    }
+
+    private void sortCustomers(Department department) {
+        /*for (Customer customer : customers) {
+            //т.е. беру человека, смотрю, какой номер отдела у него прописан, и добавляю его в
+            // этот отдел. И так для всех людей, так я рассортировываю людей по отделам
+            dep.get(customer.getDepName()).getCurrentDepCustomers().add(customer);
+        }*/
     }
 
     //TODO сделать void?
