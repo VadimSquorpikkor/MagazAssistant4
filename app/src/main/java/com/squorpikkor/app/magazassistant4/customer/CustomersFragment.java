@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.squorpikkor.app.magazassistant4.DatabaseHelper;
+import com.squorpikkor.app.magazassistant4.Department;
 import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.R;
 
@@ -22,9 +23,9 @@ public class CustomersFragment extends Fragment {
 //    DatabaseHelper databaseHelper;
     View view;
     ListView lvMain;
-    CustomerAdapter customerAdapter;
+    DepartmentAdapter departmentAdapter;
     MainViewModel mainViewModel;
-    ArrayList<Customer> customers;
+    ArrayList<Department> departments;
     DatabaseHelper databaseHelper;
 
     public static CustomersFragment newInstance() {
@@ -36,6 +37,21 @@ public class CustomersFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // начальная инициализация списка
+        departments = mainViewModel.getDepartments();
+
+        // находим список
+        lvMain = view.findViewById(R.id.departments_list_view);
+
+        // создаем адаптер
+        departmentAdapter = new DepartmentAdapter(getActivity(), R.layout.department_item,  departments, mainViewModel);
+
+        // присваиваем адаптер списку
+        lvMain.setAdapter(departmentAdapter);
+
+
+
+
+        /*// начальная инициализация списка
         customers = mainViewModel.getCustomersList();
 
         // находим список
@@ -61,7 +77,7 @@ public class CustomersFragment extends Fragment {
 //                deleteDialog(position);
                 return true;
             }
-        });
+        });*/
     }
 
     @Override
@@ -80,9 +96,9 @@ public class CustomersFragment extends Fragment {
     }
 
     private void refreshListView() {
-        customers.clear();
-        customers.addAll(databaseHelper.getAllCustomers());
-        lvMain.setAdapter(customerAdapter);
+        departments.clear();
+        departments.addAll(databaseHelper.getAllDepartments());
+        lvMain.setAdapter(departmentAdapter);
     }
 
     @Override
@@ -91,7 +107,7 @@ public class CustomersFragment extends Fragment {
         refreshListView();
     }
 
-    public void addCustomer() {
+    public void addDeparment() {
 
     }
 

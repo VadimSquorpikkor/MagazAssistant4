@@ -152,6 +152,7 @@ public class MainViewModel extends AndroidViewModel {
 
 //----------КОЛИЧЕСТВО ЛЮДЕЙ------------------------------------------------------------------------
 
+    //todo useless
     private int korelinCount;
     private int sborkaCount;
     private int montazhCount;
@@ -219,8 +220,16 @@ public class MainViewModel extends AndroidViewModel {
 //----------CUSTOMER--------------------------------------------------------------------------------
 
     private ArrayList<Customer> customerList = new ArrayList<>();
+    private ArrayList<Department> departments = new ArrayList<>();
+    private ArrayList<Order> orderList = new ArrayList<>();
 
-    ArrayList<Order> orderList = new ArrayList<>();
+    public ArrayList<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(ArrayList<Department> departments) {
+        this.departments = departments;
+    }
 
     public ArrayList<Order> getOrderList() {
         return orderList;

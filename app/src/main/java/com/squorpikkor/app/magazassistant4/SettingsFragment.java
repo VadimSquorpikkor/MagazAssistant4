@@ -53,8 +53,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     }
 
     void setDefaultSettings() {
+        Log.e(TAG, "--------BEFORE: " + database.getCustomerCount());
         database.deleteAllDepartments();
         database.deleteAllCustomers();
+        Log.e(TAG, "---------AFTER: " + database.getCustomerCount());
 
         database.addDepartment("Сборочный участок", 3);
         database.addDepartment("Корелин 1-й корпус", 3);
@@ -81,9 +83,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.set_default_button: setDefaultSettings(); break;
-            case R.id.set_default_button:
-                Log.e(TAG, "onClick: " + database.getCustomerCount()); break;
+            case R.id.set_default_button: setDefaultSettings(); break;
         }
     }
 }

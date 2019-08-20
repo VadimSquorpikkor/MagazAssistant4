@@ -3,6 +3,7 @@ package com.squorpikkor.app.magazassistant4.customer;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import com.squorpikkor.app.magazassistant4.R;
 
 import java.util.List;
+
+import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 class CustomerAdapter extends ArrayAdapter<Customer> {
 
@@ -33,6 +36,8 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
+
+        Log.e(TAG, "CUSTOMER getView: " + position);
 
         TextView name = view.findViewById(R.id.list_name);
         TextView surname = view.findViewById(R.id.list_surname);

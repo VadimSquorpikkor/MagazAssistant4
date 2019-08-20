@@ -165,8 +165,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return customer;
     }
 
-    public List<Customer> getAllCustomers() {
-        List<Customer> sourceList = new ArrayList<>();
+    public ArrayList<Customer> getAllCustomers() {
+        ArrayList<Customer> sourceList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_CUSTOMERS;
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -230,7 +230,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_DEP_NAME, name);
         values.put(COLUMN_DEP_KOEF, koef);
-        db.insert(TABLE_CUSTOMERS, null, values);
+        db.insert(TABLE_DEPARTMENT, null, values);
         db.close();
     }
 
@@ -301,12 +301,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteAllDepartments() {
 
-        Log.e(TAG, "==========deleteAllDepartments: " + this);
-        if (this.getWritableDatabase() != null) {
+//        Log.e(TAG, "==========deleteAllDepartments: " + this);
+//        if (this.getWritableDatabase() != null) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_DEPARTMENT, null, null);
         db.close();
-        }
+//        }
     }
 
     public int getDepartmentsCount() {
