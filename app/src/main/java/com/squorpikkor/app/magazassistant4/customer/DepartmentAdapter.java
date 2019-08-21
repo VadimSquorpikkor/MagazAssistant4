@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,19 +29,19 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
 
     private LayoutInflater inflater;
     private int layout;
-    private List<Department> sourceList;
+    private ArrayList<Department> departments;
     private DatabaseHelper database;
     private MainViewModel mainViewModel;
     private ArrayList<Customer> customers;
-    private View view;
+    private View main_view;
     private ListView lvMain;
-    private CustomerAdapter customerAdapter;
     private Context context;
+    private CustomerAdapter customerAdapter;
 
     //todo в конструкторе убрать параметр mainViewModel, его можно сделать через context
-    DepartmentAdapter(Context context, int resource, List<Department> sourceList, MainViewModel mainViewModel) {
-        super(context, resource, sourceList);
-        this.sourceList = sourceList;
+    DepartmentAdapter(Context context, int resource, ArrayList<Department> departments, MainViewModel mainViewModel) {
+        super(context, resource, departments);
+        this.departments = departments;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
         this.mainViewModel = mainViewModel;
@@ -50,30 +51,28 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @NonNull
-    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
-
         TextView name = view.findViewById(R.id.dep_list_item_name);
+        Department dep = departments.get(position);
 
-        Log.e(TAG, "getView: " + position);
+
 
         // начальная инициализация списка
-//        customers = mainViewModel.getCustomersList();
-        Log.e(TAG, "getView: " + database.getCustomerCount());
-        customers = database.getAllCustomers();
-        Log.e(TAG, "getView: " + customers.size());
+        //список кастомеров -- это список кастомеров конкретного отдела
+        customers = dep.getCurrentDepCustomers();
+
+        /*Log.e(TAG, "CurrentDepCustomersSize: " + dep.getCurrentDepCustomers().size() + ", " + dep.getName());
         // находим список
         lvMain = view.findViewById(R.id.customers_list_view);
         // создаем адаптер
-        customerAdapter = new CustomerAdapter(context, R.layout.customers_item,  customers);
+        customerAdapter = new CustomerAdapter(context, R.layout.customers_item, customers);
         // присваиваем адаптер списку
-        lvMain.setAdapter(customerAdapter);
+        lvMain.setAdapter(customerAdapter);*/
 
-        Department state = sourceList.get(position);
-
-        name.setText(state.getName());
+        name.setText(dep.getName());
 
         return view;
     }

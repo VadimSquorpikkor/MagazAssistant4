@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.squorpikkor.app.magazassistant4.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
@@ -28,23 +29,28 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
         this.sourceList = sourceList;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
+        Log.e(TAG, "CustomerAdapter: "  + sourceList.size());
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @NonNull
-    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(int cusPosition, View convertView, @NonNull ViewGroup parent) {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
 
-        Log.e(TAG, "CUSTOMER getView: " + position);
+        Log.e(TAG, "CUSTOMER position: " + cusPosition);
+        for (Customer customer : sourceList) {
+            Log.e(TAG, "CUS name: " + customer.getName());
+        }
+
 
         TextView name = view.findViewById(R.id.list_name);
         TextView surname = view.findViewById(R.id.list_surname);
         CheckBox isWorking = view.findViewById(R.id.isWorking);
 
 
-        Customer state = sourceList.get(position);
+        Customer state = sourceList.get(cusPosition);
 
         name.setText(state.getName());
         surname.setText(state.getSurname());

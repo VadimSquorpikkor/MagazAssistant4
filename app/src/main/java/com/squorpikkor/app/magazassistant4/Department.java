@@ -10,12 +10,12 @@ public class Department {
     private int ID;
     private String name;
     private float juicePerWeek;
-    private ArrayList<Customer> depCustomers;
+    private ArrayList<Customer> depCustomers = new ArrayList<>();
 
     public Department(String name, float juicePerWeek) {
         this.name = name;
         this.juicePerWeek = juicePerWeek;
-        this.depCustomers = new ArrayList<>();
+//        this.depCustomers = new ArrayList<>();
     }
 
     //Конструктор для БД

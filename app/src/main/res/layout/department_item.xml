@@ -7,7 +7,8 @@
 
     <LinearLayout style="@style/outer_block">
 
-        <LinearLayout style="@style/inner_block">
+        <LinearLayout style="@style/inner_block"
+            android:id="@+id/root_layout">
 
             <TextView
                 android:layout_width="match_parent"

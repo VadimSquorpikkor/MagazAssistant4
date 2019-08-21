@@ -17,6 +17,7 @@ import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+//      ПАРАДИГМА МОЕГО DATABASEHELPERA:
 //      В проекте TrenkaAssistant_4 я пытался сделать класс работы с базой данных SQLite с
 //  использованием нескольких итаблиц с разными типами связи друг с другом (один ко многим) и с
 //  запросами sql, вытягивающими данные сразу с нескольких таблиц (через foreign key от одной
@@ -282,20 +283,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sourceList;
     }
 
-    public ArrayList<Department> getAllDepartmentSorted() {
-        ArrayList<Department> departments;
-        departments = getAllDepartments();
-
+    //Метод принимает на вход коллекции департментс и кастомерс и распределяет каждого кастомера по своему отделу
+    //Этот метод заменяет сложный SQL запрос с выборкой по двум связанным таблицам (см. парадигму моего хелпера)
+    public ArrayList<Department> getAllDepartmentsSorted() {
+        ArrayList<Department> departments = getAllDepartments();
+        ArrayList<Customer> customers = getAllCustomers();
+        //т.е. беру человека, смотрю, какой номер отдела у него прописан, и добавляю его в
+        // этот отдел. И так для всех людей, так я рассортировываю людей по отделам
+        for (Customer customer : customers) {
+            departments.get(customer.getDepName()).getCurrentDepCustomers().add(customer);
+//            departments.get(0).getCurrentDepCustomers().add(customer);
+        }
         return departments;
     }
 
-    private void sortCustomers(Department department) {
-        /*for (Customer customer : customers) {
+/*    private void sortCustomers(ArrayList<Department> departments, ArrayList<Customer> customers) {
+        for (Customer customer : customers) {
             //т.е. беру человека, смотрю, какой номер отдела у него прописан, и добавляю его в
             // этот отдел. И так для всех людей, так я рассортировываю людей по отделам
-            dep.get(customer.getDepName()).getCurrentDepCustomers().add(customer);
-        }*/
-    }
+            departments.get(customer.getDepName()).getCurrentDepCustomers().add(customer);
+        }
+    }*/
 
     //TODO сделать void?
     public int updateDepartment(Department department) {
