@@ -53,10 +53,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     }
 
     void setDefaultSettings() {
-        Log.e(TAG, "--------BEFORE: " + database.getCustomerCount());
+//        Log.e(TAG, "--------BEFORE: " + database.getCustomerCount());
         database.deleteAllDepartments();
         database.deleteAllCustomers();
-        Log.e(TAG, "---------AFTER: " + database.getCustomerCount());
+//        Log.e(TAG, "---------AFTER: " + database.getCustomerCount());
 
         database.addDepartment("Сборочный участок", 3);
         database.addDepartment("Корелин 1-й корпус", 3);

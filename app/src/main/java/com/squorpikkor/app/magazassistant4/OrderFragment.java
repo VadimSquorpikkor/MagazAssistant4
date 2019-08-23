@@ -2,12 +2,18 @@ package com.squorpikkor.app.magazassistant4;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class OrderFragment extends Fragment {
 
@@ -15,6 +21,9 @@ public class OrderFragment extends Fragment {
     ListView lvMain;
     OrderAdapter orderAdapter;
     MainViewModel mainViewModel;
+
+    FragmentManager manager;
+    ArrayList<Order> orderList;
 
     public static OrderFragment newInstance() {
         return new OrderFragment();
@@ -24,6 +33,11 @@ public class OrderFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        orderList = new ArrayList<>();
+        orderList.add(new Order("Maxim", 2.3f));
+        orderList.add(new Order("Oleg", 2.8f));
+        orderList.add(new Order("Vanya", 1.3f));
+
         // начальная инициализация списка
 //        sourceList = mainViewModel.getJuicesList();
 
@@ -31,7 +45,7 @@ public class OrderFragment extends Fragment {
         lvMain = view.findViewById(R.id.order_list);
 
         // создаем адаптер
-        orderAdapter = new OrderAdapter(getActivity(), R.layout.order_list_item,  mainViewModel.getOrderList());
+        orderAdapter = new OrderAdapter(getActivity(), R.layout.order_list_item,  orderList, manager);
 
         // присваиваем адаптер списку
         lvMain.setAdapter(orderAdapter);
@@ -64,7 +78,18 @@ public class OrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_orders, container, false);
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);//todo in newInstance?
+
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+//        Fragment childFragment = new OrderItemFragment();
+//        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+//        transaction.replace(R.id.child_fragment_container, childFragment).commit();
+
+        manager = getChildFragmentManager();
+
+    }
 }

@@ -29,7 +29,7 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
         this.sourceList = sourceList;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
-        Log.e(TAG, "CustomerAdapter: "  + sourceList.size());
+//        Log.e(TAG, "CustomerAdapter: "  + sourceList.size());
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
@@ -39,9 +39,9 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
 
-        Log.e(TAG, "CUSTOMER position: " + cusPosition);
+//        Log.e(TAG, "CUSTOMER position: " + cusPosition);
         for (Customer customer : sourceList) {
-            Log.e(TAG, "CUS name: " + customer.getName());
+//            Log.e(TAG, "CUS name: " + customer.getName());
         }
 
 

@@ -3,6 +3,10 @@ package com.squorpikkor.app.magazassistant4;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +17,22 @@ import com.squorpikkor.app.magazassistant4.juice.JuicePack;
 
 import java.util.List;
 
+import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
+
 public class OrderAdapter extends ArrayAdapter<Order> {
 
     private LayoutInflater inflater;
     private int layout;
     private List<Order> sourceList;
 
-    OrderAdapter(Context context, int resource, List<Order> sourceList) {
+    private FragmentManager manager;
+
+    OrderAdapter(Context context, int resource, List<Order> sourceList, FragmentManager manager) {
         super(context, resource, sourceList);
         this.sourceList = sourceList;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
+        this.manager = manager;
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
@@ -32,6 +41,19 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
+
+        Order order = sourceList.get(position);
+
+        Log.e(TAG, "*******childFragment: " + order.getName());
+
+        Fragment childFragment = OrderItemFragment.newInstance(order.getName(), order.getPrice());
+//        Fragment childFragment = new OrderItemFragment(order.getName(), order.getPrice());
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.child_fragment_container, childFragment).commit();
+
+
+
+
 
 /*        TextView priceText = view.findViewById(R.id.juice_list_price);
         TextView countText = view.findViewById(R.id.juice_list_count);

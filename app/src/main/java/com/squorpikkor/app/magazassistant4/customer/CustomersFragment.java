@@ -4,11 +4,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.squorpikkor.app.magazassistant4.DatabaseHelper;
@@ -30,6 +32,8 @@ public class CustomersFragment extends Fragment {
     MainViewModel mainViewModel;
     ArrayList<Department> departments;
 
+    FragmentManager manager;
+
     public static CustomersFragment newInstance() {
         return new CustomersFragment();
     }
@@ -39,7 +43,6 @@ public class CustomersFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // начальная инициализация списка
-        Log.e(TAG, "-------------------------onActivityCreated");
         departments = database.getAllDepartmentsSorted();
 
         // находим список
@@ -51,6 +54,9 @@ public class CustomersFragment extends Fragment {
         // присваиваем адаптер списку
         lvMain.setAdapter(departmentAdapter);
 
+
+//        Log.e(TAG, "*************************onActivityCreated: " + getItemHeightofListView(lvMain, departments.size()));
+        getItemHeightofListView(lvMain, departments.size());
     }
 
     @Override
@@ -65,6 +71,7 @@ public class CustomersFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_customers, container, false);
         mainViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);//todo in newInstance?
         database = new DatabaseHelper(getActivity());
+
         return view;
     }
 
@@ -82,6 +89,22 @@ public class CustomersFragment extends Fragment {
 
     public void addDeparment() {
 
+    }
+
+    private static final int UNBOUNDED = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+
+    // To calculate the total height of all items in ListView call with items = adapter.getCount()
+    public static int getItemHeightofListView(ListView listView, int items) {
+        ListAdapter adapter = listView.getAdapter();
+
+        int grossElementHeight = 0;
+        for (int i = 0; i < items; i++) {
+            View childView = adapter.getView(i, null, listView);
+            childView.measure(UNBOUNDED, UNBOUNDED);
+            Log.e(TAG, "**********size of " + i + " item = " + childView.getMeasuredHeight());
+            grossElementHeight += childView.getMeasuredHeight();
+        }
+        return grossElementHeight;
     }
 
 }

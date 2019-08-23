@@ -89,7 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         + ")"
         );
 
-        Log.e(MY_TAG, "onCreate: " + "table customers created");
+//        Log.e(MY_TAG, "onCreate: " + "table customers created");
 
         db.execSQL("CREATE TABLE " + TABLE_DEPARTMENT + "("
                 + COLUMN_DEP_ID + " INTEGER PRIMARY KEY,"
@@ -98,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + ")"
         );
 
-        Log.e(MY_TAG, "onCreate: " + "table department created");
+//        Log.e(MY_TAG, "onCreate: " + "table department created");
 
 
         db.execSQL("CREATE TABLE " + TABLE_JUICES + "("

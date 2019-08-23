@@ -12,6 +12,8 @@ public class CustomerActivity extends AppCompatActivity {
     FragmentManager manager;
     Fragment fragment;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

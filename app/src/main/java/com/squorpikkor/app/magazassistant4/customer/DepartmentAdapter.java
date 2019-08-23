@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.squorpikkor.app.magazassistant4.DatabaseHelper;
 import com.squorpikkor.app.magazassistant4.Department;
 import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.R;
+import com.squorpikkor.app.magazassistant4.SettingsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,9 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
     private ListView lvMain;
     private Context context;
     private CustomerAdapter customerAdapter;
+
+    FragmentManager manager;
+    Fragment fragment;
 
     //todo в конструкторе убрать параметр mainViewModel, его можно сделать через context
     DepartmentAdapter(Context context, int resource, ArrayList<Department> departments, MainViewModel mainViewModel) {
@@ -60,17 +66,28 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
 
 
 
+//        dep.getCurrentDepCustomers().size();
+
+
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        int height = 50+23*dep.getCurrentDepCustomers().size();
+        params.height = (int) (height * (view.getResources().getDisplayMetrics().density));
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        view.setLayoutParams(params);
+
+
+//        view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         // начальная инициализация списка
         //список кастомеров -- это список кастомеров конкретного отдела
         customers = dep.getCurrentDepCustomers();
 
-        /*Log.e(TAG, "CurrentDepCustomersSize: " + dep.getCurrentDepCustomers().size() + ", " + dep.getName());
+//        Log.e(TAG, "CurrentDepCustomersSize: " + dep.getCurrentDepCustomers().size() + ", " + dep.getName());
         // находим список
         lvMain = view.findViewById(R.id.customers_list_view);
         // создаем адаптер
         customerAdapter = new CustomerAdapter(context, R.layout.customers_item, customers);
         // присваиваем адаптер списку
-        lvMain.setAdapter(customerAdapter);*/
+        lvMain.setAdapter(customerAdapter);
 
         name.setText(dep.getName());
 
