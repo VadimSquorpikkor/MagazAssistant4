@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.squorpikkor.app.magazassistant4.juice.JuicePack;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
@@ -27,12 +29,18 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
     private FragmentManager manager;
 
+    private ArrayList<Fragment> fragments;
+
     OrderAdapter(Context context, int resource, List<Order> sourceList, FragmentManager manager) {
         super(context, resource, sourceList);
         this.sourceList = sourceList;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
         this.manager = manager;
+//        manager = getChildFragmentManager();
+        fragments = new ArrayList<>();
+
+
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
@@ -46,7 +54,9 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
         Log.e(TAG, "*******childFragment: " + order.getName());
 
+
         Fragment childFragment = OrderItemFragment.newInstance(order.getName(), order.getPrice());
+        fragments.add(childFragment);
 //        Fragment childFragment = new OrderItemFragment(order.getName(), order.getPrice());
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.child_fragment_container, childFragment).commit();

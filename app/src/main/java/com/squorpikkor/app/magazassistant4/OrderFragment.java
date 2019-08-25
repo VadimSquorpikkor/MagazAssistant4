@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 public class OrderFragment extends Fragment {
 
@@ -89,6 +92,7 @@ public class OrderFragment extends Fragment {
 //        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 //        transaction.replace(R.id.child_fragment_container, childFragment).commit();
 
+        Log.e(TAG, "------------------onViewCreated: ");
         manager = getChildFragmentManager();
 
     }

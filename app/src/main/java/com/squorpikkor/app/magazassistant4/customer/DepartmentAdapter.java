@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,11 +39,14 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
     private ArrayList<Customer> customers;
     private View main_view;
     private ListView lvMain;
+    private GridView gvMain;
     private Context context;
     private CustomerAdapter customerAdapter;
 
     FragmentManager manager;
     Fragment fragment;
+
+
 
     //todo в конструкторе убрать параметр mainViewModel, его можно сделать через context
     DepartmentAdapter(Context context, int resource, ArrayList<Department> departments, MainViewModel mainViewModel) {
@@ -69,11 +73,12 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
 //        dep.getCurrentDepCustomers().size();
 
 
+        /*/////////////////Эта группа комманд для установки высоты Department item, в зависимости от колличества элементов в листе
         ViewGroup.LayoutParams params = view.getLayoutParams();
         int height = 50+23*dep.getCurrentDepCustomers().size();
         params.height = (int) (height * (view.getResources().getDisplayMetrics().density));
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        view.setLayoutParams(params);
+        view.setLayoutParams(params);*/
 
 
 //        view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -83,13 +88,19 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
 
 //        Log.e(TAG, "CurrentDepCustomersSize: " + dep.getCurrentDepCustomers().size() + ", " + dep.getName());
         // находим список
-        lvMain = view.findViewById(R.id.customers_list_view);
+        ////////lvMain = view.findViewById(R.id.customers_list_view);
+        gvMain = view.findViewById(R.id.customers_list_view);
         // создаем адаптер
         customerAdapter = new CustomerAdapter(context, R.layout.customers_item, customers);
         // присваиваем адаптер списку
-        lvMain.setAdapter(customerAdapter);
+        //////////lvMain.setAdapter(customerAdapter);
+        gvMain.setAdapter(customerAdapter);
 
         name.setText(dep.getName());
+
+        //=======GRID VIEW==============================
+
+
 
         return view;
     }

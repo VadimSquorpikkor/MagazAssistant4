@@ -13,6 +13,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -89,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         + ")"
         );
 
-//        Log.e(MY_TAG, "onCreate: " + "table customers created");
+        Log.e(MY_TAG, "onCreate: " + "table customers created");
 
         db.execSQL("CREATE TABLE " + TABLE_DEPARTMENT + "("
                 + COLUMN_DEP_ID + " INTEGER PRIMARY KEY,"
@@ -98,7 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + ")"
         );
 
-//        Log.e(MY_TAG, "onCreate: " + "table department created");
+        Log.e(MY_TAG, "onCreate: " + "table department created");
 
 
         db.execSQL("CREATE TABLE " + TABLE_JUICES + "("
@@ -212,11 +213,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteAllCustomers() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CUSTOMERS, null, null);
+//        db.execSQL("DELETE FROM " + TABLE_CUSTOMERS);//то же самое, можно и как в предыдущей строке, и как в этой
         db.close();
     }
 
     public int getCustomerCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_CUSTOMERS;
+//        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
+        String countQuery = "SELECT * FROM " + TABLE_CUSTOMERS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -324,17 +327,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void deleteAllDepartments() {
-
-//        Log.e(TAG, "==========deleteAllDepartments: " + this);
-//        if (this.getWritableDatabase() != null) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_DEPARTMENT, null, null);
+//        db.execSQL("DELETE FROM " + TABLE_DEPARTMENT);
         db.close();
 //        }
     }
 
     public int getDepartmentsCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_DEPARTMENT;
+        String countQuery = "SELECT * FROM " + TABLE_DEPARTMENT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
