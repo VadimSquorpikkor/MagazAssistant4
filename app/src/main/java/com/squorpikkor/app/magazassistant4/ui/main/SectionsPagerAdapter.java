@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.squorpikkor.app.magazassistant4.OrderFragment;
+import com.squorpikkor.app.magazassistant4.order.OrderFragment;
 import com.squorpikkor.app.magazassistant4.PricesFragment;
 import com.squorpikkor.app.magazassistant4.R;
 import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;

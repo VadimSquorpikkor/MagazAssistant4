@@ -1,19 +1,15 @@
 package com.squorpikkor.app.magazassistant4.customer;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,13 +17,8 @@ import com.squorpikkor.app.magazassistant4.DatabaseHelper;
 import com.squorpikkor.app.magazassistant4.Department;
 import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.R;
-import com.squorpikkor.app.magazassistant4.SettingsFragment;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 class DepartmentAdapter extends ArrayAdapter<Department> {
 

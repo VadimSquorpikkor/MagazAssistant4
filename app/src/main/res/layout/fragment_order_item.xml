@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".OrderItemFragment">
+    tools:context=".order.OrderItemFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: удалить файл, когда переделаю под вложенный gridView -->
     <TextView
         android:id="@+id/id_1"
         android:layout_width="match_parent"

@@ -5,6 +5,12 @@ import android.util.AttributeSet;
 import android.widget.GridView;
 
 public class MyGridView extends GridView {
+
+    //Единственное отличие этого класса от родительского -- если этот грид используется в составе
+    // итема для листВью, то в этом гриде будут отображатьсмя ВСЕ строки, а не только первая, как
+    // в обычяном гриде
+
+
     public MyGridView(Context context) {
         super(context);
     }

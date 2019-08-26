@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import com.squorpikkor.app.magazassistant4.customer.Customer;
 import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;
 import com.squorpikkor.app.magazassistant4.juice.JuicePack;
+import com.squorpikkor.app.magazassistant4.order.Order;
+
 import java.util.ArrayList;
 import java.util.List;
 

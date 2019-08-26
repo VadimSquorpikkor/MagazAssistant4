@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.squorpikkor.app.magazassistant4.customer.CustomerActivity;
+import com.squorpikkor.app.magazassistant4.settings.SettingsActivity;
 import com.squorpikkor.app.magazassistant4.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, NavigationView.OnNavigationItemSelectedListener{

@@ -72,6 +72,10 @@
         <item name="android:background">@drawable/baseline_remove_white_18dp</item>
     </style>
 
+    <style name="visibility_button" parent="small_button">
+        <item name="android:background">@drawable/baseline_visibility_white_48dp</item>
+    </style>
+
     <style name="small_edit" parent="base_center">
         <item name="android:textColor">@color/colorOrange</item>
         <item name="android:padding">0dp</item>

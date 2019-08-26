@@ -1,8 +1,6 @@
-package com.squorpikkor.app.magazassistant4;
+package com.squorpikkor.app.magazassistant4.settings;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,11 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squorpikkor.app.magazassistant4.customer.Customer;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.squorpikkor.app.magazassistant4.DatabaseHelper;
+import com.squorpikkor.app.magazassistant4.MainViewModel;
+import com.squorpikkor.app.magazassistant4.R;
 
 import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 

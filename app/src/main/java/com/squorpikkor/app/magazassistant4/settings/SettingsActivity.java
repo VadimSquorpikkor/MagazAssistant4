@@ -1,9 +1,11 @@
-package com.squorpikkor.app.magazassistant4;
+package com.squorpikkor.app.magazassistant4.settings;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.squorpikkor.app.magazassistant4.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

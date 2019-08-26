@@ -1,4 +1,4 @@
-package com.squorpikkor.app.magazassistant4;
+package com.squorpikkor.app.magazassistant4.order;
 
 public class Order {
 

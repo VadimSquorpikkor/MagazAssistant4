@@ -1,4 +1,4 @@
-package com.squorpikkor.app.magazassistant4;
+package com.squorpikkor.app.magazassistant4.order;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -6,13 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.squorpikkor.app.magazassistant4.MainViewModel;
+import com.squorpikkor.app.magazassistant4.R;
 
 import java.util.ArrayList;
 

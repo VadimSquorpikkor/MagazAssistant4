@@ -1,4 +1,4 @@
-package com.squorpikkor.app.magazassistant4;
+package com.squorpikkor.app.magazassistant4.order;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,11 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
-import com.squorpikkor.app.magazassistant4.juice.JuicePack;
+import com.squorpikkor.app.magazassistant4.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +55,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
         Fragment childFragment = OrderItemFragment.newInstance(order.getName(), order.getPrice());
         fragments.add(childFragment);
-//        Fragment childFragment = new OrderItemFragment(order.getName(), order.getPrice());
+//        Fragment childFragment = new OrderItemFragment(com.squorpikkor.app.magazassistant4.order.getName(), com.squorpikkor.app.magazassistant4.order.getPrice());
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.child_fragment_container, childFragment).commit();
 
