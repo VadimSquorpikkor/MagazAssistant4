@@ -29,22 +29,24 @@ public class OrderFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
+//------------------------ДЛЯ ПРОВЕРКИ--------------------------------------------------------------
         orderList = new ArrayList<>();
-        orderList = new ArrayList<>();
 
-        ArrayList<Product> products = new ArrayList<>();
-        products.add(new Product("Кефир", 1.0f));
+        ArrayList<Product> products1 = new ArrayList<>();
+        ArrayList<Product> products2 = new ArrayList<>();
+        ArrayList<Product> products3 = new ArrayList<>();
 
-        orderList.add(new Order("Maxim", 2.5f));
-        orderList.add(new Order("Oleg", 5.1f));
+        products1.add(new Product("Кефир", 1.0f));
+        orderList.add(new Order("Maxim", 2.5f, products1));
+        products2.add(new Product("Кефир", 1.0f));
+        products2.add(new Product("Сок", 2.4f));
+        orderList.add(new Order("Oleg", 5.1f, products2));
+        products3.add(new Product("Кефир", 1.0f));
+        products3.add(new Product("Сок", 2.4f));
+        products3.add(new Product("Печеньки", 3.5f));
+        orderList.add(new Order("Vanya", 3.7f, products3));
+//--------------------------------------------------------------------------------------------------
 
-/*        products.add(new Product("Кефир", 1.0f));
-        orderList.add(new Order("Maxim", 2.5f, products));
-        products.add(new Product("Сок", 2.4f));
-        orderList.add(new Order("Oleg", 5.1f, products));
-        products.add(new Product("Печеньки", 3.5f));
-        orderList.add(new Order("Vanya", 3.7f, products));*/
 
         // находим список
         lvMain = view.findViewById(R.id.order_list);

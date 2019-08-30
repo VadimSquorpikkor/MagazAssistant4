@@ -289,6 +289,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Метод принимает на вход коллекции департментс и кастомерс и распределяет каждого кастомера по своему отделу
     //Этот метод заменяет сложный SQL запрос с выборкой по двум связанным таблицам (см. парадигму моего хелпера)
     public ArrayList<Department> getAllDepartmentsSorted() {
+        //Вообще можнобыло бы и в одну строчку захреначить, но оставил как есть, чтоб понятнее было
+        ////////// for (Customer customer : getAllCustomers()) getAllDepartments().get(customer.getDepName()).getCurrentDepCustomers().add(customer); /////////////
         ArrayList<Department> departments = getAllDepartments();
         ArrayList<Customer> customers = getAllCustomers();
         //т.е. беру человека, смотрю, какой номер отдела у него прописан, и добавляю его в

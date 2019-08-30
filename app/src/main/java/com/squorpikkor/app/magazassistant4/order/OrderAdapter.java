@@ -48,7 +48,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         // находим список
         gvMain = view.findViewById(R.id.current_order_product_list);
         // создаем адаптер
-        productsAdapter = new ProductsAdapter(getContext(), R.layout.customers_item, products);
+        productsAdapter = new ProductsAdapter(getContext(), R.layout.current_order_product_list_item, products);
         // присваиваем адаптер списку
         gvMain.setAdapter(productsAdapter);
 
