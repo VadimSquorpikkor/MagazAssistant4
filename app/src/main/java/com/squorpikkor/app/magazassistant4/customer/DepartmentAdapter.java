@@ -3,8 +3,6 @@ package com.squorpikkor.app.magazassistant4.customer;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +31,6 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
     private GridView gvMain;
     private Context context;
     private CustomerAdapter customerAdapter;
-
-    FragmentManager manager;
-    Fragment fragment;
-
-
 
     //todo в конструкторе убрать параметр mainViewModel, его можно сделать через context
     DepartmentAdapter(Context context, int resource, ArrayList<Department> departments, MainViewModel mainViewModel) {

@@ -1,7 +1,7 @@
 package com.squorpikkor.app.magazassistant4.customer;
 
 import com.squorpikkor.app.magazassistant4.Juice;
-import com.squorpikkor.app.magazassistant4.Product;
+import com.squorpikkor.app.magazassistant4.order.Product;
 
 import java.util.ArrayList;
 

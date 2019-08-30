@@ -3,18 +3,16 @@ package com.squorpikkor.app.magazassistant4.order;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.TextView;
 
 import com.squorpikkor.app.magazassistant4.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
@@ -24,21 +22,15 @@ public class OrderAdapter extends ArrayAdapter<Order> {
     private LayoutInflater inflater;
     private int layout;
     private List<Order> sourceList;
+    private List<Product> products;
+    private GridView gvMain;
+    private ProductsAdapter productsAdapter;
 
-    private FragmentManager manager;
-
-    private ArrayList<Fragment> fragments;
-
-    OrderAdapter(Context context, int resource, List<Order> sourceList, FragmentManager manager) {
+    OrderAdapter(Context context, int resource, List<Order> sourceList) {
         super(context, resource, sourceList);
         this.sourceList = sourceList;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
-        this.manager = manager;
-//        manager = getChildFragmentManager();
-        fragments = new ArrayList<>();
-
-
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
@@ -47,31 +39,28 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
-
         Order order = sourceList.get(position);
-
         Log.e(TAG, "*******childFragment: " + order.getName());
 
+        //список заказанных продуктов -- это список продуктов конкретного человека
+        products = order.getProducts();
 
-        Fragment childFragment = OrderItemFragment.newInstance(order.getName(), order.getPrice());
-        fragments.add(childFragment);
-//        Fragment childFragment = new OrderItemFragment(com.squorpikkor.app.magazassistant4.order.getName(), com.squorpikkor.app.magazassistant4.order.getPrice());
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.child_fragment_container, childFragment).commit();
+        // находим список
+        gvMain = view.findViewById(R.id.current_order_product_list);
+        // создаем адаптер
+        productsAdapter = new ProductsAdapter(getContext(), R.layout.customers_item, products);
+        // присваиваем адаптер списку
+        gvMain.setAdapter(productsAdapter);
 
+//        name.setText(dep.getName());
 
+        TextView nameText = view.findViewById(R.id.order_item_name);
+        TextView priceText = view.findViewById(R.id.order_item_price);
 
+        Order state = sourceList.get(position);
 
-
-/*        TextView priceText = view.findViewById(R.id.juice_list_price);
-        TextView countText = view.findViewById(R.id.juice_list_count);
-        TextView nameText = view.findViewById(R.id.juice_list_name);
-
-        JuicePack state = sourceList.get(position);
-
-        nameText.setText("" + state.getName());
-        priceText.setText((int)(state.getPrice() + 0) + "p " + (int)(state.getPrice()*100%100 + 0) + "коп");
-        countText.setText(state.getCount() + "шт");*/
+        nameText.setText(state.getName());
+        priceText.setText((int)(state.getTotalPrice() + 0) + "p " + (int)(state.getTotalPrice()*100%100 + 0) + "коп");
 
         return view;
     }
