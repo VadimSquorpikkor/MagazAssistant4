@@ -70,7 +70,7 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
         //список кастомеров -- это список кастомеров конкретного отдела
         customers = dep.getCurrentDepCustomers();
 
-//        Log.e(TAG, "CurrentDepCustomersSize: " + dep.getCurrentDepCustomers().size() + ", " + dep.getName());
+//        Log.e(TAG, "CurrentDepCustomersSize: " + dep.getCurrentDepCustomers().size() + ", " + dep.getTitle());
         // находим список
         ////////lvMain = view.findViewById(R.id.customers_list_view);
         gvMain = view.findViewById(R.id.customers_list_view);

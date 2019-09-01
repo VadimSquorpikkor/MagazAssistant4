@@ -8,12 +8,14 @@ public class Product {
      * (Juice не будет наследником этого класса)
      */
 
-    public String getName() {
-        return name;
+    //region GETTERS & SETTERS
+
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String nsme) {
-        this.name = nsme;
+    public void setTitle(String nsme) {
+        this.title = nsme;
     }
 
     public Float getPrice() {
@@ -24,11 +26,62 @@ public class Product {
         this.price = price;
     }
 
-    private String name;
-    private Float price;
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public boolean isJuice() {
+        return isJuice;
+    }
+
+    public void setJuice(boolean juice) {
+        isJuice = juice;
+    }
+
+    public boolean isPurchased() {
+        return purchased;
+    }
+
+    public void setPurchased(boolean purchased) {
+        this.purchased = purchased;
+    }
+
+    public int getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(int customer) {
+        this.customer = customer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    //endregion
+
+    private int id;             //id продукта в БД -- для поиска по БД
+    private String title;       //название продукта
+    private Float price;        //цена
+    private int quantity;       //количество продукта
+    private boolean isJuice;    //сок или не сок
+    private boolean purchased;  //куплен или не куплен
+    private int customer;       //заказчик продукта. Интегер, потому как хранится толька ссылка на
+                                // id заказчика в таблице БД
 
     public Product(String name, Float price) {
-        this.name = name;
+        this.title = name;
         this.price = price;
+    }
+
+    public Product() {
     }
 }

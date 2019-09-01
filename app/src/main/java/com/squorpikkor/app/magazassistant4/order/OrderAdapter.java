@@ -52,7 +52,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         // присваиваем адаптер списку
         gvMain.setAdapter(productsAdapter);
 
-//        name.setText(dep.getName());
+//        name.setText(dep.getTitle());
 
         TextView nameText = view.findViewById(R.id.order_item_name);
         TextView priceText = view.findViewById(R.id.order_item_price);

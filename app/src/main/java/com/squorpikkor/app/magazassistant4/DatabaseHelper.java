@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.squorpikkor.app.magazassistant4.customer.Customer;
+import com.squorpikkor.app.magazassistant4.order.Product;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -39,20 +40,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "magaz_db";
-//--------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------
     private static final String TABLE_CUSTOMERS = "customers_table";
     private static final String COLUMN_CUS_ID = "id";
     private static final String COLUMN_CUS_NAME = "name";
     private static final String COLUMN_CUS_SURNAME = "surname";
     private static final String COLUMN_CUS_DEPARTMENT = "department";
-//--------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------
     private static final String TABLE_DEPARTMENT = "department_table";
     private static final String COLUMN_DEP_ID = "id";
     private static final String COLUMN_DEP_NAME = "name";
-    private static final String COLUMN_DEP_KOEF = "koef";   //juice per week for each
-                                                            // customer in current dep
-//--------------------------------------------------------------------------------------------------
-
+    private static final String COLUMN_DEP_KOEF = "koef";//juice per week for each customer in current dep
+    //--------------------------------------------------------------------------------------------------
+    private static final String TABLE_PRODUCTS = "products_table";
+    private static final String COLUMN_PROD_ID = "id";
+    private static final String COLUMN_PROD_TITLE = "title";
+    private static final String COLUMN_PROD_PRICE = "price";
+    private static final String COLUMN_PROD_QUANTITY = "quantity";
+    private static final String COLUMN_PROD_IS_JUICE = "is_juice";
+    private static final String COLUMN_PROD_PURCHASED = "purchased";
+    private static final String COLUMN_PROD_CUSTOMER = "customer";
+    //--------------------------------------------------------------------------------------------------
     private static final String TABLE_JUICES = "juices_table";
     private static final String COLUMN_J_ID = "id";
     private static final String COLUMN_J_NAME = "name";
@@ -67,27 +75,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //из БД методом getAll объект получает свой ID. Voila
     private static final String MY_TAG = "my_tag";
 
-    public DatabaseHelper (Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-/*
-        String CREATE_CUSTOMERS_TABLE = "CREATE TABLE " + TABLE_CUSTOMERS + "("
-                + COLUMN_CUS_ID + "INTEGER PRIMARY KEY,"
-                + COLUMN_CUS_NAME + "TEXT, "
-                + COLUMN_CUS_SURNAME + "TEXT"
-                + ")";
-        db.execSQL(CREATE_CUSTOMERS_TABLE);
-*/
 
         db.execSQL("CREATE TABLE " + TABLE_CUSTOMERS + "("
-        + COLUMN_CUS_ID + " INTEGER PRIMARY KEY,"
-        + COLUMN_CUS_NAME + " TEXT, "
-        + COLUMN_CUS_SURNAME + " TEXT,"
-        + COLUMN_CUS_DEPARTMENT + " INTEGER"
-        + ")"
+                + COLUMN_CUS_ID + " INTEGER PRIMARY KEY,"
+                + COLUMN_CUS_NAME + " TEXT, "
+                + COLUMN_CUS_SURNAME + " TEXT,"
+                + COLUMN_CUS_DEPARTMENT + " INTEGER"
+                + ")"
         );
 
         Log.e(MY_TAG, "onCreate: " + "table customers created");
@@ -101,11 +101,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.e(MY_TAG, "onCreate: " + "table department created");
 
-
         db.execSQL("CREATE TABLE " + TABLE_JUICES + "("
                 + COLUMN_J_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_J_NAME + " TEXT,"
                 + COLUMN_J_PRICE + " INTEGER"
+                + ")"
+        );
+
+        db.execSQL("CREATE TABLE " + TABLE_PRODUCTS + "("
+                + COLUMN_PROD_ID + " INTEGER PRIMARY KEY,"
+                + COLUMN_PROD_TITLE + " TEXT,"
+                + COLUMN_PROD_PRICE + " REAL,"
+                + COLUMN_PROD_QUANTITY + " INTEGER,"
+                + COLUMN_PROD_IS_JUICE + " TEXT,"
+                + COLUMN_PROD_PURCHASED + " TEXT,"
+                + COLUMN_PROD_CUSTOMER + " INTEGER"
                 + ")"
         );
     }
@@ -120,9 +130,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JUICES);
         onCreate(db);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS);
+        onCreate(db);
     }
 
 //---------------CUSTOMERS METHODS------------------------------------------------------------------
+//region CUSTOMERS METHODS
 
     public void addCustomer(String name, String surname, int department) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -228,7 +242,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
+//endregion
 //---------------DEPARTMENT METHODS-----------------------------------------------------------------
+//region DEPARTMENTS METHODS
 
     public void addDepartment(String name, int koef) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -345,6 +361,124 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return count;
     }
+//endregion
+//---------------PRODUCTS METHODS-------------------------------------------------------------------
+//region PRODUCTS METHODS
+    public void addProduct(String title, int quantity, boolean isJuice, int customer) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues values = new ContentValues();
+    values.put(COLUMN_PROD_TITLE, title);
+    values.put(COLUMN_PROD_PRICE, 0);
+    values.put(COLUMN_PROD_QUANTITY, quantity);
+    if(isJuice)values.put(COLUMN_PROD_IS_JUICE, "true");
+    else values.put(COLUMN_PROD_IS_JUICE, "false");
+    values.put(COLUMN_PROD_PURCHASED, "false");
+    values.put(COLUMN_PROD_CUSTOMER, customer);
 
+    db.insert(TABLE_PRODUCTS, null, values);
+    db.close();
+}
 
+    public Product getProduct(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_PRODUCTS, new String[]{
+                        COLUMN_PROD_ID,
+                        COLUMN_PROD_TITLE,
+                        COLUMN_PROD_PRICE,
+                        COLUMN_PROD_QUANTITY,
+                        COLUMN_PROD_IS_JUICE,
+                        COLUMN_PROD_PURCHASED,
+                        COLUMN_PROD_CUSTOMER
+                }, COLUMN_CUS_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+
+        Product product = new Product();
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            product.setId(Integer.parseInt(cursor.getString(0)));
+            product.setTitle(cursor.getString(1));
+            product.setPrice(Float.parseFloat(cursor.getString(2)));
+            product.setQuantity(Integer.parseInt(cursor.getString(3)));
+            product.setJuice(cursor.getString(4) == "true");//if "true", isJuice = true
+            product.setPurchased(cursor.getString(5)=="true");
+            product.setCustomer(Integer.parseInt(cursor.getString(6)));
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return product;
+    }
+
+    public ArrayList<Product> getAllProducts() {
+        ArrayList<Product> prodList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_PRODUCTS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Product product = new Product();
+                product.setId(Integer.parseInt(cursor.getString(0)));
+                product.setTitle(cursor.getString(1));
+                product.setPrice(Float.parseFloat(cursor.getString(2)));
+                product.setQuantity(Integer.parseInt(cursor.getString(3)));
+                product.setJuice(cursor.getString(4) == "true");//if "true", isJuice = true
+                product.setPurchased(cursor.getString(5)=="true");
+                product.setCustomer(Integer.parseInt(cursor.getString(6)));
+                prodList.add(product);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return prodList;
+    }
+
+    //TODO сделать void?
+    public int updateProducts(Product product) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PROD_TITLE, product.getTitle());
+        values.put(COLUMN_PROD_PRICE, product.getPrice());
+        values.put(COLUMN_PROD_QUANTITY, product.getQuantity());
+        if(product.isJuice())values.put(COLUMN_PROD_IS_JUICE, "true");
+        else values.put(COLUMN_PROD_IS_JUICE, "false");
+        if(product.isPurchased())values.put(COLUMN_PROD_PURCHASED, "true");
+        else values.put(COLUMN_PROD_PURCHASED, "false");
+        values.put(COLUMN_PROD_CUSTOMER, product.getCustomer());
+
+        return db.update(TABLE_PRODUCTS, values, COLUMN_PROD_ID + " = ?",
+                new String[]{String.valueOf(product.getId())});
+    }
+
+    public void deleteProducts(Product product) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_PRODUCTS, COLUMN_PROD_ID + " = ?", new String[]{String.valueOf(product.getId())});
+        db.close();
+    }
+
+    public void deleteAllProducts() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_PRODUCTS, null, null);
+//        db.execSQL("DELETE FROM " + TABLE_PRODUCTS);//то же самое, можно и как в предыдущей строке, и как в этой
+        db.close();
+    }
+
+    public int getProductsQuantity() {
+//        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
+        String countQuery = "SELECT * FROM " + TABLE_PRODUCTS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        return count;
+    }
+//endregion
 }

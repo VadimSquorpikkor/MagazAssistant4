@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.squorpikkor.app.magazassistant4.R;
-import com.squorpikkor.app.magazassistant4.juice.JuicePack;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class ProductsAdapter extends ArrayAdapter<Product> {
 
         Product state = sourceList.get(position);
 
-        nameText.setText(state.getName());
+        nameText.setText(state.getTitle());
         priceText.setText((int)(state.getPrice() + 0) + "p " + (int)(state.getPrice()*100%100 + 0) + "коп");
 
         return view;

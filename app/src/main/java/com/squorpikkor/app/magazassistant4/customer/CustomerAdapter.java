@@ -41,7 +41,7 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
 
 //        Log.e(TAG, "CUSTOMER position: " + cusPosition);
         for (Customer customer : sourceList) {
-//            Log.e(TAG, "CUS name: " + customer.getName());
+//            Log.e(TAG, "CUS name: " + customer.getTitle());
         }
 
 
