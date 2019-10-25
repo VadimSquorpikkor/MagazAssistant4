@@ -3,6 +3,10 @@ package com.squorpikkor.app.magazassistant4;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.view.View;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.squorpikkor.app.magazassistant4.customer.Customer;
 import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;
@@ -12,19 +16,41 @@ import com.squorpikkor.app.magazassistant4.order.Order;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
+
 public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
 
-        customerList.add(new Customer("Максим", "Шустов", 0));
-        customerList.add(new Customer("Ваня", "Махнюков", 0));
-        customerList.add(new Customer("Олег", "Алисевич", 0));
-
-
+//        customerList.add(new Customer("Максим", "Шустов", 0));
+//        customerList.add(new Customer("Ваня", "Махнюков", 0));
+//        customerList.add(new Customer("Олег", "Алисевич", 0));
     }
 
-//----------JUICE PACK------------------------------------------------------------------------------
+    DatabaseHelper databaseHelper = new DatabaseHelper(getApplication());
+
+    public DatabaseHelper getDatabase() {
+        return databaseHelper;
+    }
+
+    public static final int UNBOUNDED = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+
+    // To calculate the total height of all items in ListView call with items = adapter.getCount()
+    public static int getItemHeightofListView(ListView listView, int items) {
+        ListAdapter adapter = listView.getAdapter();
+
+        int grossElementHeight = 0;
+        for (int i = 0; i < items; i++) {
+            View childView = adapter.getView(i, null, listView);
+            childView.measure(UNBOUNDED, UNBOUNDED);
+            Log.e(TAG, "**********size of " + i + " item = " + childView.getMeasuredHeight());
+            grossElementHeight += childView.getMeasuredHeight();
+        }
+        return grossElementHeight;
+    }
+
+    //----------JUICE PACK------------------------------------------------------------------------------
 
     private List<JuicePack> juicesList = new ArrayList<>();
 

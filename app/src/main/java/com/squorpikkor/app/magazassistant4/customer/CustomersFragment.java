@@ -56,7 +56,7 @@ public class CustomersFragment extends Fragment {
 
 
 //        Log.e(TAG, "*************************onActivityCreated: " + getItemHeightofListView(lvMain, departments.size()));
-        getItemHeightofListView(lvMain, departments.size());
+        MainViewModel.getItemHeightofListView(lvMain, departments.size());
     }
 
     @Override
@@ -91,20 +91,7 @@ public class CustomersFragment extends Fragment {
 
     }
 
-    private static final int UNBOUNDED = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
 
-    // To calculate the total height of all items in ListView call with items = adapter.getCount()
-    public static int getItemHeightofListView(ListView listView, int items) {
-        ListAdapter adapter = listView.getAdapter();
 
-        int grossElementHeight = 0;
-        for (int i = 0; i < items; i++) {
-            View childView = adapter.getView(i, null, listView);
-            childView.measure(UNBOUNDED, UNBOUNDED);
-            Log.e(TAG, "**********size of " + i + " item = " + childView.getMeasuredHeight());
-            grossElementHeight += childView.getMeasuredHeight();
-        }
-        return grossElementHeight;
-    }
 
 }

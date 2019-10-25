@@ -1,86 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customer.CustomersFragment">
+
+<LinearLayout
     style="@style/outer_block">
 
     <LinearLayout
         style="@style/inner_block"
-        android:padding="0dp">
+        android:padding="0dp"
+        >
 
         <LinearLayout
             style="@style/horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical" >
 
-            <LinearLayout
+            <LinearLayout style="@style/vertical" android:layout_weight="1"
+                android:gravity="left">
+
+
+                <LinearLayout
                 style="@style/horizontal"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
                 android:paddingStart="10dp">
+
 
                 <TextView
                     android:id="@+id/order_item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
                     android:layout_marginRight="10dp"
                     android:text="Имя" />
 
                 <TextView
+                    android:textSize="20sp"
                     android:id="@+id/order_item_surname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Фамилия" />
+
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/horizontal"
-                android:layout_width="wrap_content"
-                android:layout_weight="1">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Денег: " />
 
                 <TextView
                     android:id="@+id/order_item_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:text="2.5"
                     android:textColor="@color/colorOrange" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/add_juice_button"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/my_add_button_shape"
-                android:elevation="5dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="+"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                style="@style/horizontal"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right">
+            <ImageView
+                style="@style/add_to_cart_button"
+                android:layout_marginEnd="20dp"/>
 
 
                 <ImageView
-                    style="@style/delete_button"
-                    android:gravity="end"
-                    android:layout_marginEnd="20dp"/>
-                <ImageView
-                    style="@style/visibility_button"
-                    android:gravity="end"
+                    style="@style/upp_button"
                     android:layout_marginEnd="10dp"/>
-            </LinearLayout>
+
+            <ImageView
+                style="@style/upp_button"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="5dp"/>
+
         <com.squorpikkor.app.magazassistant4.MyGridView
+            android:padding="10dp"
             android:id="@+id/current_order_product_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,5 +87,7 @@
             android:verticalSpacing="1dp">
 
         </com.squorpikkor.app.magazassistant4.MyGridView>
+
     </LinearLayout>
 </LinearLayout>
+</RelativeLayout>

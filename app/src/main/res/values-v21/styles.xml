@@ -31,6 +31,7 @@
     </style>
 
     <style name="vertical" parent="my_base_style">
+        <item name="android:gravity">center|center_vertical</item>
         <item name="android:orientation">vertical</item>
     </style>
 
@@ -76,6 +77,18 @@
         <item name="android:background">@drawable/baseline_visibility_white_48dp</item>
     </style>
 
+    <style name="add_to_cart_button" parent="small_button">
+        <item name="android:background">@drawable/baseline_add_shopping_cart_white_48dp</item>
+    </style>
+
+    <style name="down_button" parent="small_button">
+        <item name="android:background">@drawable/baseline_keyboard_arrow_down_white_48dp</item>
+    </style>
+
+    <style name="upp_button" parent="small_button">
+        <item name="android:background">@drawable/baseline_keyboard_arrow_up_white_48dp</item>
+    </style>
+
     <style name="small_edit" parent="base_center">
         <item name="android:textColor">@color/colorOrange</item>
         <item name="android:padding">0dp</item>
@@ -100,5 +113,9 @@
         <item name="android:background">@drawable/button_shape_selector</item>
     </style>
 
+    <style name="orange_title" parent="base_center">
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 
 </resources>

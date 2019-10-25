@@ -3,7 +3,6 @@ package com.squorpikkor.app.magazassistant4.settings;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,6 @@ import android.view.ViewGroup;
 import com.squorpikkor.app.magazassistant4.DatabaseHelper;
 import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.R;
-
-import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener{
 
@@ -41,32 +38,19 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        database = new DatabaseHelper(getActivity());
         view = inflater.inflate(R.layout.fragment_settings, null);
         mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);//todo in newInstance?
+        database = mViewModel.getDatabase();
         view.findViewById(R.id.set_default_button).setOnClickListener(this);
         return view;
     }
 
     void setDefaultSettings() {
-//        Log.e(TAG, "--------BEFORE: " + database.getCustomerCount());
-//        Log.e(TAG, "--------BEFORE DPTM: " + database.getDepartmentsCount());
         database.deleteAllDepartments();
         database.deleteAllCustomers();
-
-        database.addDepartment("Сборочный участок", 3);
-        database.addDepartment("Корелин 1-й корпус", 3);
-        database.addDepartment("Монтажный участок", 3);
-        database.addDepartment("Праневич", 3);
-
-        database.addCustomer("Максим", "Шустов", 0);
-        database.addCustomer("Ваня", "Махнюков", 0);
-        database.addCustomer("Олег", "Алисевич", 0);
-
-        Log.e(TAG, "---------AFTER: " + database.getCustomerCount());
-        Log.e(TAG, "---------AFTER DPTM: " + database.getDepartmentsCount());
-
-        sortCustomers();
+        SettingsDefault settingsDefault = new SettingsDefault();
+        settingsDefault.setDefaultSettings(database);
+//        sortCustomers();
     }
     
     private void sortCustomers() {
