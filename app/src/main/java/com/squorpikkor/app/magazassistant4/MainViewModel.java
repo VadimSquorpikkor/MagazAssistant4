@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 import com.squorpikkor.app.magazassistant4.customer.Customer;
 import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;
-import com.squorpikkor.app.magazassistant4.juice.JuicePack;
+import com.squorpikkor.app.magazassistant4.juice.Juice;
 import com.squorpikkor.app.magazassistant4.order.Order;
 
 import java.util.ArrayList;
@@ -52,14 +52,14 @@ public class MainViewModel extends AndroidViewModel {
 
     //----------JUICE PACK------------------------------------------------------------------------------
 
-    private List<JuicePack> juicesList = new ArrayList<>();
+    private List<Juice> juicesList = new ArrayList<>();
 
-    public List<JuicePack> getJuicesList() {
+    public List<Juice> getJuicesList() {
         return juicesList;
     }
 
     public void addPack(String name, Float price, int count) {
-        juicesList.add(new JuicePack(name, price, count));
+        juicesList.add(new Juice(name, price, count));
     }
 
 //----------FRAGMENTS-------------------------------------------------------------------------------

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:gravity="center_vertical"
+    >
+
+
+
+    <CheckBox
+        android:buttonTint="@color/colorBlue"
+        android:id="@+id/j_isDone"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:id="@+id/j_list_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Title"
+        android:textSize="15sp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/j_list_price"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Цена"
+        android:textSize="15sp"
+        android:paddingRight="10dp"/>
+    <TextView
+        android:id="@+id/j_list_count"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="15sp"
+        android:paddingRight="10dp"/>
+
+    <ImageView
+        style="@style/delete_button"
+        android:gravity="end"
+        android:layout_marginEnd="20dp"/>
+
+
+
+</LinearLayout>

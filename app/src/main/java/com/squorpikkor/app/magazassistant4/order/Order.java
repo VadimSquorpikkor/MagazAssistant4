@@ -1,5 +1,7 @@
 package com.squorpikkor.app.magazassistant4.order;
 
+import com.squorpikkor.app.magazassistant4.juice.Juice;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +16,17 @@ public class Order {
 
 
     private String name;
+    private String sName;
     private Float totalPrice;
     private List<Product> products;
+    private List<Juice> juices;
 
     public String getName() {
         return name;
+    }
+
+    public String getsName() {
+        return sName;
     }
 
     public void setName(String name) {
@@ -37,11 +45,13 @@ public class Order {
     }
 
     //Только для проверки
-    public Order(String name, Float totalPrice, List<Product> productList) {
+    public Order(String name, String sName, Float totalPrice, List<Product> productList, List<Juice> juiceList) {
         this.name = name;
+        this.sName = sName;
         this.products = new ArrayList<>();
         this.totalPrice = totalPrice;
         this.products = productList;
+        this.juices = juiceList;
     }
 
     public Float getTotalPrice() {
@@ -58,5 +68,9 @@ public class Order {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public List<Juice> getJuices() {
+        return juices;
     }
 }

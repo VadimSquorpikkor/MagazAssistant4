@@ -1,6 +1,6 @@
 package com.squorpikkor.app.magazassistant4.juice;
 
-public class JuicePack {
+public class Juice {
     private Float price;
     private int count;
     private String name;
@@ -29,7 +29,7 @@ public class JuicePack {
         this.count = count;
     }
 
-    public JuicePack(String name, Float price, int count) {
+    public Juice(String name, Float price, int count) {
         this.name = name;
         this.price = price;
         this.count = count;

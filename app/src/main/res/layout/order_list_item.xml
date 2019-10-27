@@ -88,6 +88,23 @@
 
         </com.squorpikkor.app.magazassistant4.MyGridView>
 
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="5dp"/>
+
+        <com.squorpikkor.app.magazassistant4.MyGridView
+            android:padding="10dp"
+            android:id="@+id/current_order_juice_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="1"
+            android:verticalSpacing="1dp">
+
+        </com.squorpikkor.app.magazassistant4.MyGridView>
+
     </LinearLayout>
 </LinearLayout>
 </RelativeLayout>

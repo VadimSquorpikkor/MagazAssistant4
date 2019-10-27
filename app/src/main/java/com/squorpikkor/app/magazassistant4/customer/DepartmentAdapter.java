@@ -33,6 +33,7 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
     private CustomerAdapter customerAdapter;
 
     //todo в конструкторе убрать параметр mainViewModel, его можно сделать через context
+    //todo а зачем вообще ссылочная на MVM? Надо попробовать просто статическую ссылку на метод, типа Mvm.method(), должно сработать
     DepartmentAdapter(Context context, int resource, ArrayList<Department> departments, MainViewModel mainViewModel) {
         super(context, resource, departments);
         this.departments = departments;

@@ -65,6 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_J_ID = "id";
     private static final String COLUMN_J_NAME = "name";
     private static final String COLUMN_J_PRICE = "price";
+    //todo j_customer
 
     //По поводу ID: при создании нового RA_Source ID у него ещё нет, как только создается
     //экземпляр класса, он сразу же заносится в БД. ID объекта ещё нет, в базе ID уже есть

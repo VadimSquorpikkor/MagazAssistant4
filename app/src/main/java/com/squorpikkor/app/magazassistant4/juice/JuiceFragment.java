@@ -19,9 +19,6 @@ import android.widget.ListView;
 import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 public class JuiceFragment extends Fragment  implements View.OnClickListener{
@@ -79,7 +76,7 @@ public class JuiceFragment extends Fragment  implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add_juice_button) {
-            mainViewModel.getJuicesList().add(new JuicePack("Name", 5.25f, 5));
+            mainViewModel.getJuicesList().add(new Juice("Name", 5.25f, 5));
             lvMain.setAdapter(sourceAdapter);//обновить адаптер
             Log.e(TAG, sourceAdapter.getCount()+"");
         }
