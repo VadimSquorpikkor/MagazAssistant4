@@ -2,7 +2,9 @@ package com.squorpikkor.app.magazassistant4.order;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.squorpikkor.app.magazassistant4.NewOrderActivity;
 import com.squorpikkor.app.magazassistant4.R;
 import com.squorpikkor.app.magazassistant4.juice.Juice;
 
@@ -29,6 +33,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
     private GridView gvjMain;
     private ProductsAdapter productsAdapter;
     private JuicesAdapter juicesAdapter;
+    private Fragment fragment;
 
     OrderAdapter(Context context, int resource, List<Order> sourceList) {
         super(context, resource, sourceList);
@@ -43,6 +48,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
+        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewActivity(sourceList.get(position).getName()));
         Order order = sourceList.get(position);
         Log.e(TAG, "*******childFragment: " + order.getName());
 
@@ -71,6 +77,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
 
 
+
 //        name.setText(dep.getTitle());
 
         TextView nameText = view.findViewById(R.id.order_item_name);
@@ -85,6 +92,11 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         priceText.setText((int)(state.getTotalPrice() + 0) + "p " + (int)(state.getTotalPrice()*100%100 + 0) + "коп");
 
         return view;
+    }
+
+    private void addNewActivity(String title) {
+        Toast.makeText(getContext(), title, Toast.LENGTH_SHORT).show();
+//        ((OrderFragment)fragment).addNewActivity(getContext(), title);
     }
 
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout style="@style/vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView style="@style/orange_title" android:text="Customer" android:id="@+id/customer"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:layout_marginTop="5dp"/>
+
+    <LinearLayout style="@style/horizontal">
+
+        <EditText style="@style/base_center" android:id="@+id/name"
+            android:layout_weight="1"/>
+
+        <EditText style="@style/base_center" android:id="@+id/price" android:inputType="numberDecimal"
+            android:layout_width="100dp"/>
+
+        <EditText style="@style/base_center" android:id="@+id/count" android:inputType="number"
+            android:layout_width="50dp"/>
+
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="5dp"/>
+
+
+    <TextView style="@style/base_center" android:text="Сок:"/>
+
+    <LinearLayout style="@style/horizontal">
+
+        <EditText style="@style/base_center" android:id="@+id/j_name"
+                android:layout_weight="1"/>
+
+        <EditText style="@style/base_center" android:id="@+id/j_price" android:inputType="numberDecimal"
+                android:layout_width="100dp"/>
+
+        <EditText style="@style/base_center" android:id="@+id/j_count" android:inputType="number"
+                android:layout_width="50dp"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"/>
+
+</LinearLayout>

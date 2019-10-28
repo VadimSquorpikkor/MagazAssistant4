@@ -1,5 +1,7 @@
 package com.squorpikkor.app.magazassistant4.order;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.squorpikkor.app.magazassistant4.NewOrderActivity;
 import com.squorpikkor.app.magazassistant4.R;
 import com.squorpikkor.app.magazassistant4.juice.Juice;
 
@@ -17,6 +20,8 @@ import java.util.ArrayList;
 
 public class OrderFragment extends Fragment {
 
+    private static final int REQUEST_NEW_OREDER = 1;
+    private static final String TITLE = "title";
     /**Фрагмент для отображения заказов. Изначально предполагал, что буде состоять из Customer'ов
      * но прише к тому, что кастомер -- это всё таки человек с руками-ногами, именем и деньгами
      * добавлять к кастомеру методы и поля для хранения продуктов и соков -- не правильно, для
@@ -84,12 +89,6 @@ public class OrderFragment extends Fragment {
         });
     }
 
-    //только для проверки
-    private void initializeList() {
-
-
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,8 +99,17 @@ public class OrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_orders, container, false);
+
         return view;
     }
+
+    public void addNewActivity(Context context, String title) {
+        Intent intent = new Intent(context, NewOrderActivity.class);
+        intent.putExtra(TITLE, title);
+        startActivityForResult(intent, REQUEST_NEW_OREDER);
+    }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

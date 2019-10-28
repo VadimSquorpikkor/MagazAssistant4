@@ -57,7 +57,8 @@
 
             <ImageView
                 style="@style/add_to_cart_button"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginEnd="20dp"
+                android:id="@+id/add_to_cart_button"/>
 
 
                 <ImageView
