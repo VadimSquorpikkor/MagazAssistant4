@@ -10,8 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".NewOrderActivity"></activity>
-        <activity android:name=".settings.SettingsActivity"></activity>
+        <activity android:name=".NewOrderActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Holo.Dialog">
+        </activity>
+        <activity android:name=".settings.SettingsActivity">
+
+        </activity>
         <activity android:name=".customer.CustomerActivity" />
         <!--
         <activity

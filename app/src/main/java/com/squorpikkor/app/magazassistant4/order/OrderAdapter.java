@@ -2,14 +2,18 @@ package com.squorpikkor.app.magazassistant4.order;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +52,9 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
-        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewActivity(sourceList.get(position).getName()));
+//        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(sourceList.get(position).getName()));
+        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(position));
+        fragment = new OrderFragment();
         Order order = sourceList.get(position);
         Log.e(TAG, "*******childFragment: " + order.getName());
 
@@ -75,11 +81,6 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         gvjMain.setAdapter(juicesAdapter);
         } else view.findViewById(R.id.current_order_juice_list).setVisibility(View.GONE);
 
-
-
-
-//        name.setText(dep.getTitle());
-
         TextView nameText = view.findViewById(R.id.order_item_name);
         TextView sNameText = view.findViewById(R.id.order_item_surname);
         TextView priceText = view.findViewById(R.id.order_item_price);
@@ -94,9 +95,29 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         return view;
     }
 
-    private void addNewActivity(String title) {
-        Toast.makeText(getContext(), title, Toast.LENGTH_SHORT).show();
-//        ((OrderFragment)fragment).addNewActivity(getContext(), title);
+/*    private void addNewDialog(final int position) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setTitle("Удаление");
+        alert.setIcon(R.drawable.baseline_add_shopping_cart_white_48dp);
+        alert.setMessage("Удалить " + sourceList.get(position).getName() + " из списка?");
+        final EditText edit = new EditText(getContext());
+//        edit.setLayoutParams(lp);
+        edit.setText(sourceList.get(position).getName());
+        edit.setGravity(Gravity.CENTER);
+        alert.setView(edit);
+        alert.setPositiveButton("OK", (dialog, whichButton) -> dialog.cancel());
+        alert.setNegativeButton("Нет", (dialog, which) -> dialog.cancel());
+        alert.show();
+    }*/
+
+    private void addNewDialog(final int position) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+//        alert.setTitle("Удаление");
+//        alert.setIcon(R.drawable.baseline_add_shopping_cart_white_48dp);
+        alert.setView(R.layout.add_new_dialog);
+//        alert.setPositiveButton("OK", (dialog, whichButton) -> dialog.cancel());
+//        alert.setNegativeButton("Нет", (dialog, which) -> dialog.cancel());
+        alert.show();
     }
 
 }
