@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.squorpikkor.app.magazassistant4.customer.Customer;
+import com.squorpikkor.app.magazassistant4.juice.Juice;
 import com.squorpikkor.app.magazassistant4.order.Product;
 
 import java.lang.reflect.Array;
@@ -57,15 +58,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PROD_TITLE = "title";
     private static final String COLUMN_PROD_PRICE = "price";
     private static final String COLUMN_PROD_QUANTITY = "quantity";
-    private static final String COLUMN_PROD_IS_JUICE = "is_juice";
     private static final String COLUMN_PROD_PURCHASED = "purchased";
     private static final String COLUMN_PROD_CUSTOMER = "customer";
     //--------------------------------------------------------------------------------------------------
     private static final String TABLE_JUICES = "juices_table";
     private static final String COLUMN_J_ID = "id";
-    private static final String COLUMN_J_NAME = "name";
-    private static final String COLUMN_J_PRICE = "price";
-    //todo j_customer
+    private static final String COLUMN_J_TITLE = "j_name";
+    private static final String COLUMN_J_PRICE = "j_price";
+    private static final String COLUMN_J_QUANTITY = "j_quantity";
+    private static final String COLUMN_J_PURCHASED = "j_purchased";
+    private static final String COLUMN_J_CUSTOMER = "j_customer";
 
     //По поводу ID: при создании нового RA_Source ID у него ещё нет, как только создается
     //экземпляр класса, он сразу же заносится в БД. ID объекта ещё нет, в базе ID уже есть
@@ -104,8 +106,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE_JUICES + "("
                 + COLUMN_J_ID + " INTEGER PRIMARY KEY,"
-                + COLUMN_J_NAME + " TEXT,"
-                + COLUMN_J_PRICE + " INTEGER"
+                + COLUMN_J_TITLE + " TEXT,"
+                + COLUMN_J_PRICE + " INTEGER,"
+                + COLUMN_J_QUANTITY + " INTEGER,"
+                + COLUMN_J_PURCHASED + " TEXT,"
+                + COLUMN_J_CUSTOMER + " INTEGER"
                 + ")"
         );
 
@@ -114,7 +119,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_PROD_TITLE + " TEXT,"
                 + COLUMN_PROD_PRICE + " REAL,"
                 + COLUMN_PROD_QUANTITY + " INTEGER,"
-                + COLUMN_PROD_IS_JUICE + " TEXT,"
                 + COLUMN_PROD_PURCHASED + " TEXT,"
                 + COLUMN_PROD_CUSTOMER + " INTEGER"
                 + ")"
@@ -365,14 +369,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //endregion
 //---------------PRODUCTS METHODS-------------------------------------------------------------------
 //region PRODUCTS METHODS
-    public void addProduct(String title, int quantity, boolean isJuice, int customer) {
+    public void addProduct(String title, double price, int quantity, int customer) {
     SQLiteDatabase db = this.getWritableDatabase();
     ContentValues values = new ContentValues();
     values.put(COLUMN_PROD_TITLE, title);
-    values.put(COLUMN_PROD_PRICE, 0);
+    values.put(COLUMN_PROD_PRICE, price);
     values.put(COLUMN_PROD_QUANTITY, quantity);
-    if(isJuice)values.put(COLUMN_PROD_IS_JUICE, "true");
-    else values.put(COLUMN_PROD_IS_JUICE, "false");
     values.put(COLUMN_PROD_PURCHASED, "false");
     values.put(COLUMN_PROD_CUSTOMER, customer);
 
@@ -388,7 +390,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_PROD_TITLE,
                         COLUMN_PROD_PRICE,
                         COLUMN_PROD_QUANTITY,
-                        COLUMN_PROD_IS_JUICE,
                         COLUMN_PROD_PURCHASED,
                         COLUMN_PROD_CUSTOMER
                 }, COLUMN_CUS_ID + "=?",
@@ -402,9 +403,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             product.setTitle(cursor.getString(1));
             product.setPrice(Float.parseFloat(cursor.getString(2)));
             product.setQuantity(Integer.parseInt(cursor.getString(3)));
-            product.setJuice(cursor.getString(4) == "true");//if "true", isJuice = true
-            product.setPurchased(cursor.getString(5)=="true");
-            product.setCustomer(Integer.parseInt(cursor.getString(6)));
+            product.setPurchased(cursor.getString(4).equals("true"));
+            product.setCustomer(Integer.parseInt(cursor.getString(5)));
         }
 
         if (cursor != null) {
@@ -448,8 +448,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_PROD_TITLE, product.getTitle());
         values.put(COLUMN_PROD_PRICE, product.getPrice());
         values.put(COLUMN_PROD_QUANTITY, product.getQuantity());
-        if(product.isJuice())values.put(COLUMN_PROD_IS_JUICE, "true");
-        else values.put(COLUMN_PROD_IS_JUICE, "false");
         if(product.isPurchased())values.put(COLUMN_PROD_PURCHASED, "true");
         else values.put(COLUMN_PROD_PURCHASED, "false");
         values.put(COLUMN_PROD_CUSTOMER, product.getCustomer());
@@ -474,6 +472,119 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int getProductsQuantity() {
 //        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
         String countQuery = "SELECT * FROM " + TABLE_PRODUCTS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        return count;
+    }
+//endregion
+//---------------JUICES METHODS---------------------------------------------------------------------
+//region JUICES METHODS
+public void addJuice(String title, double price, int quantity, int customer) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues values = new ContentValues();
+    values.put(COLUMN_J_TITLE, title);
+    values.put(COLUMN_J_PRICE, price);
+    values.put(COLUMN_J_QUANTITY, quantity);
+    values.put(COLUMN_J_PURCHASED, "false");
+    values.put(COLUMN_J_CUSTOMER, customer);
+
+    db.insert(TABLE_JUICES, null, values);
+    db.close();
+}
+
+    public Juice getJuice(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_JUICES, new String[]{
+                        COLUMN_J_ID,
+                        COLUMN_J_TITLE,
+                        COLUMN_J_PRICE,
+                        COLUMN_J_QUANTITY,
+                        COLUMN_J_PURCHASED,
+                        COLUMN_J_CUSTOMER
+                }, COLUMN_CUS_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+
+        Juice juice = new Juice();
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            juice.setId(Integer.parseInt(cursor.getString(0)));
+            juice.setTitle(cursor.getString(1));
+            juice.setPrice(Float.parseFloat(cursor.getString(2)));
+            juice.setQuantity(Integer.parseInt(cursor.getString(3)));
+            //juice.setJuice(cursor.getString(4) == "true");//if "true", isJuice = true
+            juice.setPurchased(cursor.getString(4).equals("true"));
+            juice.setCustomer(Integer.parseInt(cursor.getString(5)));
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return juice;
+    }
+
+    public ArrayList<Juice> getAllJuices() {
+        ArrayList<Juice> juiceList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_JUICES;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Juice juice = new Juice();
+                juice.setId(Integer.parseInt(cursor.getString(0)));
+                juice.setTitle(cursor.getString(1));
+                juice.setPrice(Float.parseFloat(cursor.getString(2)));
+                juice.setQuantity(Integer.parseInt(cursor.getString(3)));
+                juice.setPurchased(cursor.getString(4).equals("true"));
+                juice.setCustomer(Integer.parseInt(cursor.getString(5)));
+                juiceList.add(juice);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return juiceList;
+    }
+
+    //TODO сделать void?
+    public int updateJuice(Juice juice) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_J_TITLE, juice.getTitle());
+        values.put(COLUMN_J_PRICE, juice.getPrice());
+        values.put(COLUMN_J_QUANTITY, juice.getQuantity());
+        if(juice.isPurchased())values.put(COLUMN_J_PURCHASED, "true");
+        else values.put(COLUMN_J_PURCHASED, "false");
+        values.put(COLUMN_J_CUSTOMER, juice.getCustomer());
+
+        return db.update(TABLE_JUICES, values, COLUMN_J_ID + " = ?",
+                new String[]{String.valueOf(juice.getId())});
+    }
+
+    public void deleteJuice(Juice juice) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_JUICES, COLUMN_J_ID + " = ?", new String[]{String.valueOf(juice.getId())});
+        db.close();
+    }
+
+    public void deleteAllJuices() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_JUICES, null, null);
+//        db.execSQL("DELETE FROM " + TABLE_JUICES);//то же самое, можно и как в предыдущей строке, и как в этой
+        db.close();
+    }
+
+    public int getJuicesQuantity() {
+//        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
+        String countQuery = "SELECT * FROM " + TABLE_JUICES;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();

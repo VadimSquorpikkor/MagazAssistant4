@@ -1,6 +1,7 @@
 package com.squorpikkor.app.magazassistant4.order;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.NewOrderActivity;
 import com.squorpikkor.app.magazassistant4.R;
 import com.squorpikkor.app.magazassistant4.juice.Juice;
@@ -38,12 +40,14 @@ public class OrderAdapter extends ArrayAdapter<Order> {
     private ProductsAdapter productsAdapter;
     private JuicesAdapter juicesAdapter;
     private Fragment fragment;
+    private MainViewModel mainViewModel;
 
-    OrderAdapter(Context context, int resource, List<Order> sourceList) {
+    OrderAdapter(Context context, int resource, List<Order> sourceList, MainViewModel mainViewModel) {
         super(context, resource, sourceList);
         this.sourceList = sourceList;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
+        this.mainViewModel = mainViewModel;
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
@@ -52,7 +56,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
-//        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(sourceList.get(position).getName()));
+//        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(sourceList.get(position).getTitle()));
         view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(position));
         fragment = new OrderFragment();
         Order order = sourceList.get(position);
@@ -99,10 +103,10 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setTitle("Удаление");
         alert.setIcon(R.drawable.baseline_add_shopping_cart_white_48dp);
-        alert.setMessage("Удалить " + sourceList.get(position).getName() + " из списка?");
+        alert.setMessage("Удалить " + sourceList.get(position).getTitle() + " из списка?");
         final EditText edit = new EditText(getContext());
 //        edit.setLayoutParams(lp);
-        edit.setText(sourceList.get(position).getName());
+        edit.setText(sourceList.get(position).getTitle());
         edit.setGravity(Gravity.CENTER);
         alert.setView(edit);
         alert.setPositiveButton("OK", (dialog, whichButton) -> dialog.cancel());
@@ -110,7 +114,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         alert.show();
     }*/
 
-    private void addNewDialog(final int position) {
+    private void addNewDialog(int position) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 //        alert.setTitle("Удаление");
 //        alert.setIcon(R.drawable.baseline_add_shopping_cart_white_48dp);
@@ -120,4 +124,8 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         alert.show();
     }
 
+    //todo масло масленное
+    private void addNewProduct(String title, double price, int count, int customerID) {
+        mainViewModel.getDatabase().addProduct(title, price, count, customerID);
+    }
 }

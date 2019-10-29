@@ -1,37 +1,11 @@
 package com.squorpikkor.app.magazassistant4.juice;
 
-public class Juice {
-    private Float price;
-    private int count;
-    private String name;
+import com.squorpikkor.app.magazassistant4.order.Product;
 
-    public String getName() {
-        return name;
-    }
+/**Методов и конструкторов в классе не будет, класс аналогичен Product
+ *
+ */
 
-    public void setName(String name) {
-        this.name = name;
-    }
+public class Juice extends Product {
 
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public Juice(String name, Float price, int count) {
-        this.name = name;
-        this.price = price;
-        this.count = count;
-    }
 }

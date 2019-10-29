@@ -88,7 +88,7 @@ public class JuiceFragment extends Fragment  implements View.OnClickListener{
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Удаление");
         alert.setIcon(R.drawable.baseline_delete_outline_white_48dp);
-        alert.setMessage("Удалить " + mainViewModel.getJuicesList().get(position).getName() + " из списка?");
+        alert.setMessage("Удалить " + mainViewModel.getJuicesList().get(position).getTitle() + " из списка?");
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 mainViewModel.getJuicesList().remove(position);
@@ -116,7 +116,7 @@ public class JuiceFragment extends Fragment  implements View.OnClickListener{
 
         final EditText edit = new EditText(getActivity());
         edit.setLayoutParams(lp);
-        edit.setText(mainViewModel.getJuicesList().get(position).getName());
+        edit.setText(mainViewModel.getJuicesList().get(position).getTitle());
         edit.setGravity(Gravity.CENTER);
         alert.setView(edit);
         alert.setPositiveButton("Да будет так", new DialogInterface.OnClickListener() {

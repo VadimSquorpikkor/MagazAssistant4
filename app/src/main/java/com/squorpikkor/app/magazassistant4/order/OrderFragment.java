@@ -1,5 +1,6 @@
 package com.squorpikkor.app.magazassistant4.order;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.squorpikkor.app.magazassistant4.MainActivity;
+import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.NewOrderActivity;
 import com.squorpikkor.app.magazassistant4.R;
 import com.squorpikkor.app.magazassistant4.juice.Juice;
@@ -38,6 +40,7 @@ public class OrderFragment extends Fragment {
     ListView lvMain;
     OrderAdapter orderAdapter;
     ArrayList<Order> orderList;
+    MainViewModel mainViewModel;
 
     public static OrderFragment newInstance() {
         return new OrderFragment();
@@ -74,7 +77,7 @@ public class OrderFragment extends Fragment {
         lvMain = view.findViewById(R.id.order_list);
 
         // создаем адаптер
-        orderAdapter = new OrderAdapter(getActivity(), R.layout.order_list_item, orderList);
+        orderAdapter = new OrderAdapter(getActivity(), R.layout.order_list_item, orderList, mainViewModel);
 
         // присваиваем адаптер списку
         lvMain.setAdapter(orderAdapter);
@@ -105,6 +108,7 @@ public class OrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_orders, container, false);
+        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         return view;
     }
 
