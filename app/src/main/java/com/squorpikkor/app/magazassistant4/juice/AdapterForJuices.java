@@ -39,7 +39,7 @@ public class AdapterForJuices extends ArrayAdapter<Juice> {
 
         nameText.setText("" + state.getTitle());
         priceText.setText((int)(state.getPrice() + 0) + "p " + (int)(state.getPrice()*100%100 + 0) + "коп");
-        countText.setText(state.getCount() + "шт");
+        countText.setText(state.getQuantity() + "шт");
 
         return view;
     }

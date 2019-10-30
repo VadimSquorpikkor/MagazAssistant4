@@ -58,7 +58,7 @@ public class MainViewModel extends AndroidViewModel {
         return juicesList;
     }
 
-    public void addPack(String name, Float price, int count) {
+    public void addPack(String name, float price, int count) {
         juicesList.add(new Juice(name, price, count));
     }
 

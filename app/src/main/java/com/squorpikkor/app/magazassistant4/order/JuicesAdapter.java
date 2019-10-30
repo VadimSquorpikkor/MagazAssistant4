@@ -41,7 +41,7 @@ public class JuicesAdapter extends ArrayAdapter<Juice> {
         Juice state = sourceList.get(position);
 
         nameText.setText(state.getTitle());
-        count.setText(String.valueOf(state.getCount()));
+        count.setText(String.valueOf(state.getQuantity()));
         priceText.setText((int) (state.getPrice() + 0) + "p " + (int) (state.getPrice() * 100 % 100 + 0) + "коп");
 
         return view;

@@ -1,14 +1,34 @@
 <LinearLayout style="@style/inner_block"
     android:layout_margin="2dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:theme="@android:style/Theme.Holo.Dialog">
+    >
     <EditText style="@style/base_center" android:text="1111"/>
     <EditText style="@style/base_center" android:text="1111"/>
     <EditText style="@style/base_center" android:text="1111"/>
+
+
+    <LinearLayout style="@style/vertical" android:padding="2dp" android:layout_margin="3dp" android:elevation="5dp" >
+    <LinearLayout style="@style/horizontal">
+    <TextView style="@style/base_right" android:text="Название" android:layout_width="100dp"/>
     <EditText style="@style/base_center" android:text="1111"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout style="@style/horizontal">
+    <TextView style="@style/base_right" android:text="Цена" android:layout_width="100dp"/>
+    <EditText style="@style/base_center" android:text="1111"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <TextView style="@style/base_right" android:text="Количество" android:layout_width="100dp"/>
+        <EditText style="@style/base_center" android:text="1111"/>
+    </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout style="@style/horizontal">
         <Button style="@style/my_base_style" android:text="ok" android:layout_weight="1"/>
         <Button style="@style/my_base_style" android:text="cancel" android:layout_weight="1"/>
     </LinearLayout>
+
+
 </LinearLayout>

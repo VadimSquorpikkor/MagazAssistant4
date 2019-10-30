@@ -8,4 +8,11 @@ import com.squorpikkor.app.magazassistant4.order.Product;
 
 public class Juice extends Product {
 
+    public Juice(String name, float price, int count) {
+        super(name, price, count);
+    }
+
+    public Juice() {
+        super();
+    }
 }

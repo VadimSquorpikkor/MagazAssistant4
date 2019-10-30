@@ -73,16 +73,22 @@ public class Product {
 
     private int id;             //id продукта в БД -- для поиска по БД
     private String title;       //название продукта
-    private Float price;        //цена
+    private float price;        //цена
     private int quantity;       //количество продукта
     private boolean isJuice;    //сок или не сок
     private boolean purchased;  //куплен или не куплен
     private int customer;       //заказчик продукта. Интегер, потому как хранится толька ссылка на
                                 // id заказчика в таблице БД
 
-    public Product(String name, Float price) {
+    public Product(String name, float price) {
         this.title = name;
         this.price = price;
+    }
+
+    public Product(String name, float price, int quantity) {
+        this.title = name;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public Product() {

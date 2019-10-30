@@ -121,7 +121,7 @@ public class JuiceFragment extends Fragment  implements View.OnClickListener{
         alert.setView(edit);
         alert.setPositiveButton("Да будет так", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                mainViewModel.getJuicesList().get(position).setName(String.valueOf(edit.getText()));
+                mainViewModel.getJuicesList().get(position).setTitle(String.valueOf(edit.getText()));
                 lvMain.setAdapter(sourceAdapter);//обновить адаптер после добавления новых элементов*/
                 dialog.cancel();
             }
