@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".settings.SettingsFragment">
 
-    <LinearLayout style="@style/vertical">
+    <LinearLayout style="@style/vertical"
+        >
 
 
     <TextView
@@ -18,9 +19,16 @@
         style="@style/nice_button"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin="0dp"
+        android:layout_margin="5dp"
         android:text="Установить настройки по-умолчанию" />
 
+        <Button
+            android:id="@+id/set_default2_button"
+            style="@style/nice_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:text="Установить настройки по-умолчанию 2" />
     </LinearLayout>
 
 </FrameLayout>

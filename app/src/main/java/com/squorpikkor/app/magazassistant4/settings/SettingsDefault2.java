@@ -11,7 +11,7 @@ import java.util.Map;
  * больше нужен мне для тестирования) не будет путаться в коде SettingsFragment
  */
 
-class SettingsDefault {
+class SettingsDefault2 {
     //Map<Integer, String> depName = new HashMap<>();
     void setDefaultSettings(DatabaseHelper database) {
         database.addDepartment("Сборочный участок", 3);     //0
@@ -27,14 +27,16 @@ class SettingsDefault {
         database.addCustomer("О.В.", "Алисевич", 0);
         database.addCustomer("А.С.", "Бодялик", 0);
         database.addCustomer("А.А.", "Володкевич", 0);
-        database.addCustomer("В.Ю.", "Дементьев", 0);
         database.addCustomer("И.С.", "Махнюков", 0);
         database.addCustomer("Ю.В.", "Мороз", 0);
         database.addCustomer("Ю.В.", "Пекарский", 0);
-        database.addCustomer("А.А.", "Праневич", 0);
         database.addCustomer("М.В.", "Шустов", 0);
-        database.addCustomer("А.Е.", "Яворский", 0);
-        database.addCustomer("М.В.", "Ячменев", 0);
+//-----------------------------Праневич--------------------------------------------------------------
+        database.addCustomer("А.А.", "Праневич", 3);
+        database.addCustomer("М.В.", "Ячменев", 3);
+//-----------------------------Цоколь--------------------------------------------------------------
+        database.addCustomer("В.Ю.", "Дементьев", 4);
+        database.addCustomer("А.Е.", "Яворский", 4);
 //-----------------------------Корелин--------------------------------------------------------------
         database.addCustomer("С.Н.", "Барсуков", 1);
         database.addCustomer("Л.В.", "Буров", 1);

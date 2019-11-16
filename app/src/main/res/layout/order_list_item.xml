@@ -25,6 +25,12 @@
                 style="@style/horizontal"
                 android:paddingStart="10dp">
 
+                <TextView
+                    android:textSize="20sp"
+                    android:id="@+id/order_item_surname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Фамилия" />
 
                 <TextView
                     android:id="@+id/order_item_name"
@@ -34,12 +40,6 @@
                     android:layout_marginRight="10dp"
                     android:text="Имя" />
 
-                <TextView
-                    android:textSize="20sp"
-                    android:id="@+id/order_item_surname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Фамилия" />
 
             </LinearLayout>
 

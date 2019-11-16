@@ -10,24 +10,27 @@
         <LinearLayout style="@style/inner_block"
             android:id="@+id/root_layout">
 
+
+            <LinearLayout style="@style/horizontal">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dep_list_item_name"/>
+                android:id="@+id/dep_list_item_name"
+                android:layout_weight="1"/>
 
-<!--            <ListView
-                android:id="@+id/customers_list_view"
+            <ImageView style="@style/down_button" android:visibility="gone"/>
+            <ImageView style="@style/upp_button"/>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </ListView>-->
-
-            <!--<GridView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/customers_list_view"
-                android:numColumns="1">
-            </GridView>-->
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
             <com.squorpikkor.app.magazassistant4.MyGridView
                 android:layout_width="match_parent"

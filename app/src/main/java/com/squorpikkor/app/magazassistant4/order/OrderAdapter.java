@@ -13,12 +13,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squorpikkor.app.magazassistant4.MainActivity;
 import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.NewOrderActivity;
 import com.squorpikkor.app.magazassistant4.R;
@@ -26,6 +28,7 @@ import com.squorpikkor.app.magazassistant4.juice.Juice;
 
 import java.util.List;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 public class OrderAdapter extends ArrayAdapter<Order> {
@@ -114,14 +117,32 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         alert.show();
     }*/
 
-    private void addNewDialog(int position) {
+/////////////////////////////////////////////////////////////////////
+/*    private void addNewDialog(int position) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 //        alert.setTitle("Удаление");
 //        alert.setIcon(R.drawable.baseline_add_shopping_cart_white_48dp);
         alert.setView(R.layout.add_new_dialog);
+        alert.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 //        alert.setPositiveButton("OK", (dialog, whichButton) -> dialog.cancel());
 //        alert.setNegativeButton("Нет", (dialog, which) -> dialog.cancel());
         alert.show();
+    }*/
+
+    private void addNewDialog(int position) {
+        Intent intent = new Intent(getContext(), NewOrderActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, position);
+        getContext().startActivity(intent);
     }
 
     //todo масло масленное
