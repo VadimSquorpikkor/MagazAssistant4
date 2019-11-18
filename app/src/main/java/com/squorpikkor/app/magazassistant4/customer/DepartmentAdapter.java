@@ -3,11 +3,14 @@ package com.squorpikkor.app.magazassistant4.customer;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 
 class DepartmentAdapter extends ArrayAdapter<Department> {
 
+    private static final String TAG = "Department Adapter";
     private LayoutInflater inflater;
     private int layout;
     private ArrayList<Department> departments;
@@ -28,9 +32,13 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
     private ArrayList<Customer> customers;
     private View main_view;
     private ListView lvMain;
-    private GridView gvMain;
+//    private GridView gvMain;
     private Context context;
     private CustomerAdapter customerAdapter;
+//    ImageView down;
+//    ImageView up;
+
+//    private Fragment fragment;
 
     //todo в конструкторе убрать параметр mainViewModel, его можно сделать через context
     //todo а зачем вообще ссылочная на MVM? Надо попробовать просто статическую ссылку на метод, типа Mvm.method(), должно сработать
@@ -42,6 +50,7 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
         this.mainViewModel = mainViewModel;
         this.context = context;
         database = new DatabaseHelper(context);
+//        fragment = CustomersFragment.newInstance();
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
@@ -52,9 +61,9 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
         View view = inflater.inflate(this.layout, parent, false);
         TextView name = view.findViewById(R.id.dep_list_item_name);
         Department dep = departments.get(position);
-
-
-
+        ImageView down = view.findViewById(R.id.di_down);
+        ImageView up = view.findViewById(R.id.di_up);
+        GridView gvMain;
 //        dep.getCurrentDepCustomers().size();
 
 
@@ -73,8 +82,9 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
 
 //        Log.e(TAG, "CurrentDepCustomersSize: " + dep.getCurrentDepCustomers().size() + ", " + dep.getTitle());
         // находим список
-        ////////lvMain = view.findViewById(R.id.customers_list_view);
+        //////////lvMain = view.findViewById(R.id.customers_list_view);
         gvMain = view.findViewById(R.id.customers_list_view);
+        gvMain.setVisibility(View.GONE);
         // создаем адаптер
         customerAdapter = new CustomerAdapter(context, R.layout.customers_item, customers);
         // присваиваем адаптер списку
@@ -82,6 +92,22 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
         gvMain.setAdapter(customerAdapter);
 
         name.setText(dep.getName());
+
+        down.setOnClickListener(v -> {
+            Log.e(TAG, "DOWN: " + position);
+            gvMain.setVisibility(View.GONE);
+            view.findViewById(R.id.di_down).setVisibility(View.GONE);
+            view.findViewById(R.id.di_up).setVisibility(View.VISIBLE);
+//            ((CustomersFragment)fragment).refresh();
+        } );
+        up.findViewById(R.id.di_up).setOnClickListener(v -> {
+            Log.e(TAG, "UP: " + position);
+            gvMain.setVisibility(View.VISIBLE);
+            view.findViewById(R.id.di_down).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.di_up).setVisibility(View.GONE);
+//            ((CustomersFragment)fragment).refresh();
+        } );
+
 
         //=======GRID VIEW==============================
 

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".customer.CustomersFragment">
 
     <LinearLayout style="@style/outer_block">
@@ -19,8 +19,8 @@
                 android:id="@+id/dep_list_item_name"
                 android:layout_weight="1"/>
 
-            <ImageView style="@style/down_button" android:visibility="gone"/>
-            <ImageView style="@style/upp_button"/>
+            <ImageView style="@style/down_button" android:visibility="gone" android:id="@+id/di_down"/>
+            <ImageView style="@style/upp_button" android:id="@+id/di_up"/>
 
             </LinearLayout>
 
