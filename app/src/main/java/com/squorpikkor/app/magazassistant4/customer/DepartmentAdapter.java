@@ -93,19 +93,15 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
 
         name.setText(dep.getName());
 
-        down.setOnClickListener(v -> {
-            Log.e(TAG, "DOWN: " + position);
+        up.setOnClickListener(v -> {
             gvMain.setVisibility(View.GONE);
-            view.findViewById(R.id.di_down).setVisibility(View.GONE);
-            view.findViewById(R.id.di_up).setVisibility(View.VISIBLE);
-//            ((CustomersFragment)fragment).refresh();
-        } );
-        up.findViewById(R.id.di_up).setOnClickListener(v -> {
-            Log.e(TAG, "UP: " + position);
-            gvMain.setVisibility(View.VISIBLE);
-            view.findViewById(R.id.di_down).setVisibility(View.VISIBLE);
             view.findViewById(R.id.di_up).setVisibility(View.GONE);
-//            ((CustomersFragment)fragment).refresh();
+            view.findViewById(R.id.di_down).setVisibility(View.VISIBLE);
+        } );
+        down.setOnClickListener(v -> {
+            gvMain.setVisibility(View.VISIBLE);
+            view.findViewById(R.id.di_up).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.di_down).setVisibility(View.GONE);
         } );
 
 

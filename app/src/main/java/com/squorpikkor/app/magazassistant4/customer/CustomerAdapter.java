@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squorpikkor.app.magazassistant4.R;
@@ -38,6 +39,7 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
 
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
+        LinearLayout layout = view.findViewById(R.id.customer_item_layout);
 
 //        Log.e(TAG, "CUSTOMER position: " + cusPosition);
         for (Customer customer : sourceList) {
@@ -55,6 +57,8 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
         name.setText(state.getName());
         surname.setText(state.getSurname());
         isWorking.setChecked(state.isWorking());
+
+        layout.setOnClickListener(v -> {  });
 
         return view;
     }

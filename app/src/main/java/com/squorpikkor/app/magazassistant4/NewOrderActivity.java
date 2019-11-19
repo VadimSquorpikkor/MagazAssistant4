@@ -16,7 +16,5 @@ public class NewOrderActivity extends Activity {
 
         // Set result CANCELED in case the user backs out
         setResult(Activity.RESULT_CANCELED);
-
-
     }
 }

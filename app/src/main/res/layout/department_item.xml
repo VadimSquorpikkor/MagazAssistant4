@@ -19,8 +19,8 @@
                 android:id="@+id/dep_list_item_name"
                 android:layout_weight="1"/>
 
-            <ImageView style="@style/down_button" android:visibility="gone" android:id="@+id/di_down"/>
-            <ImageView style="@style/upp_button" android:id="@+id/di_up"/>
+            <ImageView style="@style/down_button" android:id="@+id/di_down"/>
+            <ImageView style="@style/upp_button" android:visibility="gone" android:id="@+id/di_up"/>
 
             </LinearLayout>
 

@@ -30,6 +30,10 @@
         <item name="android:gravity">right</item>
     </style>
 
+    <style name="base_left" parent="my_base_style">
+        <item name="android:gravity">left</item>
+    </style>
+
     <style name="vertical" parent="my_base_style">
         <item name="android:gravity">center|center_vertical</item>
         <item name="android:orientation">vertical</item>
@@ -116,6 +120,10 @@
     <style name="orange_title" parent="base_center">
         <item name="android:textColor">@color/colorOrange</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="i_can_press">
+        <item name="android:background">@drawable/background_shape_selector</item>
     </style>
 
 </resources>
