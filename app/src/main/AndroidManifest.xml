@@ -11,8 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".NewOrderActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.Holo.Dialog">
+            android:configChanges="orientation|keyboardHidden">
+<!--            android:theme="@android:style/Theme.Holo.Dialog">-->
         </activity>
         <activity android:name=".settings.SettingsActivity">
 

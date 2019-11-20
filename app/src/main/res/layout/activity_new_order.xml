@@ -10,60 +10,110 @@
 
         />
 
-    <LinearLayout style="@style/horizontal">
-        <EditText style="@style/base_left" android:layout_weight="1"/>
-        <EditText style="@style/base_left" android:layout_weight="2"/>
-        <EditText style="@style/base_left" android:layout_weight="2"/>
-    </LinearLayout>
+    <LinearLayout style="@style/outer_block" android:elevation="10dp">
+
+    <LinearLayout style="@style/inner_block">
+
+        <TextView style="@style/orange_title" android:text="Купить"/>
 
 
-
-
-<!--    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="5dp"/>
-
-    <LinearLayout style="@style/horizontal">
-
-        <EditText style="@style/base_center" android:id="@+id/name"
-            android:layout_weight="1"/>
-
-        <EditText style="@style/base_center" android:id="@+id/price" android:inputType="numberDecimal"
-            android:layout_width="100dp"/>
-
-        <EditText style="@style/base_center" android:id="@+id/count" android:inputType="number"
-            android:layout_width="50dp"/>
-
-    </LinearLayout>
-
-    <View
+        <LinearLayout style="@style/horizontal">
+            <TextView style="@style/small_orange_title_w1" android:text="Наименование"/>
+            <TextView style="@style/small_orange_title_w2" android:text="Цена"/>
+            <TextView style="@style/small_orange_title_w2" android:text="Кол-во"/>
+        </LinearLayout>
+        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="5dp"
             android:background="?android:attr/listDivider"
-            android:layout_marginTop="5dp"/>
+
+            />
 
 
-    <TextView style="@style/base_center" android:text="Сок:"/>
 
+    <LinearLayout style="@style/horizontal" android:padding="0dp" android:layout_margin="0dp">
+        <EditText style="@style/small_edit_text" android:id="@+id/name1" android:padding="0dp" android:layout_margin="0dp"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price1"  android:padding="0dp" android:layout_margin="0dp"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count1" android:padding="0dp" android:layout_margin="0dp"/>
+    </LinearLayout>
     <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name2"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price2"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count2"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name3"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price3"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count3"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name4"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price4"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count4"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name5"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price5"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count5"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name6"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price6"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count6"/>
+    </LinearLayout>
 
-        <EditText style="@style/base_center" android:id="@+id/j_name"
-                android:layout_weight="1"/>
+    </LinearLayout>
+    </LinearLayout>
 
-        <EditText style="@style/base_center" android:id="@+id/j_price" android:inputType="numberDecimal"
-                android:layout_width="100dp"/>
+    <LinearLayout style="@style/outer_block" android:elevation="10dp">
 
-        <EditText style="@style/base_center" android:id="@+id/j_count" android:inputType="number"
-                android:layout_width="50dp"/>
+    <LinearLayout style="@style/inner_block">
 
-    </LinearLayout>-->
+        <TextView style="@style/orange_title" android:text="Только соки"/>
+
+        <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name7"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price7"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count7"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name8"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price8"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count8"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name9"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price9"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count9"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name10"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price10"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count10"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name11"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price11"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count11"/>
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal">
+        <EditText style="@style/small_edit_text" android:id="@+id/name12"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/price12"/>
+        <EditText style="@style/small_edit_text2" android:id="@+id/count12"/>
+    </LinearLayout>
+
+    </LinearLayout>
+    </LinearLayout>
+
 
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OK"/>
+        android:id="@+id/save_customer"
+        style="@style/nice_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:text="Сохранить настройки"
+        />
 
 </LinearLayout>
