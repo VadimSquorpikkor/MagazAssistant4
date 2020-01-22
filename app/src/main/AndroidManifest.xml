@@ -3,6 +3,7 @@
     package="com.squorpikkor.app.magazassistant4">
 
     <application
+        android:name=".application.App"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@drawable/magaz_assistant4"

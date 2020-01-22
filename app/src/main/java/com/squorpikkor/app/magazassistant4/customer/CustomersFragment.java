@@ -70,7 +70,8 @@ public class CustomersFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_customers, container, false);
         mainViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);//todo in newInstance?
-        database = new DatabaseHelper(getActivity());
+//        database = new DatabaseHelper(getActivity());
+        database = mainViewModel.getDatabase();
 
         return view;
     }

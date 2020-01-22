@@ -46,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CUS_ID = "id";
     private static final String COLUMN_CUS_NAME = "name";
     private static final String COLUMN_CUS_SURNAME = "surname";
+    private static final String COLUMN_CUS_ON_DUTY = "onduty";
     private static final String COLUMN_CUS_DEPARTMENT = "department";
     //--------------------------------------------------------------------------------------------------
     private static final String TABLE_DEPARTMENT = "department_table";
@@ -89,6 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_CUS_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_CUS_NAME + " TEXT, "
                 + COLUMN_CUS_SURNAME + " TEXT,"
+                + COLUMN_CUS_ON_DUTY + " INTEGER," //нет boolean в sqlite, использую 0 и 1
                 + COLUMN_CUS_DEPARTMENT + " INTEGER"
                 + ")"
         );
@@ -149,6 +151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_CUS_NAME, name);
         values.put(COLUMN_CUS_SURNAME, surname);
         values.put(COLUMN_CUS_DEPARTMENT, department);
+        values.put(COLUMN_CUS_ON_DUTY, 1);
         db.insert(TABLE_CUSTOMERS, null, values);
         db.close();
     }
@@ -166,6 +169,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_CUSTOMERS, new String[]{COLUMN_CUS_ID,
                         COLUMN_CUS_NAME,
                         COLUMN_CUS_SURNAME,
+                        COLUMN_CUS_ON_DUTY,
                         COLUMN_CUS_DEPARTMENT
                 }, COLUMN_CUS_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
@@ -177,7 +181,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             customer.setID(Integer.parseInt(cursor.getString(0)));
             customer.setName(cursor.getString(1));
             customer.setSurname(cursor.getString(2));
-            customer.setDepName(Integer.parseInt(cursor.getString(3)));
+            customer.setDepName(Integer.parseInt(cursor.getString(4)));
         }
 
         if (cursor != null) {
@@ -200,7 +204,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 customer.setID(Integer.parseInt(cursor.getString(0)));
                 customer.setName(cursor.getString(1));
                 customer.setSurname(cursor.getString(2));
-                customer.setDepName(Integer.parseInt(cursor.getString(3)));
+                customer.setWorking(Integer.parseInt(cursor.getString(3))==1);  // если ==1, возвращает true
+                customer.setDepName(Integer.parseInt(cursor.getString(4)));
                 sourceList.add(customer);
             } while (cursor.moveToNext());
         }
@@ -210,6 +215,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sourceList;
     }
 
+    //todo или использовать вместо этого updateCustomer?
+    public int setCustomerWorkingStatus(Customer customer) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CUS_ON_DUTY, customer.isWorking()?1:0);
+
+        return db.update(TABLE_CUSTOMERS, values, COLUMN_CUS_ID + " = ?",
+                new String[]{String.valueOf(customer.getID())});
+    }
+
     //TODO сделать void?
     public int updateCustomer(Customer customer) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -217,6 +233,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_CUS_NAME, customer.getName());
         values.put(COLUMN_CUS_SURNAME, customer.getSurname());
+        values.put(COLUMN_CUS_ON_DUTY, customer.isWorking()?1:0);
         values.put(COLUMN_CUS_DEPARTMENT, customer.getDepName());
 
         return db.update(TABLE_CUSTOMERS, values, COLUMN_CUS_ID + " = ?",

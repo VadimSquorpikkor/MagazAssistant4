@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.squorpikkor.app.magazassistant4.application.App;
 import com.squorpikkor.app.magazassistant4.customer.CustomerActivity;
 import com.squorpikkor.app.magazassistant4.settings.SettingsActivity;
 import com.squorpikkor.app.magazassistant4.ui.main.SectionsPagerAdapter;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        /////App.
 
 
         //        setContentView(R.layout.tabbed_main);

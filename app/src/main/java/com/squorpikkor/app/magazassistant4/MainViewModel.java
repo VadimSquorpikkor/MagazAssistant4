@@ -28,7 +28,7 @@ public class MainViewModel extends AndroidViewModel {
 //        customerList.add(new Customer("Олег", "Алисевич", 0));
     }
 
-    DatabaseHelper databaseHelper = new DatabaseHelper(getApplication());
+    private DatabaseHelper databaseHelper = new DatabaseHelper(getApplication());
 
     public DatabaseHelper getDatabase() {
         return databaseHelper;
