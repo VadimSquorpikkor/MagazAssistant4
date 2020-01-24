@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.squorpikkor.app.magazassistant4.application.Application;
 import com.squorpikkor.app.magazassistant4.customer.Customer;
 
 import java.util.List;
@@ -22,9 +23,12 @@ public class AdapterForCustomers extends ArrayAdapter<Customer> {
         this.customers = customers;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
+
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+
+//        Application mApplication = (Application) getApplication();
 
         View view = inflater.inflate(this.layout, parent, false);
 

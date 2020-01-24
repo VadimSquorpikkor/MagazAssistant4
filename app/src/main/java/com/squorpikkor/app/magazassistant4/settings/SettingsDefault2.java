@@ -11,9 +11,9 @@ import java.util.Map;
  * больше нужен мне для тестирования) не будет путаться в коде SettingsFragment
  */
 
-class SettingsDefault2 {
+public class SettingsDefault2 {
     //Map<Integer, String> depName = new HashMap<>();
-    void setDefaultSettings(DatabaseHelper database) {
+    public void setDefaultSettings(DatabaseHelper database) {
         database.addDepartment("Сборочный участок", 3);     //0
         database.addDepartment("Корелин 1-й корпус", 3);    //1
         database.addDepartment("Монтажный участок", 3);     //2

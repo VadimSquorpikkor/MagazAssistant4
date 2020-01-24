@@ -15,13 +15,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.squorpikkor.app.magazassistant4.application.App;
+import com.squorpikkor.app.magazassistant4.application.Application;
 import com.squorpikkor.app.magazassistant4.customer.CustomerActivity;
 import com.squorpikkor.app.magazassistant4.settings.SettingsActivity;
 import com.squorpikkor.app.magazassistant4.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, NavigationView.OnNavigationItemSelectedListener{
 
+    protected Application mApplication;
     DatabaseHelper databaseHelper;
     MainViewModel mainViewModel;
     FragmentManager manager;
@@ -30,12 +31,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mApplication = (Application) getApplication();
         setContentView(R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        /////App.
-
-
-        //        setContentView(R.layout.tabbed_main);
+        mApplication.setMainViewModel(mainViewModel);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);

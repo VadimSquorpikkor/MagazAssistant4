@@ -23,14 +23,12 @@ import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 public class PricesFragment extends Fragment {
 
     View view;
-    MainViewModel mViewModel;
-    DatabaseHelper database;
+    MainViewModel mainViewModel;
     ArrayList<Department> departments;
     ListView lvMain;
     MV_DepartmentAdapter departmentAdapter;
 
     public PricesFragment() {
-
     }
 
     public static PricesFragment newInstance() {
@@ -40,15 +38,13 @@ public class PricesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);//todo in newInstance?
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_prices, null);
-        mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);//todo in newInstance?
-        database = mViewModel.getDatabase();
         view.findViewById(R.id.open_customers).setOnClickListener(v -> openCustomersActivity());
         return view;
     }
@@ -66,7 +62,7 @@ public class PricesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // начальная инициализация списка
-        departments = database.getAllDepartmentsSorted();
+        departments = mainViewModel.getDepartments();
 
         // находим список
         lvMain = view.findViewById(R.id.main_window_department_list);
@@ -81,7 +77,7 @@ public class PricesFragment extends Fragment {
 
     private void refreshListView() {
         departments.clear();
-        departments.addAll(database.getAllDepartmentsSorted());
+        departments.addAll(mainViewModel.getDepartments());
         lvMain.setAdapter(departmentAdapter);
     }
 

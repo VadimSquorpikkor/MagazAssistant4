@@ -50,7 +50,7 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
         this.mainViewModel = mainViewModel;
         this.context = context;
 //        database = new DatabaseHelper(context);
-        database = mainViewModel.getDatabase();
+        //////////////database = mainViewModel.getDatabase();
 //        fragment = CustomersFragment.newInstance();
     }
 

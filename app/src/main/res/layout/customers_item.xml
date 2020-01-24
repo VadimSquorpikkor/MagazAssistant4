@@ -10,8 +10,6 @@
     android:id="@+id/customer_item_layout"
     >
 
-
-
     <CheckBox
         android:buttonTint="@color/colorOrange"
         android:id="@+id/isWorking"
@@ -35,8 +33,5 @@
         android:text="Name"
         android:textSize="15sp"
         android:layout_marginRight="10dp"/>
-
-
-
 
 </LinearLayout>

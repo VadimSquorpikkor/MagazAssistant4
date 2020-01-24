@@ -40,27 +40,16 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_settings, null);
         mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);//todo in newInstance?
-        database = mViewModel.getDatabase();
+        //////////////////database = mViewModel.getDatabase();
         view.findViewById(R.id.set_default_button).setOnClickListener(this);
         view.findViewById(R.id.set_default2_button).setOnClickListener(this);
         return view;
     }
 
-    void setDefaultSettings() {
-        database.deleteAllDepartments();
-        database.deleteAllCustomers();
-        SettingsDefault settingsDefault = new SettingsDefault();
-        settingsDefault.setDefaultSettings(database);
-//        sortCustomers();
+    void setDefaultSettings2() {
+        mViewModel.setDefaultSettings();
     }
 
-    void setDefaultSettings2() {
-        database.deleteAllDepartments();
-        database.deleteAllCustomers();
-        SettingsDefault2 settingsDefault2 = new SettingsDefault2();
-        settingsDefault2.setDefaultSettings(database);
-//        sortCustomers();
-    }
     
     private void sortCustomers() {
 
@@ -75,7 +64,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.set_default_button: setDefaultSettings(); break;
             case R.id.set_default2_button: setDefaultSettings2(); break;
         }
     }

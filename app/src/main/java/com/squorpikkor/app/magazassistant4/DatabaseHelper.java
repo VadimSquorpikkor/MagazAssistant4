@@ -226,7 +226,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(customer.getID())});
     }
 
-    //TODO сделать void?
+    //TODO сделать void? с другой стороны так будет просто сделать проверку на успешную запись
     public int updateCustomer(Customer customer) {
         SQLiteDatabase db = this.getWritableDatabase();
 

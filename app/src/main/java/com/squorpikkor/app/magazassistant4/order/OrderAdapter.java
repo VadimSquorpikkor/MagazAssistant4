@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,12 +93,35 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         TextView sNameText = view.findViewById(R.id.order_item_surname);
         TextView priceText = view.findViewById(R.id.order_item_price);
 
+        ImageView down = view.findViewById(R.id.ord_down);
+        ImageView up = view.findViewById(R.id.ord_up);
 
         Order state = sourceList.get(position);
 
         nameText.setText(state.getName());
         sNameText.setText(state.getsName());
         priceText.setText((int)(state.getTotalPrice() + 0) + "p " + (int)(state.getTotalPrice()*100%100 + 0) + "коп");
+
+
+
+
+        up.setOnClickListener(v -> {
+            gvMain.setVisibility(View.GONE);
+            gvjMain.setVisibility(View.GONE);
+            view.findViewById(R.id.divider).setVisibility(View.GONE);
+            view.findViewById(R.id.divider2).setVisibility(View.GONE);
+            up.setVisibility(View.GONE);
+            down.setVisibility(View.VISIBLE);
+        } );
+        down.setOnClickListener(v -> {
+            gvMain.setVisibility(View.VISIBLE);
+            gvjMain.setVisibility(View.VISIBLE);
+            view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.divider2).setVisibility(View.VISIBLE);
+            up.setVisibility(View.VISIBLE);
+            down.setVisibility(View.GONE);
+        } );
+
 
         return view;
     }
@@ -147,6 +171,6 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
     //todo масло масленное
     private void addNewProduct(String title, double price, int count, int customerID) {
-        mainViewModel.getDatabase().addProduct(title, price, count, customerID);
+        //////////////////////////mainViewModel.getDatabase().addProduct(title, price, count, customerID);
     }
 }

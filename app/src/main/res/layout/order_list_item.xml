@@ -26,7 +26,7 @@
                 android:paddingStart="10dp">
 
                 <TextView
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:id="@+id/order_item_surname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -36,8 +36,9 @@
                     android:id="@+id/order_item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:text="Имя" />
 
 
@@ -49,8 +50,9 @@
                     android:id="@+id/order_item_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="14dp"
                     android:text="2.5"
+                    android:textSize="10sp"
                     android:textColor="@color/colorOrange" />
 
             </LinearLayout>
@@ -61,9 +63,12 @@
                 android:id="@+id/add_to_cart_button"/>
 
 
-                <ImageView
+            <ImageView style="@style/down_button" android:id="@+id/ord_up"/>
+            <ImageView style="@style/upp_button" android:visibility="gone" android:id="@+id/ord_down"/>
+
+                <!--<ImageView
                     style="@style/upp_button"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="10dp"/>-->
 
             <ImageView
                 style="@style/upp_button"

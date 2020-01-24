@@ -12,6 +12,7 @@ import com.squorpikkor.app.magazassistant4.customer.Customer;
 import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;
 import com.squorpikkor.app.magazassistant4.juice.Juice;
 import com.squorpikkor.app.magazassistant4.order.Order;
+import com.squorpikkor.app.magazassistant4.settings.SettingsDefault2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,24 +21,22 @@ import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 public class MainViewModel extends AndroidViewModel {
 
+    private DatabaseHelper db;
+
     public MainViewModel(@NonNull Application application) {
         super(application);
 
+            db = new DatabaseHelper(getApplication());
 //        customerList.add(new Customer("Максим", "Шустов", 0));
 //        customerList.add(new Customer("Ваня", "Махнюков", 0));
 //        customerList.add(new Customer("Олег", "Алисевич", 0));
     }
 
-    private DatabaseHelper databaseHelper = new DatabaseHelper(getApplication());
 
-    public DatabaseHelper getDatabase() {
-        return databaseHelper;
-    }
-
-    public static final int UNBOUNDED = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+    //////////////////public static final int UNBOUNDED = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
 
     // To calculate the total height of all items in ListView call with items = adapter.getCount()
-    public static int getItemHeightofListView(ListView listView, int items) {
+/*    public static int getItemHeightofListView(ListView listView, int items) {
         ListAdapter adapter = listView.getAdapter();
 
         int grossElementHeight = 0;
@@ -48,7 +47,7 @@ public class MainViewModel extends AndroidViewModel {
             grossElementHeight += childView.getMeasuredHeight();
         }
         return grossElementHeight;
-    }
+    }*/
 
     //----------JUICE PACK------------------------------------------------------------------------------
 
@@ -245,19 +244,32 @@ public class MainViewModel extends AndroidViewModel {
         this.totalCustomersCount = totalCustomersCount;
     }
 
-//----------CUSTOMER--------------------------------------------------------------------------------
-
-    private ArrayList<Customer> customerList = new ArrayList<>();
-    private ArrayList<Department> departments = new ArrayList<>();
-    private ArrayList<Order> orderList = new ArrayList<>();
+//----------DEPARTMENT------------------------------------------------------------------------------
 
     public ArrayList<Department> getDepartments() {
-        return departments;
+        return db.getAllDepartmentsSorted();
     }
 
-    public void setDepartments(ArrayList<Department> departments) {
-        this.departments = departments;
+    public void setDefaultSettings() {
+        db.deleteAllDepartments();
+        db.deleteAllCustomers();
+        SettingsDefault2 settingsDefault2 = new SettingsDefault2();
+        settingsDefault2.setDefaultSettings(db);
     }
+
+//----------CUSTOMER--------------------------------------------------------------------------------
+
+    public void updateCustomer(Customer customer) {
+        db.updateCustomer(customer);
+    }
+
+
+
+
+
+
+    private ArrayList<Customer> customerList = new ArrayList<>();
+    private ArrayList<Order> orderList = new ArrayList<>();
 
     public ArrayList<Order> getOrderList() {
         return orderList;
@@ -267,6 +279,7 @@ public class MainViewModel extends AndroidViewModel {
         this.orderList = orderList;
     }
 
+
     public ArrayList<Customer> getCustomersList() {
         return customerList;
     }
@@ -274,5 +287,6 @@ public class MainViewModel extends AndroidViewModel {
     public void setCustomersList(ArrayList<Customer> customersList) {
         this.customerList = customersList;
     }
+
 
 }
