@@ -11,6 +11,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,9 +32,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(TAG, "------------onCreate: STARTS");
         mApplication = (Application) getApplication();
         setContentView(R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mainViewModel.onStart();
         mApplication.setMainViewModel(mainViewModel);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());

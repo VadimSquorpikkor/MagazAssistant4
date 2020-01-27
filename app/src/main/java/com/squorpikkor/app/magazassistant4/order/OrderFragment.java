@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ import com.squorpikkor.app.magazassistant4.R;
 import com.squorpikkor.app.magazassistant4.juice.Juice;
 
 import java.util.ArrayList;
+
+import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 public class OrderFragment extends Fragment {
 
@@ -80,7 +83,10 @@ public class OrderFragment extends Fragment {
         lvMain = view.findViewById(R.id.order_list);
 
         // создаем адаптер
-        orderAdapter = new OrderAdapter(getActivity(), R.layout.order_list_item, orderList, mainViewModel);
+        orderAdapter = new OrderAdapter(getActivity(), R.layout.order_list_item, mainViewModel.getOrderListWithoutKorelin(), mainViewModel);
+        Log.e(TAG, "-----------getOrderListWithoutKorelin size : " + mainViewModel.getOrderListWithoutKorelin().size());
+//        orderAdapter = new OrderAdapter(getActivity(), R.layout.order_list_item, mainViewModel.getOrderList(), mainViewModel);
+//        orderAdapter = new OrderAdapter(getActivity(), R.layout.order_list_item, orderList, mainViewModel);
 
         // присваиваем адаптер списку
         lvMain.setAdapter(orderAdapter);

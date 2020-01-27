@@ -21,8 +21,6 @@ public class Customer {
     private int depName;
 
 
-    private ArrayList<Juice> juiceList;
-    private ArrayList<Product> prodList;
     private float moneyLeft;
     private boolean isWorking;
     private boolean isComplete;
@@ -39,24 +37,14 @@ public class Customer {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-    public ArrayList<Juice> getJuiceList() {
-        return juiceList;
-    }
-    public void setJuiceList(ArrayList<Juice> juiceList) {
-        this.juiceList = juiceList;
-    }
-    public ArrayList<Product> getProdList() {
-        return prodList;
-    }
-    public void setProdList(ArrayList<Product> prodList) {
-        this.prodList = prodList;
-    }
+
     public float getMoneyLeft() {
         return moneyLeft;
     }
     public void setMoneyLeft(float moneyLeft) {
         this.moneyLeft = moneyLeft;
     }
+
     public boolean isWorking() {
         return isWorking;
     }
@@ -87,6 +75,10 @@ public class Customer {
     public Customer() {
 
     }
+
+
+
+
 
 
 

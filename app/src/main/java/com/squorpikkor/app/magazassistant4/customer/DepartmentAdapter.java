@@ -65,6 +65,7 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
         ImageView down = view.findViewById(R.id.di_down);
         ImageView up = view.findViewById(R.id.di_up);
         GridView gvMain;
+        view.findViewById(R.id.divider).setVisibility(View.GONE);
 //        dep.getCurrentDepCustomers().size();
 
 
@@ -76,20 +77,15 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
         view.setLayoutParams(params);*/
 
 
-//        view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         // начальная инициализация списка
         //список кастомеров -- это список кастомеров конкретного отдела
         customers = dep.getCurrentDepCustomers();
-
-//        Log.e(TAG, "CurrentDepCustomersSize: " + dep.getCurrentDepCustomers().size() + ", " + dep.getTitle());
         // находим список
-        //////////lvMain = view.findViewById(R.id.customers_list_view);
         gvMain = view.findViewById(R.id.customers_list_view);
         gvMain.setVisibility(View.GONE);
         // создаем адаптер
         customerAdapter = new CustomerAdapter(context, R.layout.customers_item, customers);
         // присваиваем адаптер списку
-        //////////lvMain.setAdapter(customerAdapter);
         gvMain.setAdapter(customerAdapter);
 
         name.setText(dep.getName());
@@ -98,11 +94,13 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
             gvMain.setVisibility(View.GONE);
             view.findViewById(R.id.di_up).setVisibility(View.GONE);
             view.findViewById(R.id.di_down).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.divider).setVisibility(View.GONE);
         } );
         down.setOnClickListener(v -> {
             gvMain.setVisibility(View.VISIBLE);
             view.findViewById(R.id.di_up).setVisibility(View.VISIBLE);
             view.findViewById(R.id.di_down).setVisibility(View.GONE);
+            view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
         } );
 
 

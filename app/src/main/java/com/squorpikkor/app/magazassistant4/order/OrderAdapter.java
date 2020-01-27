@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,21 +38,41 @@ public class OrderAdapter extends ArrayAdapter<Order> {
     private LayoutInflater inflater;
     private int layout;
     private List<Order> sourceList;
-    private List<Product> products;
-    private List<Juice> juices;
-    private GridView gvMain;
-    private GridView gvjMain;
-    private ProductsAdapter productsAdapter;
-    private JuicesAdapter juicesAdapter;
-    private Fragment fragment;
-    private MainViewModel mainViewModel;
 
     OrderAdapter(Context context, int resource, List<Order> sourceList, MainViewModel mainViewModel) {
         super(context, resource, sourceList);
         this.sourceList = sourceList;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
-        this.mainViewModel = mainViewModel;
+    }
+
+    private void addNewDialog(int position) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        View dialogView = inflater.inflate(R.layout.add_new_dialog_3, null);
+        dialogBuilder.setView(dialogView);
+        NumberPicker np;
+        EditText ed;
+        TextView tw;
+        TextView ok;
+        TextView cancel;
+        np = dialogView.findViewById(R.id.num_picker);
+        ed = dialogView.findViewById(R.id.prod_name);
+        tw = dialogView.findViewById(R.id.cus_name);
+        ok = dialogView.findViewById(R.id.dlg_ok);
+        cancel = dialogView.findViewById(R.id.dlg_cancel);
+
+        np.setMaxValue(100);
+        np.setMinValue(1);
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
@@ -61,33 +82,42 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         @SuppressLint("ViewHolder")
         View view = inflater.inflate(this.layout, parent, false);
 //        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(sourceList.get(position).getTitle()));
-        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(position));
-        fragment = new OrderFragment();
+        Fragment fragment = new OrderFragment();
         Order order = sourceList.get(position);
+        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(position));
         Log.e(TAG, "*******childFragment: " + order.getName());
 
         //------------------FOR PRODUCT LIST--------------------------------------------------------
-        //todo добавить if (order.getProducts().size() != 0)
+        Log.e(TAG, "---------------order.customer_ID: " + order.getCustomerID());
+        if (order.getProducts().size() != 0) {    //если есть хоть один продукт -- показываем список
         //список заказанных продуктов -- это список продуктов конкретного человека
-        products = order.getProducts();
+        List<Product> products = order.getProducts();
         // находим список
-        gvMain = view.findViewById(R.id.current_order_product_list);
+        GridView gvMain = view.findViewById(R.id.current_order_product_list);
         // создаем адаптер
-        productsAdapter = new ProductsAdapter(getContext(), R.layout.current_order_product_list_item, products);
+        ProductsAdapter productsAdapter = new ProductsAdapter(getContext(), R.layout.current_order_product_list_item, products);
         // присваиваем адаптер списку
         gvMain.setAdapter(productsAdapter);
+        } else {
+            view.findViewById(R.id.current_order_product_list).setVisibility(View.GONE);
+            view.findViewById(R.id.divider).setVisibility(View.GONE);
+        }
         //------------------FOR JUICE LIST----------------------------------------------------------
         if (order.getJuices().size() != 0) {    //если есть хоть один сок -- показываем список
         view.findViewById(R.id.current_order_juice_list).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.divider2).setVisibility(View.VISIBLE);
         //список заказанных соков -- это список соков конкретного человека
-        juices = order.getJuices();
+            List<Juice> juices = order.getJuices();
         // находим список
-        gvjMain = view.findViewById(R.id.current_order_juice_list);
+            GridView gvjMain = view.findViewById(R.id.current_order_juice_list);
         // создаем адаптер
-        juicesAdapter = new JuicesAdapter(getContext(), R.layout.current_order_juice_list_item, juices);
+            JuicesAdapter juicesAdapter = new JuicesAdapter(getContext(), R.layout.current_order_juice_list_item, juices);
         // присваиваем адаптер списку
         gvjMain.setAdapter(juicesAdapter);
-        } else view.findViewById(R.id.current_order_juice_list).setVisibility(View.GONE);
+        } else {
+            view.findViewById(R.id.current_order_juice_list).setVisibility(View.GONE);
+            view.findViewById(R.id.divider2).setVisibility(View.GONE);
+        }
 
         TextView nameText = view.findViewById(R.id.order_item_name);
         TextView sNameText = view.findViewById(R.id.order_item_surname);
@@ -102,20 +132,17 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         sNameText.setText(state.getsName());
         priceText.setText((int)(state.getTotalPrice() + 0) + "p " + (int)(state.getTotalPrice()*100%100 + 0) + "коп");
 
-
-
-
         up.setOnClickListener(v -> {
-            gvMain.setVisibility(View.GONE);
-            gvjMain.setVisibility(View.GONE);
+            view.findViewById(R.id.current_order_product_list).setVisibility(View.GONE);
+            view.findViewById(R.id.current_order_juice_list).setVisibility(View.GONE);
             view.findViewById(R.id.divider).setVisibility(View.GONE);
             view.findViewById(R.id.divider2).setVisibility(View.GONE);
             up.setVisibility(View.GONE);
             down.setVisibility(View.VISIBLE);
         } );
         down.setOnClickListener(v -> {
-            gvMain.setVisibility(View.VISIBLE);
-            gvjMain.setVisibility(View.VISIBLE);
+            if (order.getProducts().size() != 0) view.findViewById(R.id.current_order_product_list).setVisibility(View.VISIBLE);
+            if (order.getJuices().size() != 0) view.findViewById(R.id.current_order_juice_list).setVisibility(View.VISIBLE);
             view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
             view.findViewById(R.id.divider2).setVisibility(View.VISIBLE);
             up.setVisibility(View.VISIBLE);
@@ -124,6 +151,10 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 
 
         return view;
+    }
+
+    private void setDividerVisibility(boolean state) {
+
     }
 
 /*    private void addNewDialog(final int position) {
@@ -163,11 +194,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         alert.show();
     }*/
 
-    private void addNewDialog(int position) {
-        Intent intent = new Intent(getContext(), NewOrderActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, position);
-        getContext().startActivity(intent);
-    }
+
 
     //todo масло масленное
     private void addNewProduct(String title, double price, int count, int customerID) {

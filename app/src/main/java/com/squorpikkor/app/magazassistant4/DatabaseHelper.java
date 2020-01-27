@@ -340,6 +340,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return departments;
     }
 
+    public ArrayList<Department> getAllDepartmentsAccordingTo() {
+        ArrayList<Department> departments = getAllDepartments();
+        ArrayList<Customer> customers = getAllCustomers();
+        for (Customer customer : customers) {
+            departments.get(customer.getDepName()).getCurrentDepCustomers().add(customer);
+        }
+        return departments;
+    }
+
 /*    private void sortCustomers(ArrayList<Department> departments, ArrayList<Customer> customers) {
         for (Customer customer : customers) {
             //т.е. беру человека, смотрю, какой номер отдела у него прописан, и добавляю его в

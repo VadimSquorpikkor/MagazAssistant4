@@ -62,7 +62,7 @@ class CustomerAdapter extends ArrayAdapter<Customer> {
             mainViewModel.updateCustomer(customer);
         });
 
-        layout.setOnClickListener(v -> Log.e(TAG, "onClick: " + customer.getSurname()));
+        layout.setOnClickListener(v -> Log.e(TAG, "onClick: " + customer.getSurname() + " - " + customer.getID()));
 
         name.setText(customer.getName());
         surname.setText(customer.getSurname());

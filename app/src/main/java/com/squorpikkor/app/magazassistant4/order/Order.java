@@ -11,38 +11,25 @@ public class Order {
      * Ордер -- это заказ СПИСКА ПРОДУКТОВ для конкретного человека
      * т.е. он будет содержать список продуктов, их сумарную стоимость, их стоимость
      * с учетом соков (цена соков не учитывается) и без учета соков
-     * Имя человека, сделавшего заказ и т.д.
+     * ID кастомера -- по нему классы, которым нужна будет инфа по кастомеру будут вытягиваться сам
+     * объект Customer и брать у него нужную инфу
      */
 
 
-    private String name;
-    private String sName;
     private Float totalPrice;
     private List<Product> products;
     private List<Juice> juices;
+    private int customerID;
 
-    public String getName() {
-        return name;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public String getsName() {
-        return sName;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Order(String name) {
-        this.name = name;
-        this.products = new ArrayList<>();
-    }
-
-    public Order(String name, Float totalPrice) {
-        this.name = name;
-        this.products = new ArrayList<>();
-        this.totalPrice = totalPrice;
-    }
+    //только для проверки
+    private String name;
+    private String sName;
+    public String getName()  { return name;  }
+    public String getsName() { return sName; }
 
     //Только для проверки
     public Order(String name, String sName, Float totalPrice, List<Product> productList, List<Juice> juiceList) {
@@ -73,4 +60,29 @@ public class Order {
     public List<Juice> getJuices() {
         return juices;
     }
+
+    public Order(int cusId, String name, String sName) {
+        this.customerID = cusId;
+        this.products = new ArrayList<>();
+        this.juices = new ArrayList<>();
+        this.totalPrice = 0f;
+
+        this.name = name;
+        this.sName = sName;
+    }
+
+
+
+
+    /*public Order(String name) {
+        this.name = name;
+        this.products = new ArrayList<>();
+    }
+
+    public Order(String name, Float totalPrice) {
+        this.name = name;
+        this.products = new ArrayList<>();
+        this.totalPrice = totalPrice;
+    }*/
+
 }

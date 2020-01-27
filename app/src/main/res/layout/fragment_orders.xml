@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".order.OrderFragment">
+    tools:context=".order.OrderFragment"
+    android:padding="0dp">
 
     <ListView
 
         android:id="@+id/order_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:divider="@null"
         android:dividerHeight="0dp">
 
