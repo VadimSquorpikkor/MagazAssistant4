@@ -5,6 +5,12 @@
     tools:context=".order.OrderFragment"
     android:padding="0dp">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="refresh"
+        android:id="@+id/refresh"/>
+
     <ListView
 
         android:id="@+id/order_list"

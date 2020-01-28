@@ -1,6 +1,7 @@
 package com.squorpikkor.app.magazassistant4.order;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +27,7 @@ import com.squorpikkor.app.magazassistant4.MainActivity;
 import com.squorpikkor.app.magazassistant4.MainViewModel;
 import com.squorpikkor.app.magazassistant4.NewOrderActivity;
 import com.squorpikkor.app.magazassistant4.R;
+import com.squorpikkor.app.magazassistant4.customer.Customer;
 import com.squorpikkor.app.magazassistant4.juice.Juice;
 
 import java.util.List;
@@ -38,15 +40,17 @@ public class OrderAdapter extends ArrayAdapter<Order> {
     private LayoutInflater inflater;
     private int layout;
     private List<Order> sourceList;
+    private MainViewModel mainViewModel;
 
     OrderAdapter(Context context, int resource, List<Order> sourceList, MainViewModel mainViewModel) {
         super(context, resource, sourceList);
         this.sourceList = sourceList;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
+        this.mainViewModel = mainViewModel;
     }
 
-    private void addNewDialog(int position) {
+    private void addNewDialog(Order order) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         View dialogView = inflater.inflate(R.layout.add_new_dialog_3, null);
         dialogBuilder.setView(dialogView);
@@ -64,16 +68,24 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         np.setMaxValue(100);
         np.setMinValue(1);
 
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        tw.setText(order.getsName());
 
         AlertDialog alertDialog = dialogBuilder.create();
+
+        ok.setOnClickListener(v -> {
+            mainViewModel.addProduct(ed.getText().toString(), np.getValue(), order.getCustomerID());
+
+            alertDialog.dismiss();
+        });
+
+        cancel.setOnClickListener(v -> {
+            alertDialog.dismiss();
+        });
+
         alertDialog.show();
+
     }
+
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @NonNull
@@ -84,7 +96,8 @@ public class OrderAdapter extends ArrayAdapter<Order> {
 //        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(sourceList.get(position).getTitle()));
         Fragment fragment = new OrderFragment();
         Order order = sourceList.get(position);
-        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(position));
+        view.findViewById(R.id.add_to_cart_button).setOnClickListener(v -> addNewDialog(order));
+
         Log.e(TAG, "*******childFragment: " + order.getName());
 
         //------------------FOR PRODUCT LIST--------------------------------------------------------

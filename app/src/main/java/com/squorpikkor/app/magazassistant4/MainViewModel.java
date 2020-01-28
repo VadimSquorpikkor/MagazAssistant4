@@ -85,8 +85,9 @@ public class MainViewModel extends AndroidViewModel {
     public void updateCustomer(Customer customer) {
         db.updateCustomer(customer);
         updateDepartment();
-    }
 
+    }
+//----------ORDER-----------------------------------------------------------------------------------
     public ArrayList<Order> getOrderList() {
         ArrayList<Customer> customers = db.getAllCustomers();
 
@@ -120,6 +121,11 @@ public class MainViewModel extends AndroidViewModel {
         return orders;
     }
 
+    public void updateOrder(Order order) {
+
+    }
+
+
 
     private ArrayList<Customer> customerList = new ArrayList<>();
     private ArrayList<Order> orderList = new ArrayList<>();
@@ -144,9 +150,18 @@ public class MainViewModel extends AndroidViewModel {
 
     }
 
+//----------PRODUCT PACK----------------------------------------------------------------------------
 
+    public void addProduct(String title, float price, int quantity, int customerID) {
+        db.addProduct(title, price, quantity, customerID);
+    }
 
-    //----------JUICE PACK------------------------------------------------------------------------------
+    public void addProduct(String title, int quantity, int customerID) {
+        Log.e(TAG, "addProduct: title - " + title + " quantity - " + quantity + " customerID - " + customerID);
+        db.addProduct(title, 0, quantity, customerID);
+    }
+
+//----------JUICE PACK------------------------------------------------------------------------------
 
     private List<Juice> juicesList = new ArrayList<>();
 
@@ -156,6 +171,14 @@ public class MainViewModel extends AndroidViewModel {
 
     public void addPack(String name, float price, int count) {
         juicesList.add(new Juice(name, price, count));
+    }
+
+    public void addJuice(String title, float price, int quantity, int customerID) {
+        db.addJuice(title, price, quantity, customerID);
+    }
+
+    public void addJuice(String title, int quantity, int customerID) {
+        db.addJuice(title, 0, quantity, customerID);
     }
 
 //----------FRAGMENTS-------------------------------------------------------------------------------

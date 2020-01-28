@@ -59,6 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PROD_TITLE = "title";
     private static final String COLUMN_PROD_PRICE = "price";
     private static final String COLUMN_PROD_QUANTITY = "quantity";
+    private static final String COLUMN_PROD_ISJUICE = "prod_is_juice";
     private static final String COLUMN_PROD_PURCHASED = "purchased";
     private static final String COLUMN_PROD_CUSTOMER = "customer";
     //--------------------------------------------------------------------------------------------------
@@ -121,7 +122,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_PROD_TITLE + " TEXT,"
                 + COLUMN_PROD_PRICE + " REAL,"
                 + COLUMN_PROD_QUANTITY + " INTEGER,"
-                + COLUMN_PROD_PURCHASED + " TEXT,"
+                + COLUMN_PROD_ISJUICE + " INTEGER,"
+                + COLUMN_PROD_PURCHASED + " INTEGER,"
                 + COLUMN_PROD_CUSTOMER + " INTEGER"
                 + ")"
         );
@@ -429,8 +431,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             product.setTitle(cursor.getString(1));
             product.setPrice(Float.parseFloat(cursor.getString(2)));
             product.setQuantity(Integer.parseInt(cursor.getString(3)));
-            product.setPurchased(cursor.getString(4).equals("true"));
-            product.setCustomer(Integer.parseInt(cursor.getString(5)));
+            product.setIsJuice(cursor.getInt(4) == 1);//if 1, isJuice = true
+            product.setPurchased(cursor.getInt(5)== 1);
+            product.setCustomer(Integer.parseInt(cursor.getString(6)));
         }
 
         if (cursor != null) {
@@ -454,9 +457,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 product.setTitle(cursor.getString(1));
                 product.setPrice(Float.parseFloat(cursor.getString(2)));
                 product.setQuantity(Integer.parseInt(cursor.getString(3)));
-                product.setJuice(cursor.getString(4) == "true");//if "true", isJuice = true
-                product.setPurchased(cursor.getString(5)=="true");
-                product.setCustomer(Integer.parseInt(cursor.getString(6)));
+                product.setIsJuice(cursor.getInt(4) == 1);//if 1, isJuice = true
+                product.setPurchased(cursor.getInt(5)== 1);
+                product.setCustomer(cursor.getInt(6));
                 prodList.add(product);
             } while (cursor.moveToNext());
         }
@@ -465,6 +468,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return prodList;
     }
+
+/*          + COLUMN_PROD_ID + " INTEGER PRIMARY KEY,"
+            + COLUMN_PROD_TITLE + " TEXT,"
+            + COLUMN_PROD_PRICE + " REAL,"
+            + COLUMN_PROD_QUANTITY + " INTEGER,"
+            + COLUMN_PROD_PURCHASED + " TEXT,"
+            + COLUMN_PROD_CUSTOMER + " INTEGER"*/
 
     //TODO сделать void?
     public int updateProducts(Product product) {

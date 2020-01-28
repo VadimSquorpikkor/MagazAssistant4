@@ -41,7 +41,7 @@ public class Product {
         return isJuice;
     }
 
-    public void setJuice(boolean juice) {
+    public void setIsJuice(boolean juice) {
         isJuice = juice;
     }
 
