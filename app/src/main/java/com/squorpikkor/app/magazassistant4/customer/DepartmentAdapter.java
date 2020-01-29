@@ -88,6 +88,8 @@ class DepartmentAdapter extends ArrayAdapter<Department> {
         // присваиваем адаптер списку
         gvMain.setAdapter(customerAdapter);
 
+
+
         name.setText(dep.getName());
 
         up.setOnClickListener(v -> {

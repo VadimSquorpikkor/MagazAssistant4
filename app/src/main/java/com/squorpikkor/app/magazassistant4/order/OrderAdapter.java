@@ -41,6 +41,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
     private int layout;
     private List<Order> sourceList;
     private MainViewModel mainViewModel;
+    private Context context;
 
     OrderAdapter(Context context, int resource, List<Order> sourceList, MainViewModel mainViewModel) {
         super(context, resource, sourceList);
@@ -48,6 +49,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
         this.mainViewModel = mainViewModel;
+        this.context = context;
     }
 
     private void addNewDialog(Order order) {
@@ -68,24 +70,23 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         np.setMaxValue(100);
         np.setMinValue(1);
 
-        tw.setText(order.getsName());
+        tw.setText("" + order.getsName() + " " + order.getName());
 
         AlertDialog alertDialog = dialogBuilder.create();
 
         ok.setOnClickListener(v -> {
             mainViewModel.addProduct(ed.getText().toString(), np.getValue(), order.getCustomerID());
-
+            mainViewModel.refreshOrderList();
             alertDialog.dismiss();
         });
 
         cancel.setOnClickListener(v -> {
             alertDialog.dismiss();
+//            Toast.makeText(context, "wdew", Toast.LENGTH_SHORT).show();
         });
 
         alertDialog.show();
-
     }
-
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @NonNull
@@ -108,7 +109,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         // находим список
         GridView gvMain = view.findViewById(R.id.current_order_product_list);
         // создаем адаптер
-        ProductsAdapter productsAdapter = new ProductsAdapter(getContext(), R.layout.current_order_product_list_item, products);
+        ProductsAdapter productsAdapter = new ProductsAdapter(getContext(), R.layout.current_order_product_list_item, products, mainViewModel, order);
         // присваиваем адаптер списку
         gvMain.setAdapter(productsAdapter);
         } else {

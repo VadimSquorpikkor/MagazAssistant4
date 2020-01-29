@@ -3,22 +3,22 @@
     package="com.squorpikkor.app.magazassistant4">
 
     <application
+        android:name=".application.Application"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@drawable/magaz_assistant4"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
-        android:name=".application.Application"
-        >
-        <activity android:name=".NewOrderActivity"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".customer.CurrentCustomerInfo"></activity>
+        <activity
+            android:name=".NewOrderActivity"
             android:configChanges="orientation|keyboardHidden">
-<!--            android:theme="@android:style/Theme.Holo.Dialog">-->
-        </activity>
-        <activity android:name=".settings.SettingsActivity">
 
+            <!-- android:theme="@android:style/Theme.Holo.Dialog"> -->
         </activity>
+        <activity android:name=".settings.SettingsActivity"></activity>
         <activity android:name=".customer.CustomerActivity" />
         <!--
         <activity

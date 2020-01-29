@@ -6,9 +6,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Имя"
+        android:textSize="20sp"
         android:layout_margin="5dp"
         android:textColor="@color/colorOrange"
         android:id="@+id/cus_name"/>
+
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,25 +30,33 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            android:text="Название"
+            android:text=""
             android:id="@+id/prod_name"/>
 
         <NumberPicker
-
             android:id="@+id/num_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp" />
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            />
 
     </LinearLayout>
 
     <LinearLayout
         style="@style/horizontal"
-        android:gravity="right">
+        >
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Это сок"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:id="@+id/isJuice"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="10dp"
             android:text="OK"
             android:textColor="@color/colorOrange"
             android:id="@+id/dlg_ok"/>
@@ -48,7 +64,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="10dp"
             android:text="Отмена"
             android:textColor="@color/colorOrange"
             android:id="@+id/dlg_cancel"/>

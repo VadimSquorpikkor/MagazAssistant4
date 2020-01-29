@@ -3,6 +3,7 @@ package com.squorpikkor.app.magazassistant4;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import com.squorpikkor.app.magazassistant4.customer.Customer;
 import com.squorpikkor.app.magazassistant4.juice.JuiceFragment;
 import com.squorpikkor.app.magazassistant4.juice.Juice;
 import com.squorpikkor.app.magazassistant4.order.Order;
+import com.squorpikkor.app.magazassistant4.order.OrderFragment;
 import com.squorpikkor.app.magazassistant4.order.Product;
 import com.squorpikkor.app.magazassistant4.settings.SettingsDefault2;
 
@@ -65,7 +67,10 @@ public class MainViewModel extends AndroidViewModel {
     public ArrayList<Department> getDepartments() {
         //todo почемуто не работает, если при старте записывать в department
 //        return departments;
-        return db.getAllDepartmentsSorted();
+        ArrayList<Department> dep = db.getAllDepartmentsSorted();
+        if (dep.size()!=0)dep.remove(0);
+//        return db.getAllDepartmentsSorted();
+        return dep;
     }
 
     //обновляет информацию об отделах и всех кастомеров
@@ -80,6 +85,29 @@ public class MainViewModel extends AndroidViewModel {
         settingsDefault2.setDefaultSettings(db);
     }
 
+
+
+
+
+
+
+
+
+
+    OrderFragment fragment;
+
+    public void setOrderFragment(OrderFragment fragment) {
+        this.fragment = fragment;
+    }
+
+    public void refreshOrderList() {
+        fragment.refreshList();
+    }
+
+    public OrderFragment getOrderFragment() {
+        return fragment;
+    }
+
 //----------CUSTOMER--------------------------------------------------------------------------------
 
     public void updateCustomer(Customer customer) {
@@ -87,15 +115,39 @@ public class MainViewModel extends AndroidViewModel {
         updateDepartment();
 
     }
+
+    public Customer getCustomer(int id) {
+        return db.getCustomer(id);
+    }
 //----------ORDER-----------------------------------------------------------------------------------
     public ArrayList<Order> getOrderList() {
         ArrayList<Customer> customers = db.getAllCustomers();
-
+        //todo дописать
         return orderList;
     }
 
     //todo Пока заплатка, потом сделать нормально
     public ArrayList<Order> getOrderListWithoutKorelin() {
+        //Перебирает весь список кастомеров из БД, если кастомер не из корелинского отдела, добавляет в список
+        ArrayList<Customer> customers = new ArrayList<>();
+        ArrayList<Order> orders = new ArrayList<>();
+        for (Customer customer:db.getAllCustomers()) {
+            if (customer.getDepName()!=2) customers.add(customer);
+        }
+
+        //вместо всех корелинских добавляю кастомера "Корели", он будет за весь отдел
+        //customers.add(new Customer("1-корп", "Корелин,", 2));
+
+        //формирую список ордеров, в каждый ордер добавляю продукт, соответствующий каждому из кастомеров (по ID)
+        for (Customer customer:customers) {
+            Order order = new Order(customer.getID(), customer.getName(), customer.getSurname());
+            order.getProducts().addAll(db.getProductsByID(customer.getID()));
+            orders.add(order);
+        }
+        return orders;
+    }
+
+    public ArrayList<Order> getOrderListWithoutKorelin_OLD() {
         //Перебирает весь список кастомеров из БД, если кастомер не из корелинского отдела, добавляет в список
         ArrayList<Customer> customers = new ArrayList<>();
         ArrayList<Order> orders = new ArrayList<>();
@@ -121,34 +173,7 @@ public class MainViewModel extends AndroidViewModel {
         return orders;
     }
 
-    public void updateOrder(Order order) {
-
-    }
-
-
-
-    private ArrayList<Customer> customerList = new ArrayList<>();
     private ArrayList<Order> orderList = new ArrayList<>();
-
-
-
-    public void setOrderList(ArrayList<Order> orderList) {
-        this.orderList = orderList;
-    }
-
-
-    public ArrayList<Customer> getCustomersList() {
-        return customerList;
-    }
-
-    public void setCustomersList(ArrayList<Customer> customersList) {
-        this.customerList = customersList;
-    }
-
-
-    public void onStart() {
-
-    }
 
 //----------PRODUCT PACK----------------------------------------------------------------------------
 

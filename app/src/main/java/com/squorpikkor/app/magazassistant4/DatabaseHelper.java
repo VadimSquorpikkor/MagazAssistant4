@@ -307,6 +307,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Department> getAllDepartments() {
         ArrayList<Department> sourceList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_DEPARTMENT;
+//        String selectQuery = "SELECT  * FROM " + TABLE_DEPARTMENT + " WHERE " + COLUMN_DEP_ID + " <> '1'"; //т.е. без департмента где я храню кастомера, который весь отдел (корелин)
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -322,7 +323,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         cursor.close();
-
+        Log.e(TAG, "getAllDepartments: SIZE " + sourceList.size());
         return sourceList;
     }
 
@@ -465,6 +466,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         cursor.close();
+
+        return prodList;
+    }
+
+    public ArrayList<Product> getProductsByID(int id) {
+        ArrayList<Product> prodList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_PROD_CUSTOMER + " = '" + id + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Product product = new Product();
+                product.setId(Integer.parseInt(cursor.getString(0)));
+                product.setTitle(cursor.getString(1));
+                product.setPrice(Float.parseFloat(cursor.getString(2)));
+                product.setQuantity(Integer.parseInt(cursor.getString(3)));
+                product.setIsJuice(cursor.getInt(4) == 1);//if 1, isJuice = true
+                product.setPurchased(cursor.getInt(5)== 1);
+                product.setCustomer(cursor.getInt(6));
+                prodList.add(product);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        Log.e(TAG, "getProductsByID: prodList size = " + prodList.size());
 
         return prodList;
     }

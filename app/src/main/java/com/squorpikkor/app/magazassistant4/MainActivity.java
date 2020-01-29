@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         mApplication = (Application) getApplication();
         setContentView(R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        mainViewModel.onStart();
+//        mainViewModel.onStart();
         mApplication.setMainViewModel(mainViewModel);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
