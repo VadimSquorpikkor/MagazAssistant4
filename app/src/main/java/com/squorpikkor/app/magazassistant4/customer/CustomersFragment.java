@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,6 @@ import com.squorpikkor.app.magazassistant4.R;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-import static com.squorpikkor.app.magazassistant4.MainActivity.TAG;
 
 public class CustomersFragment extends Fragment {
 
@@ -39,7 +36,7 @@ public class CustomersFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // начальная инициализация списка
-        departments = mainViewModel.getDepartments();
+        departments = mainViewModel.getDepartmentsWithoutZero();
 
         // находим список
         lvMain = view.findViewById(R.id.departments_list_view);
@@ -66,7 +63,7 @@ public class CustomersFragment extends Fragment {
 
     private void refreshListView() {
         departments.clear();
-        departments.addAll(mainViewModel.getDepartments());
+        departments.addAll(mainViewModel.getDepartmentsWithoutZero());
         lvMain.setAdapter(departmentAdapter);
     }
 

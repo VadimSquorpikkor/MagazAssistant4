@@ -1,6 +1,11 @@
 package com.squorpikkor.app.magazassistant4.settings;
 
+import android.arch.lifecycle.ViewModelProviders;
+import android.util.Log;
+
 import com.squorpikkor.app.magazassistant4.DatabaseHelper;
+import com.squorpikkor.app.magazassistant4.MainActivity;
+import com.squorpikkor.app.magazassistant4.MainViewModel;
 
 import java.util.HashMap;
 import java.util.Map;

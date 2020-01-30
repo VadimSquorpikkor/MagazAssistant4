@@ -64,13 +64,21 @@ public class MainViewModel extends AndroidViewModel {
 
     private ArrayList<Department> departments;
 
-    public ArrayList<Department> getDepartments() {
+    public ArrayList<Department> getDepartmentsWithoutZero() {
         //todo почемуто не работает, если при старте записывать в department
 //        return departments;
         ArrayList<Department> dep = db.getAllDepartmentsSorted();
         if (dep.size()!=0)dep.remove(0);
 //        return db.getAllDepartmentsSorted();
         return dep;
+    }
+
+    public ArrayList<Department> getAllDepartments() {
+        return db.getAllDepartmentsSorted();
+    }
+
+    public Department getDepartment(int id) {
+        return db.getDepartment(id);
     }
 
     //обновляет информацию об отделах и всех кастомеров

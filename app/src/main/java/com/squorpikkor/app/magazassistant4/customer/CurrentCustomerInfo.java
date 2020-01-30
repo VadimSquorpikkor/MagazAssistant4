@@ -3,6 +3,7 @@ package com.squorpikkor.app.magazassistant4.customer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,11 +38,15 @@ public class CurrentCustomerInfo extends AppCompatActivity {
         EditText dep   = findViewById(R.id.customer_department);
         TextView total = findViewById(R.id.customer_total);
 
-        id.setText(customer.getID());
+        id.setText(String.valueOf(customer.getID()));
         name.setText(customer.getName());
         sName.setText(customer.getSurname());
-        dep.setText(customer.getDepName());
-        total.setText(customer.getID());
+        dep.setText(mainViewModel.getDepartment(customer.getDepName()).getName());
+        Log.e("TAG", "onCreate: " + customer.getDepName());
+
+
+//        dep.setText(mainViewModel.getDepartmentsWithoutZero().get(customer.getDepName()).getName());
+//        total.setText(customer.getID());
 
 
     }

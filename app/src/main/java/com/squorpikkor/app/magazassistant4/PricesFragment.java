@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.squorpikkor.app.magazassistant4.customer.CustomerActivity;
@@ -62,7 +61,7 @@ public class PricesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // начальная инициализация списка
-        departments = mainViewModel.getDepartments();
+        departments = mainViewModel.getDepartmentsWithoutZero();
 
         // находим список
         lvMain = view.findViewById(R.id.main_window_department_list);
@@ -77,7 +76,7 @@ public class PricesFragment extends Fragment {
 
     private void refreshListView() {
         departments.clear();
-        departments.addAll(mainViewModel.getDepartments());
+        departments.addAll(mainViewModel.getDepartmentsWithoutZero());
         lvMain.setAdapter(departmentAdapter);
     }
 

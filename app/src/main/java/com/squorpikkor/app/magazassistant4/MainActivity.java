@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
         databaseHelper = new DatabaseHelper(this);
 
+
+        Log.e(TAG, "GET ALL DEPS - " + mainViewModel.getAllDepartments().get(0).getID());
+        Log.e(TAG, "GET ALL DEPS - " + mainViewModel.getAllDepartments().get(1).getID());
+
     }
 
     @Override
